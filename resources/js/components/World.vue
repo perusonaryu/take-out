@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>
-            <router-link to='/hello'>World</router-link>
+            <router-link to='/hello'>wwwwwwwwwwwwwwww</router-link>
         </p>
     </div>
 </template>

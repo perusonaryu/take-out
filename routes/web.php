@@ -17,7 +17,20 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/storeList','StoreController@index');
+Route::post('/storeCreate','StoreController@store');
+Route::get('/storeEdit/{id}','StoreController@edit');
+Route::patch('/storeEdit/{id}','StoreController@update');
+Route::delete('/storeDelete/{id}','StoreController@destroy');
+
 Route::get('/{any}', function () {
     // return view('welcome');
     return view('vue');
 })->where('any', '.*');
+
+
+
