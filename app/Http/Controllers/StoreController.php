@@ -43,9 +43,10 @@ class StoreController extends Controller
         $store->introduction = $request->introduction;
         $store->category = $request->category;
         $store->save();
-        return response()->json([
-            'message' => 'New post created'
-        ]);
+        return response()->json(
+            ['message' => 'New post created'],
+            ['store' => $store]
+        );
 
     }
 

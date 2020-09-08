@@ -18,7 +18,7 @@ class CreateStoresTable extends Migration
             $table->string('category');
             $table->string('address');
             $table->string('introduction');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('store_name');
             $table->timestamps();
         });

@@ -10,6 +10,18 @@
 </head>
 <body>
   <div id="app">
+    <div class=" bg-gray-100 border-b border-gray-300 py-4">
+      <div class="container mx-auto d-flex justify-between">
+        <div class=" mx-auto">
+          <router-link class="mr-4" to="/">Home</router-link>
+          <router-link to="/about">about</router-link>
+        </div>
+        <div class=" mx-auto">
+          <router-link class="mr-4" to="/login">Login</router-link>
+          <router-link to="/register">Register</router-link>
+        </div>
+      </div>
+    </div>
     <v-app>
       <v-container>
         <router-view></router-view>

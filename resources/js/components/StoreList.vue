@@ -163,7 +163,7 @@ import { validationMixin } from 'vuelidate'
     },
     
     created(){
-      axios.get('http://127.0.0.1:8000/storeList')
+      axios.get('/storeList')
         .then(response => this.stores = response.data)
         .catch(error => console.log(error));
     },

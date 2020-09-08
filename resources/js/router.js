@@ -8,6 +8,10 @@ import world from './components/World.vue'
 import storelist from './components/StoreList.vue'
 import storeadd from './components/StoreAdd.vue'
 import storeedit from './components/store/StoreEdit.vue'
+import dashboard from './components/Dashboard.vue'
+import login from './components/auth/Login.vue'
+import register from './components/auth/Register.vue'
+import Axios from 'axios';
 // Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
 
 export default new VueRouter({
@@ -19,7 +23,17 @@ export default new VueRouter({
             path: '/',
             // 名前付きルートを設定したい場合付与
             // コンポーネントの指定
-            component: storelist
+            component: storelist,
+            name: 'storeList',
+            beforeEnter: (to, from, next) => {
+                axios.get('/api/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
             // routeのパス設定
@@ -37,11 +51,44 @@ export default new VueRouter({
         },
         {
             path: '/storeadd',
-            component:storeadd
+            component:storeadd,
+            name: 'storeadd',
+            beforeEnter: (to, from, next) => {
+                axios.get('/api/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        // {
+        //     path: '/storeedit',
+        //     component: storeedit
+        // },
+        {
+            path: '/register',
+            component: register
         },
         {
-            path: '/storeedit',
-            component: storeedit
+            path: '/login',
+            component: login,
+            name: 'login'
+        },
+        {
+            path: '/dashboard',
+            component: dashboard,
+            name: 'dashboard',
+            beforeEnter: (to, from, next) => {
+                axios.get('/api/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         }
 
     ]
