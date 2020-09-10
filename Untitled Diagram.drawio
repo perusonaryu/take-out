@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-09-07T01:54:40.571Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36" etag="TGIksVv-2NVYbaE0KUnD" version="13.6.6" type="github">
+<mxfile host="app.diagrams.net" modified="2020-09-10T13:15:36.250Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36" etag="9n8LrvrWL39KArFNthEc" version="13.6.6" type="github">
   <diagram id="r8xHnbqUBmYu04PWjt0k" name="Page-1">
     <mxGraphModel dx="1186" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -8,7 +8,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="awSX5_s5WfXwRv5CiNmm-1" value="トップページ&lt;br&gt;お店の検索" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="30" y="140" width="120" height="60" as="geometry" />
+          <mxGeometry x="10" y="140" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="awSX5_s5WfXwRv5CiNmm-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="awSX5_s5WfXwRv5CiNmm-2" target="awSX5_s5WfXwRv5CiNmm-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -28,23 +28,23 @@
             <mxPoint x="590" y="170" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MWwsItmEWt5wS4m4OU8P-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="awSX5_s5WfXwRv5CiNmm-10" target="MWwsItmEWt5wS4m4OU8P-1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="awSX5_s5WfXwRv5CiNmm-10" value="ログイン画面" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="30" y="390" width="120" height="60" as="geometry" />
+          <mxGeometry x="70" y="380" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="awSX5_s5WfXwRv5CiNmm-11" value="サインイン画面" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="630" y="380" width="120" height="60" as="geometry" />
+          <mxGeometry x="40" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MWwsItmEWt5wS4m4OU8P-4" value="お店会員登録ページ" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="600" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="awSX5_s5WfXwRv5CiNmm-12" value="お店専用ページ&lt;br&gt;・メニュー編集&lt;br&gt;・注文通知" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="250" y="280" width="120" height="60" as="geometry" />
+          <mxGeometry x="370" y="380" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="MWwsItmEWt5wS4m4OU8P-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="MWwsItmEWt5wS4m4OU8P-1" target="awSX5_s5WfXwRv5CiNmm-12">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="MWwsItmEWt5wS4m4OU8P-1" value="お店登録ページ" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="250" y="500" width="120" height="60" as="geometry" />
+        <mxCell id="MWwsItmEWt5wS4m4OU8P-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="awSX5_s5WfXwRv5CiNmm-10" target="awSX5_s5WfXwRv5CiNmm-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="410" as="sourcePoint" />
+            <mxPoint x="450" y="520" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
