@@ -6,14 +6,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Laravel + Vue</title>
   <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
     <base href="<?php echo url('/');?>">
 </head>
 <body>
   <div id="app">
+    
     <v-app>
-      <v-container>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-app>
   </div>
   <script src="{{mix('js/app.js')}}"></script>

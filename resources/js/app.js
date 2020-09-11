@@ -32,7 +32,15 @@ Vue.use(Vuelidate);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
+// Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
+Vue.component('store-image', require('./components/store/storeTopImage.vue').default);
+Vue.component('store-item', require('./components/store/storeItem.vue').default);
+Vue.component('Header', require('./components/topPage/Header.vue').default);
+Vue.component('top-image', require('./components/topPage/topImage.vue').default);
+Vue.component('top-newstores', require('./components/topPage/newStores.vue').default);
+Vue.component('top-howuse', require('./components/topPage/howUse.vue').default);
+Vue.component('Footer', require('./components/topPage/Footer.vue').default);
+// Vue.component('form-component', require('./components/form.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -45,4 +53,5 @@ const app = new Vue({
     vuetify: new Vuetify(),
     router,
     Vuelidate,
+    
 });
