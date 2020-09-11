@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'storeuser' => [
+            'driver' => 'session',
+            'provider' => 'storeusers',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -75,6 +80,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'storeusers' => [
+            'driver' => 'eloquent',
+            'model' => App\StoreUser::class,
+        ],
     ],
 
     /*
@@ -95,6 +104,15 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
+
+    'passwords' => [
+        'storeusers' => [
+            'provider' => 'storeusers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
