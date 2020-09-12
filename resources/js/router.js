@@ -13,6 +13,8 @@ import login from './components/userAuth/Login.vue'
 import register from './components/userAuth/Register.vue'
 import storeLogin from './components/storeUsersAuth/Login.vue'
 import storeRegister from './components/storeUsersAuth/Register'
+import StoreItem from './components/StoreItemComponent'
+
 
 // import Axios from 'axios';
 // Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
@@ -89,6 +91,12 @@ export default new VueRouter({
             path: '/storeregister',
             component: storeRegister,
             name: 'storeRegister'
+        },
+
+        {
+            path: '/storeItem',
+            component: StoreItem,
+            // name: 'storeRegister'
         },
     ]
 });
