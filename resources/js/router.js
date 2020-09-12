@@ -3,15 +3,20 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import hello from './components/Hello.vue'
-import world from './components/World.vue'
-import storelist from './components/StoreList.vue'
+
+import topPage from './components/topPage.vue'
+import storePage from './components/storePage.vue'
 import storeadd from './components/StoreAdd.vue'
-import storeedit from './components/store/StoreEdit.vue'
+// import storeedit from './components/store/StoreEdit.vue'
 import dashboard from './components/Dashboard.vue'
-import login from './components/auth/Login.vue'
-import register from './components/auth/Register.vue'
-import Axios from 'axios';
+import login from './components/userAuth/Login.vue'
+import register from './components/userAuth/Register.vue'
+import storeLogin from './components/storeUsersAuth/Login.vue'
+import storeRegister from './components/storeUsersAuth/Register'
+import StoreItem from './components/StoreItemComponent'
+
+
+// import Axios from 'axios';
 // Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
 
 export default new VueRouter({
@@ -19,14 +24,18 @@ export default new VueRouter({
     mode: 'history',
     routes: [
         {
-            // routeのパス設定
             path: '/',
+            component: topPage,
+        },
+        {
+            // routeのパス設定
+            path: '/storepage',
             // 名前付きルートを設定したい場合付与
             // コンポーネントの指定
-            component: storelist,
-            name: 'storeList',
+            component: storePage,
+            name: 'storePage',
             beforeEnter: (to, from, next) => {
-                axios.get('/api/athenticated')
+                axios.get('/api/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
@@ -35,20 +44,7 @@ export default new VueRouter({
                 })
             }
         },
-        {
-            // routeのパス設定
-            path: '/world',
-            // 名前付きルートを設定したい場合付与
-            // コンポーネントの指定
-            component: world
-        },
-        {
-            // routeのパス設定
-            path: '/hello',
-            // 名前付きルートを設定したい場合付与
-            // コンポーネントの指定
-            component: hello
-        },
+
         {
             path: '/storeadd',
             component:storeadd,
@@ -63,10 +59,6 @@ export default new VueRouter({
                 })
             }
         },
-        // {
-        //     path: '/storeedit',
-        //     component: storeedit
-        // },
         {
             path: '/register',
             component: register
@@ -80,16 +72,31 @@ export default new VueRouter({
             path: '/dashboard',
             component: dashboard,
             name: 'dashboard',
-            beforeEnter: (to, from, next) => {
-                axios.get('/api/athenticated')
-                .then(()=>{
-                    next()
-                })
-                .catch(()=>{
-                    return next({name:'login'})
-                })
-            }
-        }
+            // beforeEnter: (to, from, next) => {
+            //     axios.get('/api/athenticated')
+            //     .then(()=>{
+            //         next()
+            //     })
+            //     .catch(()=>{
+            //         return next({name:'login'})
+            //     })
+            // }
+        },
+        {
+            path: '/storelogin',
+            component: storeLogin,
+            name: 'storeLogin'
+        },
+        {
+            path: '/storeregister',
+            component: storeRegister,
+            name: 'storeRegister'
+        },
 
+        {
+            path: '/storeItem',
+            component: StoreItem,
+            // name: 'storeRegister'
+        },
     ]
 });

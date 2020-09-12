@@ -13,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/storeList','StoreController@index');
 Route::post('/storeCreate','StoreController@store');
 Route::get('/storeEdit/{id}','StoreController@edit');
 Route::patch('/storeEdit/{id}','StoreController@update');
+
 Route::delete('/storeDelete/{id}','StoreController@destroy');
 
 Route::get('/{any}', function () {
@@ -32,5 +26,13 @@ Route::get('/{any}', function () {
     return view('vue');
 })->where('any', '.*');
 
+//商品追加ページのテンプレートのルート
+// Route::get('/storeItem','StoreItemManageController@index');
 
 
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

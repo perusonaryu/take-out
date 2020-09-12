@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Store;
+use App\StoreUser;
+use App\User;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -14,9 +15,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = Store::all();
+        return $stores = Store::all();
 
-        return response()->json($stores);
+        // return response()->json($stores);
     }
 
     /**
@@ -38,14 +39,15 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $store = new Store;
-        $store->store_name = $request->storeName;
+        // $store->name = $request->storeName;
         $store->address = $request->address;
         $store->introduction = $request->introduction;
         $store->category = $request->category;
         $store->save();
         return response()->json(
-            ['message' => 'New post created'],
-            ['store' => $store]
+            // ['message' => 'New post created'],
+            // ['store' => $store]
+            $store
         );
 
     }
@@ -69,7 +71,7 @@ class StoreController extends Controller
      */
     public function edit($id)
     {
-        $store = Store::find($id);
+        $store = StoreUser::find($id);
         return response() -> json($store);
     }
 
@@ -82,8 +84,8 @@ class StoreController extends Controller
      */
     public function update($id)
     {
-        $store = Store::find($id);
-        $store->store_name = request('store_name');
+        $store = StoreUser::find($id);
+        $store->name = request('store_name');
         $store->address = request('address');
         $store->introduction = request('introduction');
         $store->category = request('category');
@@ -92,8 +94,13 @@ class StoreController extends Controller
         if($store){
             return $this->refresh();
         }
-
     }
+
+    // public function user_update($id){
+    //     $user = User::find($id);
+    //     $user->store_id = request('store_id');
+    //     $user->save();
+    // }
 
     /**
      * Remove the specified resource from storage.

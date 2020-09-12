@@ -1,14 +1,14 @@
 <template>
   <form>
       <h1 class="d-flex justify-center">StoreCreate</h1>
-    <v-text-field
+    <!-- <v-text-field
       v-model="storeName"
       :error-messages="storeNameErrors"
       label="storeName"
       required
       @input="$v.storeName.$touch()"
       @blur="$v.storeName.$touch()"
-    ></v-text-field>
+    ></v-text-field> -->
     <v-text-field
       v-model="address"
       :error-messages="addressErrors"
@@ -64,27 +64,35 @@
     mixins: [validationMixin],
 
     validations: {
-      storeName: { required },
+      // storeName: { required },
       address: { required },
       introduction:{required},
       category: {required},
     },
 
     data: () => ({
-      storeName: '',
+      // storeName: '',
       address: '',
       introduction: '',
       category: '',
+      user:'',
+      store_id:''
     }),
 
+    mounted(){
+        axios.get('/api/user')
+        .then(response=>this.user = response.data)
+        .catch(error => console.log(error));
+    },
+
     computed: {
-      storeNameErrors () {
-        const errors = []
-        if (!this.$v.storeName.$dirty) return errors
-        // !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.storeName.required && errors.push('storeName is required.')
-        return errors
-      },
+      // storeNameErrors () {
+      //   const errors = []
+      //   if (!this.$v.storeName.$dirty) return errors
+      //   // !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
+      //   !this.$v.storeName.required && errors.push('storeName is required.')
+      //   return errors
+      // },
       addressErrors () {
         const errors = []
         if (!this.$v.address.$dirty) return errors
@@ -110,12 +118,26 @@
       storeAdd () {
         this.$v.$touch();
         axios.post('/storeCreate',{
-            storeName: this.storeName,
+            // storeName: this.storeName,
             address: this.address,
             introduction: this.introduction,
             category: this.category
         })
-        .then(response => alert(response.data.message))
+        .then(response => {
+          // this.store_id = response.data.id;
+          // alert(response.data.message);
+          // console.log(response.data.id);
+          // axios.patch('/userUpdate/' + this.user.id,{
+          //   store_id: this.store_id,
+          // })
+          // .then(() => {
+          //   this.$router.push({ name: "dashboard"}); 
+          // })
+          // .catch(() => {
+          //   error => console.log(error)
+          // })
+          this.$router.push({ name: "storeList"})
+        })
         .catch(error => console.log(error));
       },
       clear () {

@@ -67,10 +67,7 @@
     },
     props:['storeToEdit'],
     data: () => ({
-      storeName: '',
-      address: '',
-      introduction: '',
-      category: '',
+      storeUser: {},
 
       
     }),
@@ -105,21 +102,11 @@
       
     },
     
-    // updated(){
-        
-    //     axios.get('/storeEdit/' + this.storeToEdit)
-    //       .then(response => {
-    //           (this.storeName = response.data.store_name);
-    //           (this.address = response.data.address);
-    //           (this.introduction   = response.data.introduction);
-    //           (this.category   = response.data.category);
-    //         //   (console.log(response.data));
-    //       })
-    //       .catch(error => console.log(error));
-    //     console.log('おめでとう!');
-    //       console.log(this.address);
-    //       console.log(this.introduction);
-    // },
+    created(){
+      axios.get('/api/storeusers/user')
+        .then(response=>this.storeUser = response.data)
+        .catch(error => console.log(error));
+    },
     methods: {
       clear () {
         this.$v.$reset()
