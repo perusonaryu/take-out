@@ -26,6 +26,13 @@ Route::get('/{any}', function () {
     return view('vue');
 })->where('any', '.*');
 
+//商品追加ページのテンプレートのルート
+// Route::get('/storeItem','StoreItemManageController@index');
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

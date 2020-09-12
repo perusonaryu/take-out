@@ -8,7 +8,7 @@
     justify="center"
     >
         <v-col md="3" cols="12" class="howUse-text">
-            <img src="../../../../storage/app/public/order.jpg" alt="">
+            <!-- <img src="../../../../storage/app/public/order.jpg" alt=""> -->
             <h6>料理を注文</h6>
             <p>
                 専用アプリまたはWEBから料理を注文します
@@ -16,7 +16,7 @@
         </v-col>
 
         <v-col md="3" cols="12" class="howUse-text">
-            <img src="../../../../storage/app/public/receive.jpg" alt="">
+            <!-- <img src="../../../../storage/app/public/receive.jpg" alt=""> -->
             <h6>受け取りに行く</h6>
             <p>
                 受け取り時刻になったら <br> 
@@ -25,7 +25,7 @@
         </v-col>
 
         <v-col md="3" cols="12" class="howUse-text">
-            <img src="../../../../storage/app/public/eat.jpg" alt="">
+            <!-- <img src="../../../../storage/app/public/eat.jpg" alt=""> -->
             <h6>いただきます</h6>
             <p>
                 料理を受け取れたら <br>

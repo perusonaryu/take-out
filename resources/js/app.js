@@ -40,6 +40,7 @@ Vue.component('top-image', require('./components/topPage/topImage.vue').default)
 Vue.component('top-newstores', require('./components/topPage/newStores.vue').default);
 Vue.component('top-howuse', require('./components/topPage/howUse.vue').default);
 Vue.component('Footer', require('./components/topPage/Footer.vue').default);
+Vue.component('storeitem-component', require('./components/StoreItemComponent.vue').default);
 // Vue.component('form-component', require('./components/form.vue').default);
 
 /**
@@ -55,3 +56,4 @@ const app = new Vue({
     Vuelidate,
     
 });
+

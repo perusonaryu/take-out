@@ -29,6 +29,10 @@ Route::post('register', 'RegisterController@register');
 Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
 
+//storeitemのapiのルート
+Route::apiResource('/StoreItems','StoreItemsController');
+
+
 
 
 Route::group(['prefix' => 'storeusers'], function () {

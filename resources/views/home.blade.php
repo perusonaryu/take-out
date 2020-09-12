@@ -17,11 +17,6 @@
                     {{ __('You are logged in!') }}
                 </div>
             </div>
-            <div id="app">
-                <h2>store登録</h2>
-                <example-component></example-component>
-                <router-view></router-view>
-            </div>
         </div>
     </div>
 </div>
