@@ -42,11 +42,58 @@
         </div>
       </div>
       <v-row>
-      <store-item />
+        <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
+                <div class="img-wrapper">
+                    <img :src="`${storeitem.item_image}`" alt="商品の画像です" style="width:100%; height:150px">
+                </div>
+                <div class="item-detail-section" style="width:100%; height:150px text-align:center;">
+
+                    <div class="item-name" style="width:100px; height:50px">
+                        {{ storeitem.item_name }}
+                    </div>
+
+                    <div class="item-price" style="width:100px; height:50px">
+                        {{ storeitem.price}}
+                    </div>
+
+                    <div class="item-status" style="width:100px; height:50px">
+                        {{ storeitem.item_status}}
+                    </div>
+                </div>
+
+  
+                <div class="button-section">
+                  <!-- :disabled="isPush" storeitem.item_name, storeitem.price,storeitem.item_status, storeitem.item_image一旦おいとく -->
+                    <button 
+                        @click="displayUpdate(storeitem)"
+                        
+                    >
+                        編集
+                    </button>
+
+                    <!-- <button :disabled="isPush" @click="deleteStoreItem(storeitem.id)">
+                        削除
+                    </button> -->
+                </div>
+                <!-- 編集モーダル -->
+                <store-item-edit :val="storeItem" v-if="storeitem.id === showContent" @close="closeStoreEditModal"></store-item-edit>
+          </div>
+
+          <div class="add-modal-window">
+            <p>追加ボタンを押すと商品追加モーダルが表示されます</p>
+            <button @click="openModal">商品追加</button>
+            
+            <!-- 商品追加モーダル storeItemAddコンポーネント -->
+            <store-item-add @close="closeStoreAddModal" v-if="modal"></store-item-add>
+          </div>
 
       </v-row>
     </v-container>
+    <!-- デバック -->
+    <p v-if="message">{{ message }}</p>
   </div>
+  
+  
 
 </template>
 
@@ -71,6 +118,20 @@
       address: '',
       introduction: '',
       category: '',
+      // 商品追加 storeitem
+      storeitems: {},
+      confirmedImage: "",
+      item_name: "",
+      item_status: "",
+      price: "",
+      message: "",
+      file: "",
+      modal: false,
+      //商品編集モーダル
+      showContent: false,
+      storeItem: "",
+    
+    
     }),
 
     // computed: {
@@ -102,12 +163,15 @@
       
     // },
     
+        
     created(){
-      this.getStoreUser()
+      this.getStoreUser();
+      //商品
+      this.getStoreItem();
     },
     methods:{
       getStoreUser(){
-        axios.get('/api/storeusers/user')
+        axios.get('/storeusers/user')
         .then(response=>{
           this.storeUser = response.data;
           (this.storeName = response.data.name);
@@ -137,7 +201,7 @@
       },
 
       update(id){
-        axios.patch('/api/userUpdate/' + id,{
+        axios.patch('/userUpdate/' + id,{
           store_name:this.storeName,
           address:this.address,
           introduction:this.introduction,
@@ -150,10 +214,40 @@
       },
 
       logout(){
-        axios.post('/api/storeusers/logout').then(()=>{
+        axios.post('/storeusers/logout').then(()=>{
             this.$router.push({ name: "storeLogin"})
         })
-      }
+      },
+
+//商品リストの読み込み
+      getStoreItem() {
+            axios
+                .get("/api/StoreItems/")
+                .then(response => {
+                    this.storeitems = response.data;
+                    console.log(response.data);
+                })
+                .catch(err => {
+                    this.message = err;
+                });
+        },
+        //商品編集モーダル
+        displayUpdate(storeitem){
+          this.showContent = storeitem.id
+          this.storeItem = storeitem
+        },
+        closeStoreEditModal(){
+          this.showContent = false
+        },
+
+//商品追加モーダルの開閉
+        openModal() {
+          this.modal = true
+        },
+        closeStoreAddModal() {
+          this.modal = false
+        },
+    
 
     }
   }
@@ -163,5 +257,7 @@
 <style scoped>
 a{
   text-decoration: none;
+  
 }
+
 </style>

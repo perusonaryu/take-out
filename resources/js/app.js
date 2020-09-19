@@ -35,12 +35,15 @@ Vue.use(Vuelidate);
 // Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
 Vue.component('store-image', require('./components/store/storeTopImage.vue').default);
 Vue.component('store-item', require('./components/store/storeItem.vue').default);
+Vue.component('store-item-add', require('./components/store/storeItemAdd.vue').default);
+Vue.component('store-item-edit', require('./components/store/storeItemEdit.vue').default);
 Vue.component('Header', require('./components/topPage/Header.vue').default);
 Vue.component('top-image', require('./components/topPage/topImage.vue').default);
 Vue.component('top-newstores', require('./components/topPage/newStores.vue').default);
 Vue.component('top-howuse', require('./components/topPage/howUse.vue').default);
 Vue.component('Footer', require('./components/topPage/Footer.vue').default);
-Vue.component('storeitem-component', require('./components/StoreItemComponent.vue').default);
+
+// Vue.component('storeitem-component', require('./components/StoreItemComponent.vue').default);
 // Vue.component('form-component', require('./components/form.vue').default);
 
 /**
@@ -56,4 +59,5 @@ const app = new Vue({
     Vuelidate,
     
 });
+
 

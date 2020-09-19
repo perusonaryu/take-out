@@ -31,12 +31,12 @@
                     </div>
                 </div>
                     <div class="button-section">
-                        <button :disabled="isPush"
+                        <button :disabled="isPush" type="button"
                             @click="displayUpdate(storeitem.id, storeitem.item_name, storeitem.price,storeitem.item_status, storeitem.item_image)"
                         >
                             編集
                         </button>
-                        <button :disabled="isPush" @click="deleteStoreItem(storeitem.id)">
+                        <button :disabled="isPush" @click="deleteStoreItem(storeitem.id)" type="button">
                             削除
                         </button>
                     </div>

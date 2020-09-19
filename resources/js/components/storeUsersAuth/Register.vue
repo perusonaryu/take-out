@@ -41,7 +41,7 @@ export default {
     },
     methods:{
         saveForm(){
-            axios.post('/api/storeusers/register', this.form)
+            axios.post('/storeusers/register', this.form)
             .then(() =>{
                 console.log('saved');
                 this.$router.push({ name: "storePage"}); 

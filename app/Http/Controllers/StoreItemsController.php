@@ -31,9 +31,12 @@ class StoreItemsController extends Controller
         // $request->item_image->storeAs('public/store_item_images', $request->store_id.$request->item_name.'.jpg');
 
         if (request()->file) {
+            //アップロードされた画像の拡張子をとる
+            // $ext=$file->getClientOriginalExtension();
+            // $file_name = $request->item_name.'.'.$ext;
             $file_name = $request->item_name.'.jpg';
             //storage/app/public/store_item_imagesに保存
-            request()->file->storeAs('public/store_item_images', $file_name);
+            $request->file->storeAs('public/store_item_images', $file_name);
  
             $storeitem = new StoreItem();//店毎でフォルダを作った方が良いか？
             $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
@@ -43,10 +46,13 @@ class StoreItemsController extends Controller
             $storeitem->save();
  
             return ['success' => '登録しました!'];
+            StoreItem::create($request->all());
         }
         //このコード要るのか？
-        StoreItem::create($request->all());
-
+        
+        else{
+            return $error;
+        }
         // return ['success' => '登録しました!'];
     }
 
@@ -89,7 +95,13 @@ class StoreItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
-        StoreItem::where('id', $id)->delete();
+        //画像ファイルの削除
+        $deleteStoreItem = StoreItem::find($id);
+        $deletename      = $deleteStoreItem->item_image;
+        $pathdel         = storage().'/app/public/store_item_images/'.$deletename;
+        \File::delete($pathdel);
+        $deleteStoreItem->delete();
+        return redirect('/storepage');
+        // StoreItem::where('id', $id)->delete();
     }
 }
