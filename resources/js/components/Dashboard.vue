@@ -19,14 +19,14 @@ export default {
     },
     methods:{
         logout(){
-            axios.post('/api/logout').then(()=>{
-                this.$router.push({ name: "storeList"})
+            axios.post('/logout').then(()=>{
+                this.$router.push({ name: "login"})
             })
         }
     },
     mounted(){
         // axios.get('/api/storeusers/user')
-        axios.get('/api/user')
+        axios.get('/user')
         .then(response=>this.user = response.data)
         .catch(error => console.log(error));
     }

@@ -13,7 +13,7 @@ import login from './components/userAuth/Login.vue'
 import register from './components/userAuth/Register.vue'
 import storeLogin from './components/storeUsersAuth/Login.vue'
 import storeRegister from './components/storeUsersAuth/Register'
-import StoreItem from './components/StoreItemComponent'
+// import StoreItem from './components/StoreItemComponent'
 
 
 // import Axios from 'axios';
@@ -72,15 +72,15 @@ export default new VueRouter({
             path: '/dashboard',
             component: dashboard,
             name: 'dashboard',
-            // beforeEnter: (to, from, next) => {
-            //     axios.get('/api/athenticated')
-            //     .then(()=>{
-            //         next()
-            //     })
-            //     .catch(()=>{
-            //         return next({name:'login'})
-            //     })
-            // }
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
             path: '/storelogin',
@@ -93,10 +93,10 @@ export default new VueRouter({
             name: 'storeRegister'
         },
 
-        {
-            path: '/storeItem',
-            component: StoreItem,
-            // name: 'storeRegister'
-        },
+        // {
+        //     path: '/storeItem',
+        //     component: StoreItem,
+        //     // name: 'storeRegister'
+        // },
     ]
 });
