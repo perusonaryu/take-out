@@ -260,4 +260,9 @@ a{
   
 }
 
+input{
+  color:black!important;
+}
+
+
 </style>

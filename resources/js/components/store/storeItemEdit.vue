@@ -16,7 +16,7 @@
             </v-text-field>
 
             <label >写真を追加して下さい
-                <input type="file" value=updateItemImage>
+                <input type="file">
             </label>
             <!-- 画像のプレビュー機能 -->
             <!-- <img

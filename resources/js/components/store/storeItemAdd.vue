@@ -14,7 +14,8 @@
             >
             </v-text-field>
             <label >写真を追加して下さい
-                <input type="file" v-model="file">
+                <input type="file" 
+              >
             </label>
             <!-- @change="confirmImage"  v-if="view"-->
 
@@ -139,3 +140,8 @@ export default {
     }
 };
 </script>
+<style scoped>
+.v-input{
+  color:black!important;
+}
+</style>
