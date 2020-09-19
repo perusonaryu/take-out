@@ -35,7 +35,7 @@ export default new VueRouter({
             component: storePage,
             name: 'storePage',
             beforeEnter: (to, from, next) => {
-                axios.get('/api/storeusers/athenticated')
+                axios.get('/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
@@ -50,7 +50,7 @@ export default new VueRouter({
             component:storeadd,
             name: 'storeadd',
             beforeEnter: (to, from, next) => {
-                axios.get('/api/athenticated')
+                axios.get('/athenticated')
                 .then(()=>{
                     next()
                 })

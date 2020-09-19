@@ -33,7 +33,7 @@ export default {
          loginUser(){
             //  axios.get('/sanctum/csrf-cookie').then(response => {
                 // // ログイン処理…
-            axios.post('/api/storeusers/login', this.form)
+            axios.post('/storeusers/login', this.form)
             .then(() =>{
             //  response => console.log(response.data);
             this.$router.push({ name: "storePage"}); 

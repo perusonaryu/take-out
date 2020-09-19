@@ -1,8 +1,8 @@
 <template>
   <v-parallax
     dark
-    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-    height= "300"
+    src="/storage/Store/cat1.jpg"
+    height= "500"
   >
     <v-row
       align="center"
@@ -27,6 +27,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+img{
+  background-size: cover;
+}
+
 
 </style>
