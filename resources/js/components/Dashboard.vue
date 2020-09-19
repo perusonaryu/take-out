@@ -5,6 +5,7 @@
         Name: {{user.name}} <br>
         Email: {{user.email}}<br><br>
         </div>
+        <button @click="logout">logout</button>
         
 
     </div>
@@ -25,7 +26,7 @@ export default {
     },
     mounted(){
         // axios.get('/api/storeusers/user')
-        axios.get('/api/storeusers/user')
+        axios.get('/api/user')
         .then(response=>this.user = response.data)
         .catch(error => console.log(error));
     }

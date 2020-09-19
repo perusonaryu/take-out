@@ -91,9 +91,9 @@ class StoreController extends Controller
         $store->category = request('category');
         $store->save();
 
-        if($store){
-            return $this->refresh();
-        }
+        // if($store){
+        //     return $this->refresh();
+        // }
     }
 
     // public function user_update($id){

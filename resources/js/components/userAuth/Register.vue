@@ -41,7 +41,7 @@ export default {
     },
     methods:{
         saveForm(){
-            axios.post('/api/register', this.form)
+            axios.post('/register', this.form)
             .then(() =>{
                 console.log('saved');
                 this.$router.push({ name: "storeadd"}); 

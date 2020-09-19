@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .theme--light.v-text-field>.v-input__control>.v-input__slot:before {
     border-color: white;
 }

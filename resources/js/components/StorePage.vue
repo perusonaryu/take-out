@@ -9,38 +9,7 @@
     </v-btn>
     <!-- Modal -->
     <v-container>
-      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content container">
-              <form>
-                  <h1 class="d-flex justify-center">StoreCreate</h1>
-                  <v-text-field
-                  v-model="storeName"
-                  label="storeName"
-                  
-                  >  </v-text-field>
-                  <v-text-field
-                  v-model="address"
-                  label="address"
-                  ></v-text-field>
-                  <v-text-field
-                  v-model="introduction"
-                  label="introduction"
-                  ></v-text-field>
-                  <v-text-field
-                  v-model="category"
-                  label="category"
-                  ></v-text-field>
-                  
-                  <v-btn class="mr-4" @click="update(storeUser.id)" data-dismiss="modal">保存</v-btn>
-                  <v-btn @click="clear" data-dismiss="modal">clear</v-btn>
-              </form>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-              </div>
-          </div>
-        </div>
-      </div>
+      <store-edit  @update = "getStoreUser"/>
       <v-row>
       <store-item />
 
@@ -66,11 +35,11 @@
 
     data: () => ({
       storeUser: {},
-      storeToEdit:'',
+      // storeId:'',
       storeName: '',
-      address: '',
-      introduction: '',
-      category: '',
+      // address: '',
+      // introduction: '',
+      // category: '',
     }),
 
     // computed: {
@@ -107,15 +76,16 @@
     },
     methods:{
       getStoreUser(){
-        axios.get('/api/storeusers/user')
+        axios.get('/storeusers/user')
         .then(response=>{
           this.storeUser = response.data;
-          (this.storeName = response.data.name);
-          (this.address = response.data.address);
-          (this.introduction   = response.data.introduction);
-          (this.category   = response.data.category);
+          this.storeName = response.data.name;
+          // this.address = response.data.address;
+          // this.introduction   = response.data.introduction;
+          // this.category   = response.data.category;
+          // this.storeId = response.data.id;
 
-          })
+        })
         .catch(error => console.log(error));
       },
 
@@ -136,21 +106,10 @@
         // console.log(this.storeToEdit);
       },
 
-      update(id){
-        axios.patch('/api/userUpdate/' + id,{
-          store_name:this.storeName,
-          address:this.address,
-          introduction:this.introduction,
-          category:this.category
-        })
-        .then(response => {
-          this.getStoreUser()
-        })
-        .catch(error => console.log(error));
-      },
+      
 
       logout(){
-        axios.post('/api/storeusers/logout').then(()=>{
+        axios.post('/storeusers/logout').then(()=>{
             this.$router.push({ name: "storeLogin"})
         })
       }
@@ -163,5 +122,9 @@
 <style scoped>
 a{
   text-decoration: none;
+}
+
+input{
+  color:black!important;
 }
 </style>
