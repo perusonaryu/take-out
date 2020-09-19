@@ -5,7 +5,8 @@
         Name: {{user.name}} <br>
         Email: {{user.email}}<br><br>
         </div>
-        <button @click="logout">log out</button>
+        <button @click="logout">logout</button>
+        
 
     </div>
 </template>

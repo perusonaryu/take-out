@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::patch('/userUpdate/{id}','StoreUserController@update');
+
+
 
 
 //storeitemのapiのルート
