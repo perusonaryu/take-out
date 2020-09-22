@@ -36,7 +36,7 @@ export default {
             axios.post('/login', this.form)
             .then(() =>{
              response => console.log(response.data);
-            this.$router.push({ name: "storeList"}); 
+            this.$router.push({ name: "userpaymentform"}); 
                 // axios.get('/api/user')
                 // .then(response=>{
                 //     this.user = response.data;

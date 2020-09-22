@@ -14,7 +14,7 @@
             >
             </v-text-field>
             <label >写真を追加して下さい
-                <input type="file" >
+              <input type="file" v-on:change="fileSelected">
             </label>
             <!-- @change="confirmImage"  v-if="view"-->
 
@@ -67,10 +67,10 @@ export default {
     },
     data:()=>( {
         
-            item_name: "",
-            file: "",
-            price: "",
-            item_status: "",
+      item_name: "",
+      file: "",
+      price: "",
+      item_status: "",
         
     }),
 
@@ -104,38 +104,43 @@ export default {
     
     methods: {
     addStoreItem() {
-            //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
-            let data = new FormData();
-            data.append("item_name", this.item_name);
-            data.append("file", this.file);
-            data.append("price", this.price);
-            data.append("item_status", this.item_status);
-            const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                };
-            axios
-                .post("/api/StoreItems", data, config)
-                .then(response => {
-                    // this.getStoreItem();
-                    this.message = response.data.success;
-                    // this.confirmedImage = "";
-                    this.item_name = "";
-                    this.file = "";
-                    this.price = "";
-                    this.item_status = "";
-                    
-                    //ファイルを選択のクリア
-                    // this.view = false;
-                    // this.$nextTick(function() {
-                    //     this.view = true;
-                    // });
-                })
-                .catch(err => {
-                    this.message = err.response.data.errors;
-                });
-         }
-    }
+      //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
+      let data = new FormData();
+      data.append("item_name", this.item_name);
+      data.append("file", this.file);
+      data.append("price", this.price);
+      data.append("item_status", this.item_status);
+      axios
+          .post("/api/StoreItems", data)
+          .then(response => {
+              // this.getStoreItem();
+              this.message = response.data.success;
+              // this.confirmedImage = "";
+              this.item_name = "";
+              this.file = "";
+              this.price = "";
+              this.item_status = "";
+              
+              //ファイルを選択のクリア
+              // this.view = false;
+              // this.$nextTick(function() {
+              //     this.view = true;
+              // });
+              console.log('OK');
+          })
+          .catch(err => {
+              this.message = err.response.data.errors;
+          });
+    },
+
+    fileSelected(event){
+        // console.log(event.target.files[0]);
+        // this.imageInfo = event.__ob__.value[0];
+        // this.imageInfo = event[0];
+        this.file = event.target.files[0];
+        // console.log(event);
+
+    },
+  }
 };
 </script>

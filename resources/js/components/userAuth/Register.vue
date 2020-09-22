@@ -44,7 +44,7 @@ export default {
             axios.post('/register', this.form)
             .then(() =>{
                 console.log('saved');
-                this.$router.push({ name: "dashboard"}); 
+                this.$router.push({ name: "userpaymentform"}); 
             })
             .catch((error) =>{
                 this.errors = error.response.data.errors;
