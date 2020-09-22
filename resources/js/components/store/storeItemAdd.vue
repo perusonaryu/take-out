@@ -1,7 +1,7 @@
 <template>
      <transition name="modal" appear>
     <div class="modal-overlay" @click.self="$emit('close')">
-        <form enctype="multipart/form-data">
+        <!-- <form enctype="multipart/form-data"> -->
             <v-text-field
                 label="商品名"
                 placeholder="カレー"
@@ -14,11 +14,14 @@
             >
             </v-text-field>
             <label >写真を追加して下さい
-                <input type="file" 
+                <input type="file" @change="confirmImage"  v-if="view"
               >
             </label>
-            <!-- @change="confirmImage"  v-if="view"-->
-
+            
+            <!-- 確認用画像 -->
+            <p v-if="confirmedImage" style="width:100px;height:200px;">
+                <img class="img" :src="confirmedImage" style="width:100%;"/>
+            </p>
             <v-text-field
                 label="値段"
                 placeholder="100円"
@@ -44,7 +47,7 @@
             </v-text-field>
             <button @click="addStoreItem" type="button">追加</button>
             <button @click="$emit('close')">閉じる</button>
-        </form>
+        <!-- </form> -->
     </div>
     </transition>
 </template>
@@ -72,7 +75,8 @@ export default {
             file: "",
             price: "",
             item_status: "",
-        
+            confirmedImage: "",
+            view: true,
     }),
 
     computed: {
@@ -117,7 +121,7 @@ export default {
                     }
                 };
             axios
-                .post("/api/StoreItems", data, config)
+                .post("/api/StoreItems/", data, config)
                 .then(response => {
                     // this.getStoreItem();
                     this.message = response.data.success;
@@ -127,16 +131,36 @@ export default {
                     this.price = "";
                     this.item_status = "";
                     
-                    //ファイルを選択のクリア
-                    // this.view = false;
-                    // this.$nextTick(function() {
-                    //     this.view = true;
-                    // });
+                    ファイルを選択のクリア
+                    this.view = false;
+                    this.$nextTick(function() {
+                        this.view = true;
+                    });
                 })
                 .catch(err => {
                     this.message = err.response.data.errors;
                 });
-         }
+         },
+
+         confirmImage(e) {
+            this.message = "";
+            this.file = e.target.files[0];
+            if (!this.file.type.match("image.*")) {
+                this.message = "画像ファイルを選択して下さい";
+                this.confirmedImage = "";
+                return;
+            }
+            this.createImage(this.file);
+        },
+
+        createImage(file) {
+            //FileReaderのインスタンスを作成しfileを読み込む
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = e => {
+                this.confirmedImage = e.target.result;
+            };
+        },
     }
 };
 </script>

@@ -74,15 +74,17 @@ class StoreItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidStoreItem $request, $id)
+    public function update(Request $request, $id)
     {
+        $file_name = $request->item_name.'.jpg';
+        $request->file->storeAs('public/store_item_images', $file_name);
         //
         $update = [
             'item_name'  => $request->item_name,
             'price'      => $request->price,
             // 'store_id'   => $request->store_id,
             'item_status'=> $request->item_status,
-            'item_image' => $request->item_image,
+            'item_image' => 'storage/store_item_images/' . $file_name,
         ];
         StoreItem::where('id', $id)->update($update);
     }
