@@ -17,6 +17,8 @@
       <router-view></router-view>
     </v-app>
   </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
   <script src="{{mix('js/app.js')}}"></script>
 </body>
 </html>

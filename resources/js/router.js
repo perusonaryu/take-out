@@ -13,6 +13,9 @@ import login from './components/userAuth/Login.vue'
 import register from './components/userAuth/Register.vue'
 import storeLogin from './components/storeUsersAuth/Login.vue'
 import storeRegister from './components/storeUsersAuth/Register'
+import userinfotop from './components/UserPage/UserInfoTop.vue'
+import userpaymentform from './components/UserPage/UserPaymentForm.vue'
+
 // import StoreItem from './components/StoreItemComponent'
 
 
@@ -91,6 +94,25 @@ export default new VueRouter({
             path: '/storeregister',
             component: storeRegister,
             name: 'storeRegister'
+        },
+        {
+            path: '/userinfotop',
+            component: userinfotop,
+            name: 'userinfotop'
+        },
+        {
+            path: '/userpaymentform',
+            component: userpaymentform,
+            name: 'userpaymentform',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
 
         // {

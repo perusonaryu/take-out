@@ -1,5 +1,5 @@
 <template>
-     <transition name="modal" appear>
+    <transition name="modal" appear>
     <div class="modal-overlay" @click.self="$emit('close')">
         <form style="color:black">
             <v-text-field
@@ -7,7 +7,6 @@
                 placeholder="カレー"
                 outlined
                 v-model="updateItemName"
-                
             >
             <!-- :error-messages="itemNameErrors"
                 required

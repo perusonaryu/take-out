@@ -34,8 +34,7 @@
                 <div class="button-section">
                   <!-- :disabled="isPush" storeitem.item_name, storeitem.price,storeitem.item_status, storeitem.item_image一旦おいとく -->
                     <button 
-                        @click="displayUpdate(storeitem)"
-                        
+                      @click="displayUpdate(storeitem)"
                     >
                         編集
                     </button>
@@ -46,6 +45,9 @@
                 </div>
                 <!-- 編集モーダル -->
                 <store-item-edit :val="storeItem" v-if="storeitem.id === showContent" @close="closeStoreEditModal"></store-item-edit>
+
+
+
           </div>
 
           <div class="add-modal-window">
@@ -139,77 +141,79 @@
       this.getStoreItem();
     },
     methods:{
-      getStoreUser(){
-        axios.get('/storeusers/user')
-        .then(response=>{
-          this.storeUser = response.data;
-          this.storeName = response.data.name;
-          // this.address = response.data.address;
-          // this.introduction   = response.data.introduction;
-          // this.category   = response.data.category;
-          // this.storeId = response.data.id;
+    getStoreUser(){
+      axios.get('/storeusers/user')
+      .then(response=>{
+        this.storeUser = response.data;
+        this.storeName = response.data.name;
+        // this.address = response.data.address;
+        // this.introduction   = response.data.introduction;
+        // this.category   = response.data.category;
+        // this.storeId = response.data.id;
 
-        })
-        .catch(error => console.log(error));
-      },
+      })
+      .catch(error => console.log(error));
+    },
 
-      Delete(id){
-          console.log(id);
-          axios.delete('/storeDelete/' + id)
-            .then(response => this.stores = response.data )
-            .catch(error => console.log(error));
-      },
+    Delete(id){
+        console.log(id);
+        axios.delete('/storeDelete/' + id)
+          .then(response => this.stores = response.data )
+          .catch(error => console.log(error));
+    },
 
 
-      clear () {
-        // this.$v.$reset()
-        this.nastoreName = ''
-        this.address = ''
-        this.introduction = ''
-        this.category = ''
-        // console.log(this.storeToEdit);
-      },
+    clear () {
+      // this.$v.$reset()
+      this.nastoreName = ''
+      this.address = ''
+      this.introduction = ''
+      this.category = ''
+      // console.log(this.storeToEdit);
+    },
 
       
 
-      logout(){
-        axios.post('/storeusers/logout').then(()=>{
-            this.$router.push({ name: "storeLogin"})
+    logout(){
+      axios.post('/storeusers/logout').then(()=>{
+          this.$router.push({ name: "storeLogin"})
+      })
+    },
+
+    //商品リストの読み込み
+    getStoreItem() {
+      axios
+        .get("/api/StoreItems/")
+        .then(response => {
+            this.storeitems = response.data;
+            console.log(response.data);
         })
-      },
+        .catch(err => {
+            this.message = err;
+        });
+    },
 
-//商品リストの読み込み
-      getStoreItem() {
-            axios
-                .get("/api/StoreItems/")
-                .then(response => {
-                    this.storeitems = response.data;
-                    console.log(response.data);
-                })
-                .catch(err => {
-                    this.message = err;
-                });
-        },
-        //商品編集モーダル
-        displayUpdate(storeitem){
-          this.showContent = storeitem.id
-          this.storeItem = storeitem
-        },
-        closeStoreEditModal(){
-          this.showContent = false
-        },
 
-//商品追加モーダルの開閉
-        openModal() {
-          this.modal = true
-        },
-        closeStoreAddModal() {
-          this.modal = false
-        },
+    //商品編集モーダル
+    displayUpdate(storeitem){
+      this.showContent = storeitem.id
+      this.storeItem = storeitem
+    },
+    closeStoreEditModal(){
+      this.showContent = false
+    },
+
+    //商品追加モーダルの開閉
+    openModal() {
+      this.modal = true
+    },
+    closeStoreAddModal() {
+      this.modal = false
+    },
     
 
-    }
   }
+}
 
 </script>
 

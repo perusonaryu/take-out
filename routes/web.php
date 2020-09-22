@@ -57,6 +57,8 @@ Route::post('/storeImage/{id}','StoreUserController@storeImage');
 
 
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function () {
     return auth()->user();
 });
@@ -89,7 +91,10 @@ Route::group(['prefix' => 'storeusers'], function () {
 
 
 
-
+//決済関係
+Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');
+Route::post('/user/payment/store', 'PaymentController@storePaymentInfo')->name('user.payment.store');
+Route::post('/user/payment/destroy', 'PaymentController@deletePaymentInfo')->name('user.payment.destroy');
 
 
 
