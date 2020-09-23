@@ -22,7 +22,7 @@
         <div class="form-group">
             <button type="button" @click="submit" id="create_token" class="btn btn-primary">カードを登録する</button>
         </div>
-    <a href="">クレジットカード情報ページに戻る</a>
+    <router-link to="/userinfodetail">クレジットカード情報ページに戻る</router-link>
 
     </v-container>
 </template>
@@ -82,7 +82,7 @@ export default {
 
             const self = this;
             /* Stripe.jsを使って、フォームに入力されたコードをStripe側に送信。今回ご紹介している方法の場合、「カード名義」だけはStripe Elementsの仕組みを使っていないため、このままだとカード名義の情報が足りずにカード情報の暗号化ができなくなってしまうので、{name:document.querySelector('#cardName').value}を足すことで、フォームに入力されたカード名義情報も、他の情報と同時にStripeに送ることができるようになる。 */
-            this.stripe.createToken(this.cardNumber,this.name).then(function(result) {
+            this.stripe.createToken(this.cardNumber,{name: this.name}).then(function(result) {
                 /* errorが返ってきた場合はその旨を表示 */
                 if (result.error) {
                     alert("カード登録処理時にエラーが発生しました。カード番号が正しいものかどうかをご確認いただくか、別のクレジットカードで登録してみてください。");

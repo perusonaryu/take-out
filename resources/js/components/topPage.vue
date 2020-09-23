@@ -1,5 +1,5 @@
 <template>
-    <div class="top-image">
+    <div class="top-image" >
         <Header />
         <top-image />
         <v-container>

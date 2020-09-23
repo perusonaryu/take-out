@@ -15,6 +15,7 @@ import storeLogin from './components/storeUsersAuth/Login.vue'
 import storeRegister from './components/storeUsersAuth/Register'
 import userinfotop from './components/UserPage/UserInfoTop.vue'
 import userpaymentform from './components/UserPage/UserPaymentForm.vue'
+import userinfodetail from './components/UserPage/UserInfoDetail.vue'
 
 // import StoreItem from './components/StoreItemComponent'
 
@@ -101,6 +102,11 @@ export default new VueRouter({
             name: 'userinfotop'
         },
         {
+            path: '/userinfodetail',
+            component: userinfodetail,
+            name: 'userinfodetail'
+        },
+        {
             path: '/userpaymentform',
             component: userpaymentform,
             name: 'userpaymentform',
@@ -114,11 +120,8 @@ export default new VueRouter({
                 })
             }
         },
+        
 
-        // {
-        //     path: '/storeItem',
-        //     component: StoreItem,
-        //     // name: 'storeRegister'
-        // },
+    
     ]
 });
