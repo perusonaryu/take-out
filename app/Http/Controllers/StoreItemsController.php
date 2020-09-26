@@ -78,7 +78,7 @@ class StoreItemsController extends Controller
     {
         
        $file_path=request()->file;
-       dd(is_string($file_path));
+    //    dd(is_string($file_path));
         if(!is_string($file_path)){
             
                 $file_name =request()->item_name.request()->file->getClientOriginalExtension();
