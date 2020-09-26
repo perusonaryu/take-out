@@ -76,26 +76,43 @@ class StoreItemsController extends Controller
      */
     public function update(ValidStoreItem $request, $id)
     {
-        // $storeitem = StoreItem::find($id);
-        if(request()->file){
-            $file_name = request()->file->getClientOriginalExtension();
-            request()->file->storeAs('public/store_item_images',$file_name);
+        
+       $file_path=request()->file;
+       dd(is_string($file_path));
+        if(!is_string($file_path)){
+            
+                $file_name =request()->item_name.request()->file->getClientOriginalExtension();
+                request()->file->storeAs('public/store_item_images',$file_name);
+                $update = [
+                    'item_name'  => $request->item_name,
+                    'price'      => $request->price,
+                    // 'store_id'   => $request->store_id,
+                    'item_status'=> $request->item_status,
+                    'item_image' => 'storage/store_item_images/' . $file_name,
+                ];
+                StoreItem::where('id', $id)->update($update);
+            }else{
+                $update = [
+                    'item_name'  => $request->item_name,
+                    'price'      => $request->price,
+                    // 'store_id'   => $request->store_id,
+                    'item_status'=> $request->item_status,
+                    'item_image' => $request->file,
+                ];
+                StoreItem::where('id', $id)->update($update);
+            }
+
+            
         // if ($request->file) {
         // $file_name = $request->item_name.'.jpg';
         
-        // $request->file('itemimage')->storeAs('public/store_item_images', $file_name);
-        //
-        $update = [
-            'item_name'  => $request->item_name,
-            'price'      => $request->price,
-            // 'store_id'   => $request->store_id,
-            'item_status'=> $request->item_status,
-            'item_image' => 'storage/store_item_images/' . $file_name,
-        ];
-        StoreItem::where('id', $id)->update($update);
-        }
+        // $request->file('itemimage')->storeAs('public/store_item_images', $file_name)
+        // }else{
+        //     $file_name = request()->file;
+        // }
+     
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -107,10 +124,12 @@ class StoreItemsController extends Controller
         //画像ファイルの削除
         $deleteStoreItem = StoreItem::find($id);
         $deletename      = $deleteStoreItem->item_image;
-        $pathdel         = storage_path().'/app/public/store_item_images/'.$deletename;
+        $pathdel         = public_path().'/'.$deletename;
+        // dd($pathdel);
         \File::delete($pathdel);
         $deleteStoreItem->delete();
-        return redirect('/storepage');
+        
         // StoreItem::where('id', $id)->delete();
     }
+
 }
