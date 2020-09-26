@@ -3,27 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 use Auth;
+use App\User;
 
 class Payment extends Model
 {
-    /**
-     * Stripe上に「顧客」を登録するための関数
-     *
-     * @param String $token・・・・・Stripe上のtoken（フロントエンドで作成）
-     * @param object $user ・・・・・カード登録をするユーザーの情報
-     * @param object $customer・・・Stripe上に登録する顧客オブジェクト
-     */
+    //
 
     public static function setCustomer($token, $user)
     {
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
-
-        //Stripe上に顧客情報をtokenを使用することで保存
         try {
             $customer = \Stripe\Customer::create([
-                'card' => $token,
+                'card' => $token, //カード情報はデフォルトソース？sourceにtoken入れなくて良いのか？
                 'name' => $user->name,
                 'description' => $user->id
             ]);
@@ -63,27 +55,29 @@ class Payment extends Model
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
 
         try {
-            // $card = $customer->sources->create(['source' => $token]);
-            // dd($card->id);
-            
-
-            \Stripe\Customer::createSource(
-                $user->stripe_id,
-                ['source' => $token]
-            );
-
             $customer = \Stripe\Customer::retrieve($user->stripe_id);
-            $customer2 = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
-
-            // dd($customer2);
+            // $card = $customer->sources->create(['source' => $token]);;
+            // dd(['source' => $token]);
             
-
-            $card = $customer2;
+            // $access_token = str_random(32);
+            // dd($access_token);ヘルパー関数がいる
+            $card = \Stripe\Customer::createSource(//カード情報取得
+                $user->stripe_id,
+                ['source' => "$token"],
+                //sourceはsrcから始まるやつじゃなくて良いのか？
+            );
+            // $card=$stripe->customers->createSource(
+            //     $user->stripe_id,
+            //     ['source' => "$token"],
+            //   );
+            // $card = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
+            
+           
 
             if (isset($customer)) {
                 $customer->default_source = $card->id;
                 $customer->save();
-                // dd($customer->default_source);
+                // dd($token,$user->stripe_id,$customer,$customer->default_source,$customer->source,$card,$card->id,$card->source);
                 return true;
             }
             
@@ -103,7 +97,6 @@ class Payment extends Model
         return true;
     }
 
-
     /**
      * Stripe上に現在登録されている顧客の「使用カード」の情報を取得するための関数
      *
@@ -119,16 +112,14 @@ class Payment extends Model
         $default_card = null;
 
         if (!is_null($user->stripe_id)) {
+            //stripe_id顧客情報を使って、顧客オブジェクト取得
             $customer = \Stripe\Customer::retrieve($user->stripe_id);
-            
+            //default_sourceにはカードidが入っている、Customer::retrieveSource(顧客ID,カードID)でカード情報取得(名義etc)
             $card = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
-            if (isset($customer['default_source']) && $customer['default_source']) {
-                // dd($customer->default_source);
-                // dd($customer2->brand);
-                // dd($customer2);
-                
+            // if (isset($customer['default_source']) && $customer['default_source']) {
+                // dd($customer->sources);
                 // $card = $customer->sources->data[0];
-                // _originalValues
+                
                 $default_card = [
                     'number' => str_repeat('*', 8) . $card->last4,
                     'brand' => $card->brand,
@@ -137,13 +128,10 @@ class Payment extends Model
                     'name' => $card->name,
                     'id' => $card->id,
                 ];
-                // dd($default_card);
             }
-        }
+        // }
         return $default_card;
     }
-
-
 
     /**
      * Stripe上に現在登録されている顧客のカード情報を削除するための関数
@@ -156,20 +144,18 @@ class Payment extends Model
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
         $customer = \Stripe\Customer::retrieve($user->stripe_id);
         $customer2 = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
-
+        // $card = $customer->sources->data[0];
         $card = $customer2;
-
         // var_dump($card,"カード");
         /* card情報が存在していれば削除 */
         if ($card) {
             \Stripe\Customer::deleteSource(
                 $user->stripe_id,
-                $card->id
-                // $customer->default_source
+                $customer->default_source,
+                // $card->id
             );
             return true;
         }
         return false;
     }
-
 }

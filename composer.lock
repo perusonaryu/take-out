@@ -1329,10 +1329,6 @@
                 "laravel",
                 "sanctum"
             ],
-            "support": {
-                "issues": "https://github.com/laravel/sanctum/issues",
-                "source": "https://github.com/laravel/sanctum"
-            },
             "time": "2020-09-01T13:48:09+00:00"
         },
         {
@@ -3196,10 +3192,13 @@
                 "payment processing",
                 "stripe"
             ],
+<<<<<<< HEAD
+=======
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
                 "source": "https://github.com/stripe/stripe-php/tree/v7.52.0"
             },
+>>>>>>> 2f27c73a23cbaf80dc0cffd94c0910afba74623b
             "time": "2020-09-08T19:29:20+00:00"
         },
         {
@@ -7927,5 +7926,5 @@
         "php": "^7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

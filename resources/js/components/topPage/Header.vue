@@ -11,7 +11,7 @@
 
       <v-spacer></v-spacer>
 
-      <router-link to="/dashboard">picksについて</router-link>
+      <router-link to="/userinfotop">picksについて</router-link>
       <router-link to="/dashboard">飲食店登録</router-link>
       <router-link to="/dashboard">picksについて</router-link>
       
