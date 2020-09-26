@@ -76,14 +76,17 @@ class Payment extends Model
             $customer2 = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
 
             // dd($customer2);
+            
 
             $card = $customer2;
 
             if (isset($customer)) {
                 $customer->default_source = $card->id;
                 $customer->save();
+                // dd($customer->default_source);
                 return true;
             }
+            
 
         } catch(\Stripe\Exception\CardException $e) {
             /*

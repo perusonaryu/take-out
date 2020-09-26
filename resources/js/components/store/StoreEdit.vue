@@ -113,6 +113,7 @@
           this.address = response.data.address;
           this.introduction   = response.data.introduction;
           this.category   = response.data.category;
+          console.log(this.storeUser);
           
           // this.storeId = response.data.id;
         })
@@ -134,9 +135,9 @@
         imageData.append('introduction',this.introduction);
         imageData.append('category',this.category);
         imageData.append('file',this.imageInfo);
-        console.log(imageData.get('file'));
-        const image = this.imageInfo;
-        console.log(this.imageInfo);
+        // console.log(imageData.get('file'));
+        // const image = this.imageInfo;
+        // console.log(this.imageInfo);
 
         
 

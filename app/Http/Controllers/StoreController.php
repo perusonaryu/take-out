@@ -20,6 +20,8 @@ class StoreController extends Controller
         // return response()->json($stores);
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

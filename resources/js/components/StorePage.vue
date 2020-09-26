@@ -1,6 +1,6 @@
 <template>
   <div>
-    <store-image v-bind:storeName = "storeUser.name" />
+    <store-image v-bind:store = "storeUser" />
     <v-btn text color="primary" data-toggle="modal" data-target="#editModal" >
       編集
     </v-btn>

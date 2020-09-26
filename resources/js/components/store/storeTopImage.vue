@@ -1,24 +1,25 @@
 <template>
-  <v-parallax
-    dark
-    src="/storage/Store/cat1.jpg"
-    height= "500"
+  <v-img
+    :src= "` ${store.image} `"
+    width="100%"
+    height="500"
   >
+  
     <v-row
       align="center"
       justify="center"
+      class="h-100"
     >
-      <v-col class="text-left" cols="12">
-        <h1 class="display-1 font-weight-thin mb-4"> {{ storeName }} </h1>
-        <h4 class="subheading">Build your application today!</h4>
+      <v-col class="text-left" md="6">
+        <h1 class="display-1 font-weight-thin mb-4"> {{ store.name }} </h1>
       </v-col>
     </v-row>
-  </v-parallax>
+  </v-img>
 </template>
 
 <script>
 export default {
-    props:['storeName'],
+    props:['store'],
     data: () => ({
       storeUser: {},
 
@@ -33,4 +34,13 @@ img{
 }
 
 
+
+</style>
+
+<style>
+.v-image__image{
+  height:500px;
+  width:100%;
+  object-fit:cover;
+}
 </style>
