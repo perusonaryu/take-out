@@ -10,16 +10,16 @@
     <tr >
       <!-- scope="row" -->
       <th >カード番号</th>
-      <td>{{ card.number }}</td>
+      <td>{{ cardinfo.number }}</td>
     </tr>
     <th >カードブランド</th>
-      <td>{{ card.brand }}</td>
+      <td>{{ cardinfo.brand }}</td>
     <tr>
       <th >名義</th>
-      <td>{{ card.name }}</td>
+      <td>{{ cardinfo.name }}</td>
     </tr>
     <th >有効期限</th>
-      <td>{{ card.exp_month }}/{{ card.exp_year }}</td>
+      <td>{{ cardinfo.exp_month }}/{{ cardinfo.exp_year }}</td>
   </tbody>
 </table>
 </template>
@@ -27,11 +27,16 @@
 export default {
     data(){
         return{
-            cardinfo: {},
+            cardinfo: "",
+            // number:"",
+            // brand:"",
+            // name:"",
+            // month:"",
+            // year:"",
         }
     },
     
-    created: function() {
+    mounted: function() {
         this.getCardInfo();
         
     },
@@ -40,9 +45,15 @@ export default {
             axios
                 .get("/user/payment")
                 .then(response => {
-                    this.cardinfo = response.data;
+                    this.cardinfo = response.data.defaultCard;
+                    // this.number = this.cardinfo.number;
+                    // this.brand = this.cardinfo.brand;
+                    // this.name = this.cardinfo.name;
+                    // this.month = this.cardinfo.exp_month
+                    // this.year = this.cardinfo.exp_year;
                     // console.log(response.data);
-                    console.log(this.card.brand);
+                    console.log(response.data);
+                    console.log(response.data.defaultCard);
                 })
                 .catch(err => {
                     // this.message = err;

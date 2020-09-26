@@ -1,55 +1,57 @@
+
 <template>
-     <transition name="modal" appear>
-    <div class="modal-overlay" @click.self="$emit('close')">
-        <!-- <form enctype="multipart/form-data"> -->
-            <v-text-field
-                label="商品名"
-                placeholder="カレー"
-                outlined
-                v-model="item_name"
-                :error-messages="itemNameErrors"
-                required
-                @input="$v.item_name.$touch()"
-                @blur="$v.item_name.$touch()"
-            >
-            </v-text-field>
-            <label >写真を追加して下さい
-                <input type="file" @change="confirmImage"  v-if="view"
-              >
+<div class="modal" id="itemaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+            <h1 class="d-flex justify-center">商品追加</h1>
+             <label>商品画像
+                <input type="file" @change="itemImageSelect">
             </label>
-            
-            <!-- 確認用画像 -->
-            <p v-if="confirmedImage" style="width:100px;height:200px;">
-                <img class="img" :src="confirmedImage" style="width:100%;"/>
+            <p v-if="selectedImage" style="width:100px;height:200px;">
+                <img class="img" :src="selectedImage" style="width:100%;"/>
             </p>
             <v-text-field
-                label="値段"
-                placeholder="100円"
-                outlined
-                v-model="price"
-                :error-messages="itemPriceErrors"
-                required
-                @input="$v.price.$touch()"
-                @blur="$v.price.$touch()"
-            >
-            </v-text-field>
-
+            v-model="StoreItemName"
+            label="商品名"
+            :error-messages="itemNameErrors"
+            required
+            @input="$v.StoreItemName.$touch()"
+            @blur="$v.StoreItemName.$touch()"
+            >  </v-text-field>
             <v-text-field
-                label="商品状況"
-                placeholder="売り切れ"
-                outlined
-                v-model="item_status"
-                :error-messages="itemStatusErrors"
-                required
-                @input="$v.item_status.$touch()"
-                @blur="$v.item_status.$touch()"
-            >
-            </v-text-field>
+            v-model="Price"
+            label="値段"
+            :error-messages="itemPriceErrors"
+            required
+            @input="$v.Price.$touch()"
+            @blur="$v.Price.$touch()"
+            ></v-text-field>
+            <v-text-field
+            v-model="ItemStatus"
+            label="商品状況"
+            :error-messages="itemStatusErrors"
+            required
+            @input="$v.ItemStatus.$touch()"
+            @blur="$v.ItemStatus.$touch()"
+            ></v-text-field>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-primary" @click="addStoreItem" >商品追加</button>
+      </div>
+      </form>
+      </div>
+  </div>
+</div>
+    
+    <!-- <div class="modal-overlay" @click.self="$emit('close')"> -->
+            <!-- 確認用画像 -->
+            <!-- <p v-if="confirmedImage" style="width:100px;height:200px;">
+                <img class="img" :src="confirmedImage" style="width:100%;"/>
+            </p>
             <button @click="addStoreItem" type="button">追加</button>
-            <button @click="$emit('close')">閉じる</button>
-        <!-- </form> -->
-    </div>
-    </transition>
+            <button @click="$emit('close')">閉じる</button> -->
+
 </template>
 
 <script>
@@ -63,27 +65,27 @@ export default {
     mixins: [validationMixin],
 
     validations: {
-      item_name: { required },
+      StoreItemName: { required },
     //   file: { required },
-      price:{required},
-      item_status: {required},
+      Price:{required},
+      ItemStatus: {required},
 
     },
     data:()=>( {
         
-            item_name: "",
+            StoreItemName: "",
             file: "",
-            price: "",
-            item_status: "",
-            confirmedImage: "",
+            Price: "",
+            ItemStatus: "",
             view: true,
+            selectedImage:"",
     }),
 
     computed: {
       itemNameErrors () {
         const errors = []
-        if (!this.$v.item_name.$dirty) return errors
-        !this.$v.item_name.required && errors.push('商品名を入力して下さい')
+        if (!this.$v.StoreItemName.$dirty) return errors
+        !this.$v.StoreItemName.required && errors.push('商品名を入力して下さい')
         return errors
       },
     //   fileErrors () {
@@ -94,14 +96,14 @@ export default {
     //   },
       itemPriceErrors () {
         const errors = []
-        if (!this.$v.price.$dirty) return errors
-        !this.$v.price.required && errors.push('値段を入力して下さい')
+        if (!this.$v.Price.$dirty) return errors
+        !this.$v.Price.required && errors.push('値段を入力して下さい')
         return errors
       },
       itemStatusErrors () {
         const errors = []
-        if (!this.$v.item_status.$dirty) return errors
-        !this.$v.item_status.required && errors.push('商品状況を入力して下さい')
+        if (!this.$v.ItemStatus.$dirty) return errors
+        !this.$v.ItemStatus.required && errors.push('商品状況を入力して下さい')
         return errors
       },
       
@@ -111,10 +113,10 @@ export default {
     addStoreItem() {
             //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
             let data = new FormData();
-            data.append("item_name", this.item_name);
+            data.append("item_name", this.StoreItemName);
             data.append("file", this.file);
-            data.append("price", this.price);
-            data.append("item_status", this.item_status);
+            data.append("price", this.Price);
+            data.append("item_status", this.ItemStatus);
             const config = {
                     headers: {
                         'content-type': 'multipart/form-data'
@@ -124,12 +126,11 @@ export default {
                 .post("/api/StoreItems/", data, config)
                 .then(response => {
                     // this.getStoreItem();
-                    this.message = response.data.success;
-                    // this.confirmedImage = "";
-                    this.item_name = "";
+                    this.$emit('add');
+                    this.StoreItemName = "";
                     this.file = "";
-                    this.price = "";
-                    this.item_status = "";
+                    this.Price = "";
+                    this.ItemStatus = "";
                     
                     ファイルを選択のクリア
                     this.view = false;
@@ -138,27 +139,27 @@ export default {
                     });
                 })
                 .catch(err => {
-                    this.message = err.response.data.errors;
+                    this.message = err;
                 });
          },
 
-         confirmImage(e) {
+         itemImageSelect(e) {
             this.message = "";
             this.file = e.target.files[0];
             if (!this.file.type.match("image.*")) {
                 this.message = "画像ファイルを選択して下さい";
-                this.confirmedImage = "";
+                this.selectedImage = "";
                 return;
             }
-            this.createImage(this.file);
+            this.createItemImage(this.file);
         },
 
-        createImage(file) {
+        createItemImage(file) {
             //FileReaderのインスタンスを作成しfileを読み込む
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = e => {
-                this.confirmedImage = e.target.result;
+                this.selectedImage = e.target.result;
             };
         },
     }

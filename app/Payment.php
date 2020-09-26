@@ -15,7 +15,7 @@ class Payment extends Model
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
         try {
             $customer = \Stripe\Customer::create([
-                'card' => $token,
+                'card' => $token, //カード情報はデフォルトソース？sourceにtoken入れなくて良いのか？
                 'name' => $user->name,
                 'description' => $user->id
             ]);
@@ -57,19 +57,31 @@ class Payment extends Model
 
         try {
             $customer = \Stripe\Customer::retrieve($user->stripe_id);
-            // $card = $customer->sources->create(['source' => $token]);
-            $card = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
-            \Stripe\Customer::createSource(
+            // $card = $customer->sources->create(['source' => $token]);;
+            // dd(['source' => $token]);
+            
+            // $access_token = str_random(32);
+            // dd($access_token);ヘルパー関数がいる
+            $card = \Stripe\Customer::createSource(//カード情報取得
                 $user->stripe_id,
-                ['source' => $token]
+                ['source' => "$token"],
+                //sourceはsrcから始まるやつじゃなくて良いのか？
             );
-            dd('source');
+            // $card=$stripe->customers->createSource(
+            //     $user->stripe_id,
+            //     ['source' => "$token"],
+            //   );
+            // $card = \Stripe\Customer::retrieveSource($user->stripe_id,$customer->default_source);
+            
+           
 
             if (isset($customer)) {
-                $customer->default_source = $card["id"];
+                $customer->default_source = $card->id;
                 $customer->save();
+                // dd($token,$user->stripe_id,$customer,$customer->default_source,$customer->source,$card,$card->id,$card->source);
                 return true;
             }
+            
 
         } catch(\Stripe\Exception\CardException $e) {
             /*

@@ -14,7 +14,7 @@ class PaymentController extends Controller
         $user = Auth::user(); //要するにUser情報を取得したい
         $defaultCard = Payment::getDefaultcard($user);
 
-        return $defaultCard;
+        return compact('defaultCard');
         // return view('user.payment.index', compact('user', 'defaultCard'));
 
     }

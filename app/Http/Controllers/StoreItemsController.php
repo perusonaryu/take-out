@@ -74,10 +74,16 @@ class StoreItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidStoreItem $request, $id)
     {
-        $file_name = $request->item_name.'.jpg';
-        $request->file->storeAs('public/store_item_images', $file_name);
+        // $storeitem = StoreItem::find($id);
+        if(request()->file){
+            $file_name = request()->file->getClientOriginalExtension();
+            request()->file->storeAs('public/store_item_images',$file_name);
+        // if ($request->file) {
+        // $file_name = $request->item_name.'.jpg';
+        
+        // $request->file('itemimage')->storeAs('public/store_item_images', $file_name);
         //
         $update = [
             'item_name'  => $request->item_name,
@@ -87,6 +93,7 @@ class StoreItemsController extends Controller
             'item_image' => 'storage/store_item_images/' . $file_name,
         ];
         StoreItem::where('id', $id)->update($update);
+        }
     }
 
     /**
@@ -100,7 +107,7 @@ class StoreItemsController extends Controller
         //画像ファイルの削除
         $deleteStoreItem = StoreItem::find($id);
         $deletename      = $deleteStoreItem->item_image;
-        $pathdel         = storage().'/app/public/store_item_images/'.$deletename;
+        $pathdel         = storage_path().'/app/public/store_item_images/'.$deletename;
         \File::delete($pathdel);
         $deleteStoreItem->delete();
         return redirect('/storepage');

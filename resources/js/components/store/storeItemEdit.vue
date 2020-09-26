@@ -1,66 +1,47 @@
 <template>
-     <transition name="modal" appear>
-    <div class="modal-overlay" @click.self="$emit('close')" style="color:black" > 
-        
-            <v-text-field
-                label="商品名"
-                placeholder="カレー"
-                outlined
-                v-model="updateItemName"
-                
-            >
-            <!-- :error-messages="itemNameErrors"
-                required
-                @input="$v.item_name.$touch()"
-                @blur="$v.item_name.$touch()" -->
-            </v-text-field>
-<!-- v-if="view" -->
-            <label >写真を追加して下さい
-                <input type="file" @change="imageEdit"  >
+<div class="modal" id="itemeditmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form enctype="multipart/form-data">
+            <h1 class="d-flex justify-center">商品編集</h1>
+             <label>商品画像
+                <input type="file" @change="itemImageEdit" name="itemimage"
+>
             </label>
-            <p v-if="editedImage">
-                <img class="img" :src="editedImage" />
+            <p v-if="editedImage" style="width:100px;height:200px;">
+                <img class="img" :src="editedImage" style="width:100%;"/>
             </p>
-            <!-- 画像のプレビュー機能 -->
-            <!-- <img
-                    v-show="uploadedImage"
-                    class="preview-item-file"
-                    :src="uploadedImage"
-                    alt=""
-                /> -->
+            <v-text-field
+            v-model="updateItemName"
+            label="商品名"
             
-
+            >  </v-text-field>
             <v-text-field
-                label="値段"
-                placeholder="100円"
-                outlined
-                v-model="updatePrice"
-                
-            >
-            <!-- :error-messages="itemPriceErrors"
-                required
-                @input="$v.price.$touch()"
-                @blur="$v.price.$touch()" -->
-            </v-text-field>
-
+            v-model="updatePrice"
+            label="値段"
+            
+            ></v-text-field>
             <v-text-field
-                label="商品状況"
-                placeholder="売り切れ"
-                outlined
-                v-model="updateItemStatus"
-                
-            >
-            <!-- :error-messages="itemStatusErrors"
-                required
-                @input="$v.item_status.$touch()"
-                @blur="$v.item_status.$touch()" -->
-            </v-text-field>
+            v-model="updateItemStatus"
+            label="商品状況"
+            
+            ></v-text-field>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateStoreItem(updateId)" >編集する</button>
+      </div>
+      </form>
+      </div>
+  </div>
+</div>
+
+            <!-- </v-text-field>
             <button @click="updateStoreItem(updateId, updateItemName, updatePrice, updateItemStatus, file)" >追加</button>
             <button @click="$emit('close')">閉じる</button>
        <p>{{message}}</p>
     </div>
 
-    </transition>
+    </transition> -->
     
 </template>
 
@@ -77,9 +58,9 @@
             updateItemName: "",
             updatePrice: "",
             updateItemStatus: "",
-            updateItemImage: "",
+           
             file:"",
-            message:"",
+            
             // updateForm:false,
         };
     },
@@ -92,35 +73,36 @@
         this.updateId = this.val.id
         this.updateItemName = this.val.item_name
         this.updatePrice = this.val.price
-        this.updateItemImage = this.val.item_image
+        this.file = this.val.item_image
         this.updateItemStatus = this.val.item_status
         
     },
     methods:{
-        updateStoreItem(updateId, updateItemName, updatePrice, updateItemStatus, file){
+        updateStoreItem(updateId){
             
-            let EditData = new FormData();
-            EditData.append("id", this.updateId);
-            EditData.append("item_name", this.updateItemName);
-            EditData.append("file", this.file);
-            EditData.append("price", this.updatePrice);
-            EditData.append("item_status", this.updateItemStatus);
+            let editedData = new FormData();
+            editedData.append("id", this.updateId);
+            editedData.append("item_name", this.updateItemName);
+            editedData.append("file", this.file);
+            editedData.append("price", this.updatePrice);
+            editedData.append("item_status", this.updateItemStatus);
+            console.log(...editedData.entries());
 axios
-                .patch("/api/StoreItems/" + updateId, {
-                    item_name: this.updateItemName,
-                    price: this.updatePrice,
-                    item_status: this.updateItemStatus,
-                    item_image: this.file
-                })
+                .post("/api/StoreItems/" + this.updateId,editedData,
+                {
+          headers: {
+            'X-HTTP-Method-Override': 'PUT'
+          }
+        })
                 .then(response => {
                     // this.getStoreItem();
                     // this.isPush = false;
                     // this.updateForm = false;
                     console.log(response.data);
-                    this.message = "";
+                    this.$emit('itemUpdate');
                 })
                 .catch(err => {
-                    this.message = err;
+                    console.log(err);
                 });
         },
             //  axios({
@@ -138,21 +120,11 @@ axios
             //                 data: EditData,
             //             })
                 
-            //     .then(response => {
-            //         // this.getStoreItem();
-            //         // this.isPush = false;
-            //         // this.updateForm = false;
-            //         this.message = "";
-            //     })
-            //     .catch(err => {
-            //         this.message = err;
-            //     });
-            // },
-        imageEdit(e) {
-            this.message = "";
+        itemImageEdit(e) {
+            
             this.file = e.target.files[0];
             if (!this.file.type.match("image.*")) {
-                this.message = "画像ファイルを選択して下さい";
+                
                 this.editedImage = "";
                 return;
             }

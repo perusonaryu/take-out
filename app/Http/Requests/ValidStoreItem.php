@@ -29,7 +29,7 @@ class ValidStoreItem extends FormRequest
             'price'      => 'required',
             // 'store_id'=> 'required',
             'item_status'=> 'required',
-            'file'       => 'required|file|image|',
+            'file'       => 'required',
         ];
     }
     // public function messages(){

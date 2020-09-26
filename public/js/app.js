@@ -2293,10 +2293,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      cardinfo: {}
+      cardinfo: "" // number:"",
+      // brand:"",
+      // name:"",
+      // month:"",
+      // year:"",
+
     };
   },
-  created: function created() {
+  mounted: function mounted() {
     this.getCardInfo();
   },
   methods: {
@@ -2304,9 +2309,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/user/payment").then(function (response) {
-        _this.cardinfo = response.data; // console.log(response.data);
+        _this.cardinfo = response.data.defaultCard; // this.number = this.cardinfo.number;
+        // this.brand = this.cardinfo.brand;
+        // this.name = this.cardinfo.name;
+        // this.month = this.cardinfo.exp_month
+        // this.year = this.cardinfo.exp_year;
+        // console.log(response.data);
 
-        console.log(_this.card.brand);
+        console.log(response.data);
+        console.log(response.data.defaultCard);
       })["catch"](function (err) {
         // this.message = err;
         console.log(err);
@@ -2602,38 +2613,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 //vuelidate
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_0__["validationMixin"]],
   validations: {
-    item_name: {
+    StoreItemName: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"]
     },
     //   file: { required },
-    price: {
+    Price: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"]
     },
-    item_status: {
+    ItemStatus: {
       required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__["required"]
     }
   },
   data: function data() {
     return {
-      item_name: "",
+      StoreItemName: "",
       file: "",
-      price: "",
-      item_status: "",
-      confirmedImage: "",
-      view: true
+      Price: "",
+      ItemStatus: "",
+      view: true,
+      selectedImage: ""
     };
   },
   computed: {
     itemNameErrors: function itemNameErrors() {
       var errors = [];
-      if (!this.$v.item_name.$dirty) return errors;
-      !this.$v.item_name.required && errors.push('商品名を入力して下さい');
+      if (!this.$v.StoreItemName.$dirty) return errors;
+      !this.$v.StoreItemName.required && errors.push('商品名を入力して下さい');
       return errors;
     },
     //   fileErrors () {
@@ -2644,14 +2657,14 @@ __webpack_require__.r(__webpack_exports__);
     //   },
     itemPriceErrors: function itemPriceErrors() {
       var errors = [];
-      if (!this.$v.price.$dirty) return errors;
-      !this.$v.price.required && errors.push('値段を入力して下さい');
+      if (!this.$v.Price.$dirty) return errors;
+      !this.$v.Price.required && errors.push('値段を入力して下さい');
       return errors;
     },
     itemStatusErrors: function itemStatusErrors() {
       var errors = [];
-      if (!this.$v.item_status.$dirty) return errors;
-      !this.$v.item_status.required && errors.push('商品状況を入力して下さい');
+      if (!this.$v.ItemStatus.$dirty) return errors;
+      !this.$v.ItemStatus.required && errors.push('商品状況を入力して下さい');
       return errors;
     }
   },
@@ -2661,10 +2674,10 @@ __webpack_require__.r(__webpack_exports__);
 
       //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
       var data = new FormData();
-      data.append("item_name", this.item_name);
+      data.append("item_name", this.StoreItemName);
       data.append("file", this.file);
-      data.append("price", this.price);
-      data.append("item_status", this.item_status);
+      data.append("price", this.Price);
+      data.append("item_status", this.ItemStatus);
       var config = {
         headers: {
           'content-type': 'multipart/form-data'
@@ -2672,12 +2685,12 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/api/StoreItems/", data, config).then(function (response) {
         // this.getStoreItem();
-        _this.message = response.data.success; // this.confirmedImage = "";
+        _this.$emit('add');
 
-        _this.item_name = "";
+        _this.StoreItemName = "";
         _this.file = "";
-        _this.price = "";
-        _this.item_status = "";
+        _this.Price = "";
+        _this.ItemStatus = "";
         ファイルを選択のクリア;
         _this.view = false;
 
@@ -2685,22 +2698,22 @@ __webpack_require__.r(__webpack_exports__);
           this.view = true;
         });
       })["catch"](function (err) {
-        _this.message = err.response.data.errors;
+        _this.message = err;
       });
     },
-    confirmImage: function confirmImage(e) {
+    itemImageSelect: function itemImageSelect(e) {
       this.message = "";
       this.file = e.target.files[0];
 
       if (!this.file.type.match("image.*")) {
         this.message = "画像ファイルを選択して下さい";
-        this.confirmedImage = "";
+        this.selectedImage = "";
         return;
       }
 
-      this.createImage(this.file);
+      this.createItemImage(this.file);
     },
-    createImage: function createImage(file) {
+    createItemImage: function createItemImage(file) {
       var _this2 = this;
 
       //FileReaderのインスタンスを作成しfileを読み込む
@@ -2708,7 +2721,7 @@ __webpack_require__.r(__webpack_exports__);
       reader.readAsDataURL(file);
 
       reader.onload = function (e) {
-        _this2.confirmedImage = e.target.result;
+        _this2.selectedImage = e.target.result;
       };
     }
   }
@@ -2725,25 +2738,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -2803,9 +2809,7 @@ __webpack_require__.r(__webpack_exports__);
       updateItemName: "",
       updatePrice: "",
       updateItemStatus: "",
-      updateItemImage: "",
-      file: "",
-      message: "" // updateForm:false,
+      file: "" // updateForm:false,
 
     };
   },
@@ -2818,32 +2822,36 @@ __webpack_require__.r(__webpack_exports__);
     this.updateId = this.val.id;
     this.updateItemName = this.val.item_name;
     this.updatePrice = this.val.price;
-    this.updateItemImage = this.val.item_image;
+    this.file = this.val.item_image;
     this.updateItemStatus = this.val.item_status;
   },
   methods: {
-    updateStoreItem: function updateStoreItem(updateId, updateItemName, updatePrice, updateItemStatus, file) {
-      var _this = this;
+    updateStoreItem: function updateStoreItem(updateId) {
+      var _console,
+          _this = this;
 
-      var EditData = new FormData();
-      EditData.append("id", this.updateId);
-      EditData.append("item_name", this.updateItemName);
-      EditData.append("file", this.file);
-      EditData.append("price", this.updatePrice);
-      EditData.append("item_status", this.updateItemStatus);
-      axios.patch("/api/StoreItems/" + updateId, {
-        item_name: this.updateItemName,
-        price: this.updatePrice,
-        item_status: this.updateItemStatus,
-        item_image: this.file
+      var editedData = new FormData();
+      editedData.append("id", this.updateId);
+      editedData.append("item_name", this.updateItemName);
+      editedData.append("file", this.file);
+      editedData.append("price", this.updatePrice);
+      editedData.append("item_status", this.updateItemStatus);
+
+      (_console = console).log.apply(_console, _toConsumableArray(editedData.entries()));
+
+      axios.post("/api/StoreItems/" + this.updateId, editedData, {
+        headers: {
+          'X-HTTP-Method-Override': 'PUT'
+        }
       }).then(function (response) {
         // this.getStoreItem();
         // this.isPush = false;
         // this.updateForm = false;
         console.log(response.data);
-        _this.message = "";
+
+        _this.$emit('itemUpdate');
       })["catch"](function (err) {
-        _this.message = err;
+        console.log(err);
       });
     },
     //  axios({
@@ -2860,22 +2868,10 @@ __webpack_require__.r(__webpack_exports__);
     //     // ファイルが入ったデータ
     //                 data: EditData,
     //             })
-    //     .then(response => {
-    //         // this.getStoreItem();
-    //         // this.isPush = false;
-    //         // this.updateForm = false;
-    //         this.message = "";
-    //     })
-    //     .catch(err => {
-    //         this.message = err;
-    //     });
-    // },
-    imageEdit: function imageEdit(e) {
-      this.message = "";
+    itemImageEdit: function itemImageEdit(e) {
       this.file = e.target.files[0];
 
       if (!this.file.type.match("image.*")) {
-        this.message = "画像ファイルを選択して下さい";
         this.editedImage = "";
         return;
       }
@@ -3013,6 +3009,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 // import { validationMixin } from 'vuelidate'
 // import { required, maxLength, email } from 'vuelidate/lib/validators'
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3033,45 +3032,12 @@ __webpack_require__.r(__webpack_exports__);
       category: '',
       // 商品追加 storeitem
       storeitems: {},
-      confirmedImage: "",
-      item_name: "",
-      item_status: "",
-      price: "",
-      message: "",
-      file: "",
-      modal: false,
+      addmodal: false,
       //商品編集モーダル
       showContent: false,
       storeItem: ""
     };
   },
-  // computed: {
-  //   storeNameErrors () {
-  //     const errors = []
-  //     if (!this.$v.storeName.$dirty) return errors
-  //     // !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-  //     !this.$v.storeName.required && errors.push('storeName is required.')
-  //     return errors
-  //   },
-  //   addressErrors () {
-  //     const errors = []
-  //     if (!this.$v.address.$dirty) return errors
-  //     !this.$v.address.required && errors.push('address is required')
-  //     return errors
-  //   },
-  //   introductionErrors () {
-  //     const errors = []
-  //     if (!this.$v.introduction.$dirty) return errors
-  //     !this.$v.introduction.required && errors.push('introduction is required')
-  //     return errors
-  //   },
-  //   categoryErrors () {
-  //     const errors = []
-  //     if (!this.$v.category.$dirty) return errors
-  //     !this.$v.category.required && errors.push('category is required')
-  //     return errors
-  //   },
-  // },
   created: function created() {
     this.getStoreUser(); //商品
 
@@ -3083,10 +3049,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/storeusers/user').then(function (response) {
         _this.storeUser = response.data;
-        _this.storeName = response.data.name; // this.address = response.data.address;
-        // this.introduction   = response.data.introduction;
-        // this.category   = response.data.category;
-        // this.storeId = response.data.id;
+        _this.storeName = response.data.name;
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -3130,7 +3093,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //商品編集モーダル
     displayUpdate: function displayUpdate(storeitem) {
-      this.showContent = storeitem.id;
+      this.showContent = true;
       this.storeItem = storeitem;
     },
     closeStoreEditModal: function closeStoreEditModal() {
@@ -3138,10 +3101,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     //商品追加モーダルの開閉
     openModal: function openModal() {
-      this.modal = true;
+      this.addmodal = true;
     },
     closeStoreAddModal: function closeStoreAddModal() {
-      this.modal = false;
+      this.addmodal = false;
+    },
+    deleteStoreItem: function deleteStoreItem(id) {
+      var _this5 = this;
+
+      axios["delete"]("/api/StoreItems/" + id).then(function (response) {
+        _this5.getStoreItem();
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -40664,23 +40636,25 @@ var render = function() {
       _c("tr", [
         _c("th", [_vm._v("カード番号")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.card.number))])
+        _c("td", [_vm._v(_vm._s(_vm.cardinfo.number))])
       ]),
       _vm._v(" "),
       _c("th", [_vm._v("カードブランド")]),
       _vm._v(" "),
-      _c("td", [_vm._v(_vm._s(_vm.card.brand))]),
+      _c("td", [_vm._v(_vm._s(_vm.cardinfo.brand))]),
       _vm._v(" "),
       _c("tr", [
         _c("th", [_vm._v("名義")]),
         _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.card.name))])
+        _c("td", [_vm._v(_vm._s(_vm.cardinfo.name))])
       ]),
       _vm._v(" "),
       _c("th", [_vm._v("有効期限")]),
       _vm._v(" "),
       _c("td", [
-        _vm._v(_vm._s(_vm.card.exp_month) + "/" + _vm._s(_vm.card.exp_year))
+        _vm._v(
+          _vm._s(_vm.cardinfo.exp_month) + "/" + _vm._s(_vm.cardinfo.exp_year)
+        )
       ])
     ])
   ])
@@ -40942,137 +40916,146 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "modal", appear: "" } }, [
-    _c(
-      "div",
-      {
-        staticClass: "modal-overlay",
-        on: {
-          click: function($event) {
-            if ($event.target !== $event.currentTarget) {
-              return null
-            }
-            return _vm.$emit("close")
-          }
-        }
-      },
-      [
-        _c("v-text-field", {
-          attrs: {
-            label: "商品名",
-            placeholder: "カレー",
-            outlined: "",
-            "error-messages": _vm.itemNameErrors,
-            required: ""
-          },
-          on: {
-            input: function($event) {
-              return _vm.$v.item_name.$touch()
-            },
-            blur: function($event) {
-              return _vm.$v.item_name.$touch()
-            }
-          },
-          model: {
-            value: _vm.item_name,
-            callback: function($$v) {
-              _vm.item_name = $$v
-            },
-            expression: "item_name"
-          }
-        }),
-        _vm._v(" "),
-        _c("label", [
-          _vm._v("写真を追加して下さい\n            "),
-          _vm.view
-            ? _c("input", {
-                attrs: { type: "file" },
-                on: { change: _vm.confirmImage }
-              })
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _vm.confirmedImage
-          ? _c("p", { staticStyle: { width: "100px", height: "200px" } }, [
-              _c("img", {
-                staticClass: "img",
-                staticStyle: { width: "100%" },
-                attrs: { src: _vm.confirmedImage }
-              })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("v-text-field", {
-          attrs: {
-            label: "値段",
-            placeholder: "100円",
-            outlined: "",
-            "error-messages": _vm.itemPriceErrors,
-            required: ""
-          },
-          on: {
-            input: function($event) {
-              return _vm.$v.price.$touch()
-            },
-            blur: function($event) {
-              return _vm.$v.price.$touch()
-            }
-          },
-          model: {
-            value: _vm.price,
-            callback: function($$v) {
-              _vm.price = $$v
-            },
-            expression: "price"
-          }
-        }),
-        _vm._v(" "),
-        _c("v-text-field", {
-          attrs: {
-            label: "商品状況",
-            placeholder: "売り切れ",
-            outlined: "",
-            "error-messages": _vm.itemStatusErrors,
-            required: ""
-          },
-          on: {
-            input: function($event) {
-              return _vm.$v.item_status.$touch()
-            },
-            blur: function($event) {
-              return _vm.$v.item_status.$touch()
-            }
-          },
-          model: {
-            value: _vm.item_status,
-            callback: function($$v) {
-              _vm.item_status = $$v
-            },
-            expression: "item_status"
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "button" }, on: { click: _vm.addStoreItem } },
-          [_vm._v("追加")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.$emit("close")
-              }
-            }
-          },
-          [_vm._v("閉じる")]
-        )
-      ],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    {
+      staticClass: "modal",
+      attrs: {
+        id: "itemaddmodal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c(
+            "form",
+            [
+              _c("h1", { staticClass: "d-flex justify-center" }, [
+                _vm._v("商品追加")
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _vm._v("商品画像\n                "),
+                _c("input", {
+                  attrs: { type: "file" },
+                  on: { change: _vm.itemImageSelect }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.selectedImage
+                ? _c(
+                    "p",
+                    { staticStyle: { width: "100px", height: "200px" } },
+                    [
+                      _c("img", {
+                        staticClass: "img",
+                        staticStyle: { width: "100%" },
+                        attrs: { src: _vm.selectedImage }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "商品名",
+                  "error-messages": _vm.itemNameErrors,
+                  required: ""
+                },
+                on: {
+                  input: function($event) {
+                    return _vm.$v.StoreItemName.$touch()
+                  },
+                  blur: function($event) {
+                    return _vm.$v.StoreItemName.$touch()
+                  }
+                },
+                model: {
+                  value: _vm.StoreItemName,
+                  callback: function($$v) {
+                    _vm.StoreItemName = $$v
+                  },
+                  expression: "StoreItemName"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "値段",
+                  "error-messages": _vm.itemPriceErrors,
+                  required: ""
+                },
+                on: {
+                  input: function($event) {
+                    return _vm.$v.Price.$touch()
+                  },
+                  blur: function($event) {
+                    return _vm.$v.Price.$touch()
+                  }
+                },
+                model: {
+                  value: _vm.Price,
+                  callback: function($$v) {
+                    _vm.Price = $$v
+                  },
+                  expression: "Price"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: {
+                  label: "商品状況",
+                  "error-messages": _vm.itemStatusErrors,
+                  required: ""
+                },
+                on: {
+                  input: function($event) {
+                    return _vm.$v.ItemStatus.$touch()
+                  },
+                  blur: function($event) {
+                    return _vm.$v.ItemStatus.$touch()
+                  }
+                },
+                model: {
+                  value: _vm.ItemStatus,
+                  callback: function($$v) {
+                    _vm.ItemStatus = $$v
+                  },
+                  expression: "ItemStatus"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("閉じる")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addStoreItem }
+                  },
+                  [_vm._v("商品追加")]
+                )
+              ])
+            ],
+            1
+          )
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41096,104 +41079,115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "modal", appear: "" } }, [
-    _c(
-      "div",
-      {
-        staticClass: "modal-overlay",
-        staticStyle: { color: "black" },
-        on: {
-          click: function($event) {
-            if ($event.target !== $event.currentTarget) {
-              return null
-            }
-            return _vm.$emit("close")
-          }
-        }
-      },
-      [
-        _c("v-text-field", {
-          attrs: { label: "商品名", placeholder: "カレー", outlined: "" },
-          model: {
-            value: _vm.updateItemName,
-            callback: function($$v) {
-              _vm.updateItemName = $$v
-            },
-            expression: "updateItemName"
-          }
-        }),
-        _vm._v(" "),
-        _c("label", [
-          _vm._v("写真を追加して下さい\n                "),
-          _c("input", {
-            attrs: { type: "file" },
-            on: { change: _vm.imageEdit }
-          })
-        ]),
-        _vm._v(" "),
-        _vm.editedImage
-          ? _c("p", [
-              _c("img", { staticClass: "img", attrs: { src: _vm.editedImage } })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("v-text-field", {
-          attrs: { label: "値段", placeholder: "100円", outlined: "" },
-          model: {
-            value: _vm.updatePrice,
-            callback: function($$v) {
-              _vm.updatePrice = $$v
-            },
-            expression: "updatePrice"
-          }
-        }),
-        _vm._v(" "),
-        _c("v-text-field", {
-          attrs: { label: "商品状況", placeholder: "売り切れ", outlined: "" },
-          model: {
-            value: _vm.updateItemStatus,
-            callback: function($$v) {
-              _vm.updateItemStatus = $$v
-            },
-            expression: "updateItemStatus"
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.updateStoreItem(
-                  _vm.updateId,
-                  _vm.updateItemName,
-                  _vm.updatePrice,
-                  _vm.updateItemStatus,
-                  _vm.file
+  return _c(
+    "div",
+    {
+      staticClass: "modal",
+      attrs: {
+        id: "itemeditmodal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c(
+            "form",
+            { attrs: { enctype: "multipart/form-data" } },
+            [
+              _c("h1", { staticClass: "d-flex justify-center" }, [
+                _vm._v("商品編集")
+              ]),
+              _vm._v(" "),
+              _c("label", [
+                _vm._v("商品画像\n                "),
+                _c("input", {
+                  attrs: { type: "file", name: "itemimage" },
+                  on: { change: _vm.itemImageEdit }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.editedImage
+                ? _c(
+                    "p",
+                    { staticStyle: { width: "100px", height: "200px" } },
+                    [
+                      _c("img", {
+                        staticClass: "img",
+                        staticStyle: { width: "100%" },
+                        attrs: { src: _vm.editedImage }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "商品名" },
+                model: {
+                  value: _vm.updateItemName,
+                  callback: function($$v) {
+                    _vm.updateItemName = $$v
+                  },
+                  expression: "updateItemName"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "値段" },
+                model: {
+                  value: _vm.updatePrice,
+                  callback: function($$v) {
+                    _vm.updatePrice = $$v
+                  },
+                  expression: "updatePrice"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                attrs: { label: "商品状況" },
+                model: {
+                  value: _vm.updateItemStatus,
+                  callback: function($$v) {
+                    _vm.updateItemStatus = $$v
+                  },
+                  expression: "updateItemStatus"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("閉じる")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateStoreItem(_vm.updateId)
+                      }
+                    }
+                  },
+                  [_vm._v("編集する")]
                 )
-              }
-            }
-          },
-          [_vm._v("追加")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.$emit("close")
-              }
-            }
-          },
-          [_vm._v("閉じる")]
-        ),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.message))])
-      ],
-      1
-    )
-  ])
+              ])
+            ],
+            1
+          )
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41300,142 +41294,137 @@ var render = function() {
         [
           _c("store-edit", { on: { update: _vm.getStoreUser } }),
           _vm._v(" "),
+          _c("store-item-add", { on: { add: _vm.getStoreItem } }),
+          _vm._v(" "),
+          _vm.showContent
+            ? _c("store-item-edit", {
+                attrs: { val: _vm.storeItem },
+                on: {
+                  close: _vm.closeStoreEditModal,
+                  itemUpdate: _vm.getStoreItem
+                }
+              })
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "v-row",
             [
               _vm._l(_vm.storeitems, function(storeitem) {
                 return _c(
-                  "div",
+                  "v-col",
                   {
                     key: storeitem.id,
                     staticClass: "store-item-list",
-                    staticStyle: { width: "100px", height: "330px" }
+                    attrs: { lg: "3", md: "4", cols: "12" }
                   },
                   [
-                    _c("div", { staticClass: "img-wrapper" }, [
-                      _c("img", {
-                        staticStyle: { width: "100%", height: "150px" },
-                        attrs: {
-                          src: "" + storeitem.item_image,
-                          alt: "商品の画像です"
-                        }
-                      })
-                    ]),
+                    _c("v-img", {
+                      attrs: {
+                        height: "100%",
+                        width: "100%",
+                        src: storeitem.item_image
+                      }
+                    }),
                     _vm._v(" "),
                     _c(
                       "div",
                       {
                         staticClass: "item-detail-section",
+                        staticStyle: { "text-align": "center" }
+                      },
+                      [
+                        _c("div", { staticClass: "item-name" }, [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(storeitem.item_name) +
+                              "\n                  "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item-price" }, [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(storeitem.price) +
+                              "\n                  "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item-status" }, [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(storeitem.item_status) +
+                              "\n                  "
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "button-section",
                         staticStyle: {
-                          width: "100%",
-                          height: "150px text-align:center"
+                          display: "flex",
+                          "justify-content": "space-around"
                         }
                       },
                       [
                         _c(
-                          "div",
+                          "v-btn",
                           {
-                            staticClass: "item-name",
-                            staticStyle: { width: "100px", height: "50px" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                      " +
-                                _vm._s(storeitem.item_name) +
-                                "\n                  "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "item-price",
-                            staticStyle: { width: "100px", height: "50px" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                      " +
-                                _vm._s(storeitem.price) +
-                                "\n                  "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "item-status",
-                            staticStyle: { width: "100px", height: "50px" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                      " +
-                                _vm._s(storeitem.item_status) +
-                                "\n                  "
-                            )
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "button-section" }, [
-                      _c(
-                        "button",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.displayUpdate(storeitem)
+                            attrs: {
+                              text: "",
+                              color: "primary",
+                              "data-toggle": "modal",
+                              "data-target": "#itemeditmodal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.displayUpdate(storeitem)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                      編集\n                  "
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    storeitem.id === _vm.showContent
-                      ? _c("store-item-edit", {
-                          attrs: { val: _vm.storeItem },
-                          on: { close: _vm.closeStoreEditModal }
-                        })
-                      : _vm._e()
+                          },
+                          [_vm._v("\n                編集\n              ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteStoreItem(storeitem.id)
+                              }
+                            }
+                          },
+                          [_vm._v("\n                削除\n              ")]
+                        )
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
               }),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "add-modal-window" },
-                [
-                  _c("p", [
-                    _vm._v("追加ボタンを押すと商品追加モーダルが表示されます")
-                  ]),
-                  _vm._v(" "),
-                  _c("button", { on: { click: _vm.openModal } }, [
-                    _vm._v("商品追加")
-                  ]),
-                  _vm._v(" "),
-                  _vm.modal
-                    ? _c("store-item-add", {
-                        on: { close: _vm.closeStoreAddModal }
-                      })
-                    : _vm._e()
-                ],
-                1
+                "v-btn",
+                {
+                  attrs: {
+                    text: "",
+                    color: "primary",
+                    "data-toggle": "modal",
+                    "data-target": "#itemaddmodal"
+                  }
+                },
+                [_vm._v("\n    商品追加\n  ")]
               )
             ],
             2
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _vm.message ? _c("p", [_vm._v(_vm._s(_vm.message))]) : _vm._e()
+      )
     ],
     1
   )
