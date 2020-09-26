@@ -19,6 +19,16 @@ class StoreItemsController extends Controller
         return StoreItem::all();
     }
 
+    public function StoreItemGet($id){
+        $storeItem = StoreItem::where('store_id', $id)->get();
+
+        // dd($storeItem);
+
+        return $storeItem;
+    }
+
+    
+
     /**
      * Store a newly created resource in storage.
      *

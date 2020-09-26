@@ -42,7 +42,6 @@ class Payment extends Model
         return false;
     }
 
-
     /**
      * Stripe上の「顧客」情報を更新するための関数
      *

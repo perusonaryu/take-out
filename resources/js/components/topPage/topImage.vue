@@ -34,7 +34,9 @@
 
 <script>
 export default {
-
+  data: () => ({
+    message:''
+  })
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <store-image v-bind:storeName = "storeUser.name" />
+    <store-image v-bind:store = "storeUser" />
     <v-btn text color="primary" data-toggle="modal" data-target="#editModal" >
       編集
     </v-btn>
@@ -132,9 +132,19 @@
 
       
 
-      logout(){
-        axios.post('/storeusers/logout').then(()=>{
-            this.$router.push({ name: "storeLogin"})
+    logout(){
+      axios.post('/storeusers/logout').then(()=>{
+          this.$router.push({ name: "storeLogin"})
+      })
+    },
+
+    //商品リストの読み込み
+    getStoreItem() {
+      axios
+        .get("/api/StoreItems/")
+        .then(response => {
+            this.storeitems = response.data;
+            console.log(response.data);
         })
       },
 
@@ -179,6 +189,7 @@
         }
     }
   }
+
 
 </script>
 

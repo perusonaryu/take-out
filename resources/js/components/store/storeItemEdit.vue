@@ -87,7 +87,7 @@
             editedData.append("price", this.updatePrice);
             editedData.append("item_status", this.updateItemStatus);
             console.log(...editedData.entries());
-            
+
             axios
                 .post("/api/StoreItems/" + this.updateId,editedData,
                 {

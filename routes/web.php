@@ -57,6 +57,8 @@ Route::post('/storeImage/{id}','StoreUserController@storeImage');
 
 
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function () {
     return auth()->user();
 });
@@ -69,6 +71,13 @@ Route::middleware('auth:sanctum')->get('/athenticated', function (Request $reque
 Route::post('register', 'RegisterController@register');
 Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
+
+
+//お店情報取得
+Route::get('/newStoreGet','StoreUserController@newStoreGet');
+
+//お店商品情報取得
+Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
 
 
 
@@ -88,10 +97,15 @@ Route::group(['prefix' => 'storeusers'], function () {
 });
 
 
-//決済コントローラー
+
+//決済関係
 Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');
-// Route::get('/user/payment/form', 'User\PaymentController@getPaymentForm')->name('user.payment.form');
 Route::post('/user/payment/store', 'PaymentController@storePaymentInfo')->name('user.payment.store');
+Route::post('/user/payment/destroy', 'PaymentController@deletePaymentInfo')->name('user.payment.destroy');
+
+Route::get('/user/info', 'UserPaymentController@getUserInfo')->name('user.info');
+Route::post('/user/paid', 'UserPaymentController@itemPaid')->name('user.paid');
+Route::post('/user/cancel', 'UserPaymentController@cancelPaidMember')->name('user.cancel');
 
 
 
@@ -109,6 +123,9 @@ Route::get('/{any}', function () {
     // return view('welcome');
     return view('vue');
 })->where('any', '.*');
+
+
+
 
 //商品追加ページのテンプレートのルート
 // Route::get('/storeItem','StoreItemManageController@index');
