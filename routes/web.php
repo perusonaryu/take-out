@@ -73,6 +73,13 @@ Route::post('login', 'LoginController@login');
 Route::post('logout', 'LoginController@logout');
 
 
+//お店情報取得
+Route::get('/newStoreGet','StoreUserController@newStoreGet');
+
+//お店商品情報取得
+Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
+
+
 
 
 //お店ユーザー認証

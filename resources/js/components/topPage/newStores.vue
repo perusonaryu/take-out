@@ -6,22 +6,27 @@
       </div>
       <v-row
       justify="center"
+      v-if="newStores"
       >
         
-        <v-col md="3" cols="12" class="store-box">
-            <router-link to="/">
-                <img src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" alt="">
+        <v-col md="3" cols="12" class="store-box" v-for="store in newStores" :key="store.id">
+            <router-link :to="{
+            name: 'shop',
+            params: { id: store.id }
+            }"
+            >
+                <img :src="` ${store.image} `" alt="">
                 <div class="store-text">
                     <h3 >
-                        チキンワークス白金  神宮外苑前店
+                        {{store.name}}
                     </h3>
-                    <p>外苑前駅 徒歩6分</p>
+                    <!-- <p>外苑前駅 徒歩6分</p> -->
                 </div>
             </router-link>
 
         </v-col>
 
-        <v-col md="3" cols="12" class="store-box">
+        <!-- <v-col md="3" cols="12" class="store-box">
             <router-link to="/">
                 <img src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg" alt="">
                 <div class="store-text">
@@ -45,7 +50,7 @@
                 </div>
             </router-link>
 
-        </v-col>
+        </v-col> -->
           
 
       </v-row>
@@ -54,7 +59,23 @@
 
 <script>
 export default {
+    data: () => ({
+        newStores:'',
+    }),
 
+    mounted(){
+        this.newStoresGet();
+    },
+    methods:{
+        newStoresGet(){
+            axios.get('/newStoreGet')
+            .then(response => {
+                console.log(response.data);
+                this.newStores = response.data;
+            })
+            .catch(error => console.log(error));
+        }
+    }
 }
 </script>
 

@@ -23,7 +23,7 @@
                 </ul>
             </v-col>
         </v-row>
-        <v-row justify="center">
+        <v-row justify="space-around">
             <router-link to="/userpaymentform">
                 <v-btn text >
                     カード登録画面へ
@@ -32,6 +32,10 @@
 
             <v-btn color="success" @click="itemPaid">
                 購入
+            </v-btn>
+
+            <v-btn color="primary" @click="logout">
+                ログアウト
             </v-btn>
             
             
@@ -66,6 +70,11 @@ export default {
                 console.log(response.data);
             })
             .catch(error => console.log(error));
+        },
+        logout(){
+            axios.post('/logout').then(()=>{
+                this.$router.push({ name: "login"})
+            })
         }
     },
 }
