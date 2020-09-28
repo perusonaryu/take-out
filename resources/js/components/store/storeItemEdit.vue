@@ -58,7 +58,8 @@
             updateItemName: "",
             updatePrice: "",
             updateItemStatus: "",
-           
+            updateStoreId: "",
+
             file:"",
             
             // updateForm:false,

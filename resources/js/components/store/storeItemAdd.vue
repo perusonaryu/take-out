@@ -28,6 +28,14 @@
             @blur="$v.Price.$touch()"
             ></v-text-field>
             <v-text-field
+            v-model="Discription"
+            label="商品説明"
+            :error-messages="itemDiscriptionErrors"
+            required
+            @input="$v.Discription.$touch()"
+            @blur="$v.Discription.$touch()"
+            ></v-text-field>
+            <v-text-field
             v-model="ItemStatus"
             label="商品状況"
             :error-messages="itemStatusErrors"
@@ -61,6 +69,8 @@ import { required,} from 'vuelidate/lib/validators'
 
 
 export default {
+    name: 'Modal',
+    props: ['val'],
 
     mixins: [validationMixin],
 
@@ -68,6 +78,7 @@ export default {
       StoreItemName: { required },
     //   file: { required },
       Price:{required},
+      Discription:{required},
       ItemStatus: {required},
 
     },
@@ -76,11 +87,20 @@ export default {
             StoreItemName: "",
             file: "",
             Price: "",
+            Discription: "",
             ItemStatus: "",
             view: true,
             selectedImage:"",
+            // storeId:"",
     }),
-
+    mounted(){
+      const vm = this;
+            Vue.nextTick(function () {
+                console.log(vm.val);
+            });
+      // this.storeId=this.val;
+      // console.log(this.storeId);
+    },
     computed: {
       itemNameErrors () {
         const errors = []
@@ -100,6 +120,12 @@ export default {
         !this.$v.Price.required && errors.push('値段を入力して下さい')
         return errors
       },
+      itemDiscriptionErrors () {
+        const errors = []
+        if (!this.$v.Discription.$dirty) return errors
+        !this.$v.Discription.required && errors.push('商品説明を入力して下さい')
+        return errors
+      },
       itemStatusErrors () {
         const errors = []
         if (!this.$v.ItemStatus.$dirty) return errors
@@ -108,7 +134,7 @@ export default {
       },
       
     },
-    
+  
     methods: {
     addStoreItem() {
             //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
@@ -117,6 +143,8 @@ export default {
             data.append("file", this.file);
             data.append("price", this.Price);
             data.append("item_status", this.ItemStatus);
+            data.append("item_discription", this.Discription);
+            data.append("store_id", this.val);
             const config = {
                     headers: {
                         'content-type': 'multipart/form-data'

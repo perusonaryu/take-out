@@ -1,11 +1,5 @@
 <template>
-<<<<<<< HEAD
-<div class="card-body">
-    <form  class="card-form" id="form_payment" method="POST">
-        
-=======
     <v-container>
->>>>>>> 2f27c73a23cbaf80dc0cffd94c0910afba74623b
         <div class="form-group">
             <label for="name">カード番号</label>
             <div id="cardNumber"></div>
@@ -23,16 +17,15 @@
 
         <div class="form-group">
             <label for="name">カード名義</label>
-<<<<<<< HEAD
-            <input type="text" name="cardName" id="cardName" class="form-control" value="" placeholder="カード名義を入力">
-        </div>
-        <div class="form-group">
+            <!-- <input type="text" name="cardName" id="cardName" class="form-control" value="" placeholder="カード名義を入力">
+        </div> -->
+        <!-- <div class="form-group">
             <button @click="submit" id="create_token" class="btn btn-primary">カードを登録する</button>
         </div>
         <div v-if="show_result">{{result_message}}</div>
-    </form>
+    </form> -->
     <!-- <a href="{{route('user.payment')}}">クレジットカード情報ページに戻る</a> -->
-</div>
+<!-- </div>
 </template>
 
 
@@ -120,8 +113,7 @@ export default {
 
 <style>
 
-</style>
-=======
+</style> -->
             <input type="text" name="cardName" id="cardName" class="form-control" v-model="name" placeholder="カード名義を入力">
         </div>
         <div class="form-group">
@@ -217,4 +209,3 @@ export default {
 <style>
 
 </style>
->>>>>>> 2f27c73a23cbaf80dc0cffd94c0910afba74623b

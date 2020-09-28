@@ -1,6 +1,6 @@
 <template>
   <v-img
-    :src= "` ${store.image} `"
+    :src="store.image"
     width="100%"
     height="500"
   >
@@ -10,8 +10,8 @@
       justify="center"
       class="h-100"
     >
-      <v-col class="text-left" md="6">
-        <h1 class="display-1 font-weight-thin mb-4"> {{ store.name }} </h1>
+      <v-col class="text-left" md="6" style="background-color:white;">
+        <h1 class="display-1 font-weight-thin mb-4" style="color:black"> {{ store.name }} </h1>
       </v-col>
     </v-row>
   </v-img>
@@ -21,10 +21,18 @@
 export default {
     props:['store'],
     data: () => ({
-      storeUser: {},
-
+      // name:"",
+      // image:"",
+    
       
     }),
+    //  mounted(){
+    //     this.name=this.store.name;
+    //     this.image=this.store.image;
+    //     console.log(this.store);
+        
+    // },
+    
 }
 </script>
 

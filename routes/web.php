@@ -53,7 +53,8 @@ Route::delete('/storeDelete/{id}','StoreController@destroy');
 //お店編集
 Route::put('/storeUserUpdate/{id}','StoreUserController@update');
 
-Route::post('/storeImage/{id}','StoreUserController@storeImage');
+// Route::post('/storeImage','StoreUserController@storeImage');
+Route::get('/storeImage/{id}','StoreUserController@storeImage');
 
 
 

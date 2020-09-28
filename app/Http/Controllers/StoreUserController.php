@@ -50,6 +50,8 @@ class StoreUserController extends Controller
     }
 
     public function storeImage($id){
-        
+        $storeInfo = StoreUser::where('id', $id)->get();
+        // dd($storeInfo);
+        return $storeInfo;
     }
 }

@@ -12,8 +12,8 @@
       <!-- 店編集モーダル -->
       <store-edit  @update = "getStoreUser"/>
       <!-- 商品追加モーダル -->
-      <store-item-add @add = "getStoreItem"/>
-      <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
+      <store-item-add @add = "getStoreItem" :val="addItem"></store-item-add>
+      <store-item-edit :val="editItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
       <v-row>
         <v-col lg="3" md="4" cols="12" class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id">
           <v-img 
@@ -37,11 +37,11 @@
                 </div>
                 <div class="button-section" style="display:flex; justify-content:space-around;">
                    <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
-                  編集
-                </v-btn>
-                <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
-                  削除
-                </v-btn>
+                    編集
+                  </v-btn>
+                  <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
+                    削除
+                  </v-btn>
                 </div>
                
         </v-col>
@@ -54,7 +54,7 @@
   
   
                 
-    <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" >
+    <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" @click="displayAdd(storeUser.id)">
       商品追加
     </v-btn>
           
@@ -93,9 +93,10 @@
       // 商品追加 storeitem
       storeitems: {},
       addmodal: false,
+      addItem:"",
       //商品編集モーダル
       showContent: false,
-      storeItem: "",
+      editItem: "",
     }),
 
     created(){
@@ -138,16 +139,6 @@
       })
     },
 
-    //商品リストの読み込み
-    getStoreItem() {
-      axios
-        .get("/api/StoreItems/")
-        .then(response => {
-            this.storeitems = response.data;
-            console.log(response.data);
-        })
-      },
-
 //商品リストの読み込み
       getStoreItem() {
             axios
@@ -163,7 +154,7 @@
         //商品編集モーダル
         displayUpdate(storeitem){
           this.showContent = true
-          this.storeItem = storeitem
+          this.editItem = storeitem
         },
         closeStoreEditModal(){
           this.showContent = false
@@ -175,6 +166,11 @@
         },
         closeStoreAddModal() {
           this.addmodal = false
+        },
+
+        displayAdd(id){
+          this.addItem=id;
+          console.log(this.addItem);
         },
     
  deleteStoreItem(id) {
