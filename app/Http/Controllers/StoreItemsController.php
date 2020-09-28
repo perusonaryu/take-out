@@ -23,6 +23,13 @@ class StoreItemsController extends Controller
         $item = StoreItem::where('store_id', $id)->get();
         
         return $item;
+        // dd($id);
+
+        // $storeItem = StoreItem::where('store_id', $id)->get();
+
+
+
+        // dd($storeItem);
 
         // $query = StoreItem::query();
         // $item = $query->where('store_id',$id)->get();

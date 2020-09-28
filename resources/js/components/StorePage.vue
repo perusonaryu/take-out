@@ -10,10 +10,12 @@
     <!-- Modal -->
     <v-container>
       <!-- 店編集モーダル -->
-      <store-edit  @update = "getStoreUser"/>
+      <store-edit  @update = "getStoreUser" />
       <!-- 商品追加モーダル -->
       <store-item-add @add = "getStoreItem" :val="addItem"></store-item-add>
       <store-item-edit :val="editItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
+      <!-- <store-item-add @add = "getStoreItem" :id="storeUser.id" />
+      <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit> -->
       <v-row>
         <v-col lg="3" md="4" cols="12" class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id">
           <v-img 
@@ -43,6 +45,28 @@
                     削除
                   </v-btn>
                 </div>
+          <!-- <div class="item-detail-section" style="text-align:center;">
+
+              <div class="item-name" >
+                  {{ storeitem.item_name }}
+              </div>
+
+              <div class="item-price" >
+                  {{ storeitem.price}}
+              </div>
+
+              <div class="item-status" >
+                  {{ storeitem.item_status}}
+              </div> -->
+            <!-- <div class="button-section" style="display:flex; justify-content:space-around;">
+              <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
+                編集
+              </v-btn>
+              <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
+                削除
+              </v-btn>
+            </div> -->
+          <!-- </div> -->
                
         </v-col>
         <!-- <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
@@ -98,11 +122,15 @@
       showContent: false,
       editItem: "",
     }),
-
-    created(){
+    mounted(){
       this.getStoreUser();
+    },
+    created(){
       //商品
-      this.getStoreItem();
+      if(this.storeUser.length > 0){
+        this.getStoreItem();
+      }
+
     },
     methods:{
       getStoreUser(){
@@ -110,6 +138,7 @@
         .then(response=>{
           this.storeUser = response.data;
           this.storeName = response.data.name;
+          this.getStoreItem();
         })
         .catch(error => console.log(error));
       },
@@ -122,14 +151,6 @@
       },
 
 
-      clear () {
-        // this.$v.$reset()
-        this.nastoreName = ''
-        this.address = ''
-        this.introduction = ''
-        this.category = ''
-        // console.log(this.storeToEdit);
-      },
 
       
 
@@ -139,18 +160,27 @@
       })
     },
 
+    //商品リストの読み込み
+    // getStoreItem() {
+    //   axios.get("/shopDataGet/" + this.storeUser.id)
+    //   .then(response => {
+    //       this.storeitems = response.data;
+    //       console.log(response.data);
+    //   })
+    //   .catch(eroor => console.log(error));
+    // },
+    getStoreItem(){
+      const storeId = this.storeUser.id;
+      axios.get('/shopDataGet/'+ storeId)
+      .then(response => {
+        this.storeitems = response.data;
+        // console.log(response.data);
+      })
+      .catch( error => console.log(error));
+    },
+
 //商品リストの読み込み
-      getStoreItem() {
-            axios
-                .get("/api/StoreItems/")
-                .then(response => {
-                    this.storeitems = response.data;
-                    console.log(response.data);
-                })
-                .catch(err => {
-                    this.message = err;
-                });
-        },
+      
         //商品編集モーダル
         displayUpdate(storeitem){
           this.showContent = true

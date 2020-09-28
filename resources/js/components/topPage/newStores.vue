@@ -70,7 +70,7 @@ export default {
         newStoresGet(){
             axios.get('/newStoreGet')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.newStores = response.data;
             })
             .catch(error => console.log(error));

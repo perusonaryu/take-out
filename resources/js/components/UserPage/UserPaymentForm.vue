@@ -34,7 +34,7 @@ export default {
     data() {
         return {
         cardNumber: null,
-        stripe: Stripe("pk_test_51HTcy3LNe3F5SGnQS3KhJx0L2sJsExG6RpslBaBSNSQALEV0Owxs8RI0ex5ZorikXXEeFP2do2ggJLDUuTwVPjEe00GeQ23J0r"),
+        
         show_result: false,
         result_message: "",
         
@@ -127,18 +127,17 @@ export default {
 <script>
 // var stripe = Stripe('pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF');
 // var elements = stripe.elements();
-
 export default {
     data: () =>({
         // card: null,
-        stripe: Stripe("pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF"),
+        // stripe: Stripe("pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF"),
         // show_result: false,
         // result_message: "",
+        stripe: Stripe("pk_test_51HTcy3LNe3F5SGnQS3KhJx0L2sJsExG6RpslBaBSNSQALEV0Owxs8RI0ex5ZorikXXEeFP2do2ggJLDUuTwVPjEe00GeQ23J0r"),
         name:'',
         cardNumber:null,
         stripeToken:'',
     }),
-
     mounted() {
         const elements = this.stripe.elements();
         const style = {
@@ -151,15 +150,11 @@ export default {
         /* フォームでdivタグになっている部分をStripe Elementsを使ってフォームに変換 */
         this.cardNumber = elements.create('cardNumber', {style:style});
         this.cardNumber.mount('#cardNumber');
-
         const cardCvc = elements.create('cardCvc', {style:style});
         cardCvc.mount('#securityCode');
-
         const cardExpiry = elements.create('cardExpiry', {style:style});
         cardExpiry.mount('#expiration');
-
     },
-
     methods:{
         submit() {
             // const self = this;
@@ -176,7 +171,6 @@ export default {
             //     self.result_message = "token_id: " + result.token.id;
             //     }
             // });
-
             const self = this;
             /* Stripe.jsを使って、フォームに入力されたコードをStripe側に送信。今回ご紹介している方法の場合、「カード名義」だけはStripe Elementsの仕組みを使っていないため、このままだとカード名義の情報が足りずにカード情報の暗号化ができなくなってしまうので、{name:document.querySelector('#cardName').value}を足すことで、フォームに入力されたカード名義情報も、他の情報と同時にStripeに送ることができるようになる。 */
             this.stripe.createToken(this.cardNumber,{name: this.name}).then(function(result) {
@@ -184,7 +178,6 @@ export default {
                 if (result.error) {
                     alert("カード登録処理時にエラーが発生しました。カード番号が正しいものかどうかをご確認いただくか、別のクレジットカードで登録してみてください。");
                 } else {
-
                     /* 暗号化されたコードが返ってきた場合は以下のStripeTokenHandler関数を実行。その際、引数として暗号化されたコードを渡してあげる。 */
                     // stripeTokenHandler(result.token);
                     self.stripeToken = result.token.id;
@@ -198,7 +191,6 @@ export default {
                     .catch(error => console.log(error));
                 }
             });
-
         }
     }
 }

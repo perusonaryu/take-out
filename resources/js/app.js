@@ -12,6 +12,7 @@ window.Vue = require('vue');
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import router from './router';
+import store from './store'
 import Vuelidate from 'vuelidate'
 
 
@@ -58,6 +59,7 @@ const app = new Vue({
     vuetify: new Vuetify(),
     router,
     Vuelidate,
+    store,
     
 });
 

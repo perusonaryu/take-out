@@ -101,6 +101,8 @@ export default {
       // this.storeId=this.val;
       // console.log(this.storeId);
     },
+    props:['id'],
+
     computed: {
       itemNameErrors () {
         const errors = []
