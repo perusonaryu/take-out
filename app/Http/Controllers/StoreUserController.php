@@ -49,7 +49,9 @@ class StoreUserController extends Controller
         return $stores;
     }
 
-    public function storeImage($id){
-        
+    public function storeGet($id){
+        $stores = StoreUser::find($id);
+
+        return $stores;
     }
 }
