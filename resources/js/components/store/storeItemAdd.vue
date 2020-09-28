@@ -80,6 +80,7 @@ export default {
             view: true,
             selectedImage:"",
     }),
+    props:['id'],
 
     computed: {
       itemNameErrors () {
@@ -117,6 +118,7 @@ export default {
             data.append("file", this.file);
             data.append("price", this.Price);
             data.append("item_status", this.ItemStatus);
+            data.append("store_id",this.id);
             const config = {
                     headers: {
                         'content-type': 'multipart/form-data'

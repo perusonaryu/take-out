@@ -113,7 +113,7 @@
           this.address = response.data.address;
           this.introduction   = response.data.introduction;
           this.category   = response.data.category;
-          console.log(this.storeUser);
+          // console.log(this.storeUser);
           
           // this.storeId = response.data.id;
         })

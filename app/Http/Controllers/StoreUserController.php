@@ -18,7 +18,7 @@ class StoreUserController extends Controller
 
         $store = StoreUser::find($id);
 
-        if($store->image){
+        if(!empty($store->image)){
             $image = $store->image;
             $pathdel = public_path().$image;
             // dd($pathdel);
@@ -49,7 +49,9 @@ class StoreUserController extends Controller
         return $stores;
     }
 
-    public function storeImage($id){
-        
+    public function storeGet($id){
+        $stores = StoreUser::find($id);
+
+        return $stores;
     }
 }
