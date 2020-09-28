@@ -2227,9 +2227,33 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UserPage/UserInfoTop.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Applications/MAMP/htdocs/pickapp/resources/js/components/UserPage/UserInfoTop.vue: Unexpected token (13:0)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 12 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m}\u001b[0m\n\u001b[0m \u001b[90m 16 | \u001b[39m\u001b[0m\n    at Parser._raise (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:766:17)\n    at Parser.raiseWithData (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:759:17)\n    at Parser.raise (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:753:17)\n    at Parser.unexpected (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:8966:16)\n    at Parser.parseIdentifierName (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11085:18)\n    at Parser.parseIdentifier (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11058:23)\n    at Parser.parseMaybePrivateName (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:10363:19)\n    at Parser.parsePropertyName (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:10853:155)\n    at Parser.parsePropertyDefinition (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:10747:22)\n    at Parser.parseObjectLike (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:10664:25)\n    at Parser.parseExprAtom (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:10198:23)\n    at Parser.parseExprSubscripts (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9844:23)\n    at Parser.parseUpdate (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Parser.parseMaybeUnary (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Parser.parseExprOps (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Parser.parseMaybeConditional (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Parser.parseMaybeAssign (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9620:21)\n    at /Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9586:39\n    at Parser.allowInAnd (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11296:16)\n    at Parser.parseMaybeAssignAllowIn (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:9586:17)\n    at Parser.parseExportDefaultExpression (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:12619:24)\n    at Parser.parseExport (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:12529:31)\n    at Parser.parseStatementContent (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11536:27)\n    at Parser.parseStatement (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11430:17)\n    at Parser.parseBlockOrModuleBlockBody (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:12012:25)\n    at Parser.parseBlockBody (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11998:10)\n    at Parser.parseTopLevel (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:11361:10)\n    at Parser.parse (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:13044:10)\n    at parse (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/parser/lib/index.js:13097:38)\n    at parser (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/core/lib/parser/index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/core/lib/transformation/normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/core/lib/transformation/index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (/Applications/MAMP/htdocs/pickapp/node_modules/@babel/core/lib/transform.js:27:41)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      userData: ''
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    getUserData: function getUserData() {
+      axios.get('/user/payment').then(function (response) {
+        consol.log(response.data);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -2271,82 +2295,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// var stripe = Stripe('pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF');
+// var elements = stripe.elements();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      // card: null,
+      stripe: Stripe("pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF"),
+      // show_result: false,
+      // result_message: "",
+      name: '',
       cardNumber: null,
-      stripe: Stripe("pk_test_51HTcy3LNe3F5SGnQS3KhJx0L2sJsExG6RpslBaBSNSQALEV0Owxs8RI0ex5ZorikXXEeFP2do2ggJLDUuTwVPjEe00GeQ23J0r"),
-      show_result: false,
-      result_message: ""
+      stripeToken: ''
     };
   },
   mounted: function mounted() {
     var elements = this.stripe.elements();
-    this.cardNumber = elements.create('cardNumber');
+    var style = {
+      base: {
+        fontSize: '12px',
+        color: "#32325d" // border: "solid 1px ccc"
+
+      }
+    };
+    /* フォームでdivタグになっている部分をStripe Elementsを使ってフォームに変換 */
+
+    this.cardNumber = elements.create('cardNumber', {
+      style: style
+    });
     this.cardNumber.mount('#cardNumber');
-    var cardCvc = elements.create('cardCvc');
+    var cardCvc = elements.create('cardCvc', {
+      style: style
+    });
     cardCvc.mount('#securityCode');
-    var cardExpiry = elements.create('cardExpiry');
+    var cardExpiry = elements.create('cardExpiry', {
+      style: style
+    });
     cardExpiry.mount('#expiration');
   },
   methods: {
-    submit: function submit(e) {
-      // let stripeToken="";
+    submit: function submit() {
+      // const self = this;
+      // self.show_result = false;
+      // this.stripe.createToken(this.card).then(result => {
+      //     console.log("result: " + JSON.stringify(result));
+      //     // エラーの場合
+      //     if (result.error) {
+      //     self.show_result = true;
+      //     self.result_message = result.error.message;
+      //     // 成功の場合
+      //     } else {
+      //     self.show_result = true;
+      //     self.result_message = "token_id: " + result.token.id;
+      //     }
+      // });
       var self = this;
-      self.show_result = false;
-      e.preventDefault();
+      /* Stripe.jsを使って、フォームに入力されたコードをStripe側に送信。今回ご紹介している方法の場合、「カード名義」だけはStripe Elementsの仕組みを使っていないため、このままだとカード名義の情報が足りずにカード情報の暗号化ができなくなってしまうので、{name:document.querySelector('#cardName').value}を足すことで、フォームに入力されたカード名義情報も、他の情報と同時にStripeに送ることができるようになる。 */
+
       this.stripe.createToken(this.cardNumber, {
-        name: document.querySelector('#cardName').value
+        name: this.name
       }).then(function (result) {
+        /* errorが返ってきた場合はその旨を表示 */
         if (result.error) {
           alert("カード登録処理時にエラーが発生しました。カード番号が正しいものかどうかをご確認いただくか、別のクレジットカードで登録してみてください。");
         } else {
-          console.log(result.token.id);
-          var token = result.token.id; // let data = new FormData();
-          // data.append("stripeToken",token);
+          /* 暗号化されたコードが返ってきた場合は以下のStripeTokenHandler関数を実行。その際、引数として暗号化されたコードを渡してあげる。 */
           // stripeTokenHandler(result.token);
-
-          self.show_result = true;
-          self.result_message = "token_id: " + result.token.id;
+          self.stripeToken = result.token.id;
+          console.log(result.token);
           axios.post('/user/payment/store', {
-            stripeToken: token
+            stripeToken: self.stripeToken
           }).then(function (response) {
-            // console.log(stripeToken.token);
-            console.log(response); // console.log(response.data);
-          })["catch"](function (err) {
-            console.log(err); // console.log(err.data);
+            console.log(response);
+          })["catch"](function (error) {
+            return console.log(error);
           });
-        } // return stripeToken
-
-      }); // console.log(stripeToken);
-      // axios.post('/user/payment/store',stripeToken)
-      // .then(response => {
-      //         console.log(stripeToken);
-      //         console.log(response);
-      //         console.log(response.data);
-      //     })
-      //     .catch(err => {
-      //         console.log(err);
-      //         console.log(err.data);
-      //     });
-      //         function stripeTokenHandler(token) {
-      //         const form = document.getElementById('form_payment');
-      //         const hiddenInput = document.createElement('input');
-      //         hiddenInput.setAttribute('type', 'hidden');
-      //         hiddenInput.setAttribute('name', 'stripeToken');
-      //         hiddenInput.setAttribute('value', token.id);
-      //         form.appendChild(hiddenInput);
-      //         form.submit();
-      // }
+        }
+      });
     }
   }
 });
@@ -2452,8 +2477,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     shopDataGet: function shopDataGet() {
-      axios.get('/shopDataGet/' + this.$route.params.id).then(function (response) {
-        console.log(response.data);
+      axios.get('/shopDataGet/' + this.$route.params.id).then(function (response) {// console.log(response.data);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -2580,8 +2604,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.storeName = response.data.name;
         _this.address = response.data.address;
         _this.introduction = response.data.introduction;
-        _this.category = response.data.category;
-        console.log(_this.storeUser); // this.storeId = response.data.id;
+        _this.category = response.data.category; // console.log(this.storeUser);
+        // this.storeId = response.data.id;
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -2778,6 +2802,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedImage: ""
     };
   },
+  props: ['id'],
   computed: {
     itemNameErrors: function itemNameErrors() {
       var errors = [];
@@ -2814,6 +2839,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append("file", this.file);
       data.append("price", this.Price);
       data.append("item_status", this.ItemStatus);
+      data.append("store_id", this.id);
       var config = {
         headers: {
           'content-type': 'multipart/form-data'
@@ -3078,10 +3104,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -3179,18 +3201,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       storeItem: ""
     };
   },
-  created: function created() {
-    this.getStoreUser(); //商品
-
-    this.getStoreItem();
+  mounted: function mounted() {
+    this.getStoreUser();
   },
-  methods: (_methods = {
+  created: function created() {
+    //商品
+    if (this.storeUser.length > 0) {
+      this.getStoreItem();
+    }
+  },
+  methods: {
     getStoreUser: function getStoreUser() {
       var _this = this;
 
       axios.get('/storeusers/user').then(function (response) {
         _this.storeUser = response.data;
         _this.storeName = response.data.name;
+
+        _this.getStoreItem();
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -3205,13 +3233,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return console.log(error);
       });
     },
-    clear: function clear() {
-      // this.$v.$reset()
-      this.nastoreName = '';
-      this.address = '';
-      this.introduction = '';
-      this.category = ''; // console.log(this.storeToEdit);
-    },
     logout: function logout() {
       var _this3 = this;
 
@@ -3222,41 +3243,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     //商品リストの読み込み
+    // getStoreItem() {
+    //   axios.get("/shopDataGet/" + this.storeUser.id)
+    //   .then(response => {
+    //       this.storeitems = response.data;
+    //       console.log(response.data);
+    //   })
+    //   .catch(eroor => console.log(error));
+    // },
     getStoreItem: function getStoreItem() {
       var _this4 = this;
 
-      axios.get("/api/StoreItems/").then(function (response) {
-        _this4.storeitems = response.data;
-        console.log(response.data);
+      var storeId = this.storeUser.id;
+      axios.get('/shopDataGet/' + storeId).then(function (response) {
+        _this4.storeitems = response.data; // console.log(response.data);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    //商品リストの読み込み
+    //商品編集モーダル
+    displayUpdate: function displayUpdate(storeitem) {
+      this.showContent = true;
+      this.storeItem = storeitem;
+    },
+    closeStoreEditModal: function closeStoreEditModal() {
+      this.showContent = false;
+    },
+    //商品追加モーダルの開閉
+    openModal: function openModal() {
+      this.addmodal = true;
+    },
+    closeStoreAddModal: function closeStoreAddModal() {
+      this.addmodal = false;
+    },
+    deleteStoreItem: function deleteStoreItem(id) {
+      var _this5 = this;
+
+      axios["delete"]("/api/StoreItems/" + id).then(function (response) {
+        _this5.getStoreItem();
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
-  }, _defineProperty(_methods, "getStoreItem", function getStoreItem() {
-    var _this5 = this;
-
-    axios.get("/api/StoreItems/").then(function (response) {
-      _this5.storeitems = response.data;
-      console.log(response.data);
-    })["catch"](function (err) {
-      _this5.message = err;
-    });
-  }), _defineProperty(_methods, "displayUpdate", function displayUpdate(storeitem) {
-    this.showContent = true;
-    this.storeItem = storeitem;
-  }), _defineProperty(_methods, "closeStoreEditModal", function closeStoreEditModal() {
-    this.showContent = false;
-  }), _defineProperty(_methods, "openModal", function openModal() {
-    this.addmodal = true;
-  }), _defineProperty(_methods, "closeStoreAddModal", function closeStoreAddModal() {
-    this.addmodal = false;
-  }), _defineProperty(_methods, "deleteStoreItem", function deleteStoreItem(id) {
-    var _this6 = this;
-
-    axios["delete"]("/api/StoreItems/" + id).then(function (response) {
-      _this6.getStoreItem();
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  }), _methods)
+  }
 });
 
 /***/ }),
@@ -3683,7 +3713,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/newStoreGet').then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this.newStores = response.data;
       })["catch"](function (error) {
         return console.log(error);
@@ -40827,8 +40857,14 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -40845,8 +40881,83 @@ var staticRenderFns = []
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("カード番号")]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "cardNumber" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("セキュリティコード")]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "securityCode" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("有効期限")]),
+        _vm._v(" "),
+        _c("div", { attrs: { id: "expiration" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "name" } }, [_vm._v("カード名義")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.name,
+              expression: "name"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "cardName",
+            id: "cardName",
+            placeholder: "カード名義を入力"
+          },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button", id: "create_token" },
+            on: { click: _vm.submit }
+          },
+          [_vm._v("カードを登録する")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: "/userinfodetail" } }, [
+        _vm._v("クレジットカード情報ページに戻る")
+      ])
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -41556,7 +41667,10 @@ var render = function() {
         [
           _c("store-edit", { on: { update: _vm.getStoreUser } }),
           _vm._v(" "),
-          _c("store-item-add", { on: { add: _vm.getStoreItem } }),
+          _c("store-item-add", {
+            attrs: { id: _vm.storeUser.id },
+            on: { add: _vm.getStoreItem }
+          }),
           _vm._v(" "),
           _vm.showContent
             ? _c("store-item-edit", {
@@ -41597,72 +41711,72 @@ var render = function() {
                       [
                         _c("div", { staticClass: "item-name" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n                " +
                               _vm._s(storeitem.item_name) +
-                              "\n                  "
+                              "\n            "
                           )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item-price" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n                " +
                               _vm._s(storeitem.price) +
-                              "\n                  "
+                              "\n            "
                           )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item-status" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n                " +
                               _vm._s(storeitem.item_status) +
-                              "\n                  "
+                              "\n            "
                           )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "button-section",
-                        staticStyle: {
-                          display: "flex",
-                          "justify-content": "space-around"
-                        }
-                      },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              text: "",
-                              color: "primary",
-                              "data-toggle": "modal",
-                              "data-target": "#itemeditmodal"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.displayUpdate(storeitem)
-                              }
-                            }
-                          },
-                          [_vm._v("\n                編集\n              ")]
-                        ),
+                        ]),
                         _vm._v(" "),
                         _c(
-                          "v-btn",
+                          "div",
                           {
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteStoreItem(storeitem.id)
-                              }
+                            staticClass: "button-section",
+                            staticStyle: {
+                              display: "flex",
+                              "justify-content": "space-around"
                             }
                           },
-                          [_vm._v("\n                削除\n              ")]
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  text: "",
+                                  color: "primary",
+                                  "data-toggle": "modal",
+                                  "data-target": "#itemeditmodal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.displayUpdate(storeitem)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n              編集\n            ")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteStoreItem(storeitem.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("\n              削除\n            ")]
+                            )
+                          ],
+                          1
                         )
-                      ],
-                      1
+                      ]
                     )
                   ],
                   1
@@ -104178,8 +104292,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserPaymentForm_vue_vue_type_template_id_e2b12356___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserPaymentForm.vue?vue&type=template&id=e2b12356& */ "./resources/js/components/UserPage/UserPaymentForm.vue?vue&type=template&id=e2b12356&");
 /* harmony import */ var _UserPaymentForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserPaymentForm.vue?vue&type=script&lang=js& */ "./resources/js/components/UserPage/UserPaymentForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _UserPaymentForm_vue_vue_type_custom_index_0_blockType_input_name_cardName_class_form_control_v_model_name_placeholder_E3_82_AB_E3_83_BC_E3_83_89_E5_90_8D_E7_BE_A9_E3_82_92_E5_85_A5_E5_8A_9B__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserPaymentForm.vue?vue&type=custom&index=0&blockType=input&name=cardName&class=form-control&v-model=name&placeholder=%E3%82%AB%E3%83%BC%E3%83%89%E5%90%8D%E7%BE%A9%E3%82%92%E5%85%A5%E5%8A%9B */ "./resources/js/components/UserPage/UserPaymentForm.vue?vue&type=custom&index=0&blockType=input&name=cardName&class=form-control&v-model=name&placeholder=%E3%82%AB%E3%83%BC%E3%83%89%E5%90%8D%E7%BE%A9%E3%82%92%E5%85%A5%E5%8A%9B");
-/* harmony import */ var _UserPaymentForm_vue_vue_type_custom_index_0_blockType_input_name_cardName_class_form_control_v_model_name_placeholder_E3_82_AB_E3_83_BC_E3_83_89_E5_90_8D_E7_BE_A9_E3_82_92_E5_85_A5_E5_8A_9B__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_UserPaymentForm_vue_vue_type_custom_index_0_blockType_input_name_cardName_class_form_control_v_model_name_placeholder_E3_82_AB_E3_83_BC_E3_83_89_E5_90_8D_E7_BE_A9_E3_82_92_E5_85_A5_E5_8A_9B__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -104198,25 +104310,10 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* custom blocks */
-
-if (typeof _UserPaymentForm_vue_vue_type_custom_index_0_blockType_input_name_cardName_class_form_control_v_model_name_placeholder_E3_82_AB_E3_83_BC_E3_83_89_E5_90_8D_E7_BE_A9_E3_82_92_E5_85_A5_E5_8A_9B__WEBPACK_IMPORTED_MODULE_3___default.a === 'function') _UserPaymentForm_vue_vue_type_custom_index_0_blockType_input_name_cardName_class_form_control_v_model_name_placeholder_E3_82_AB_E3_83_BC_E3_83_89_E5_90_8D_E7_BE_A9_E3_82_92_E5_85_A5_E5_8A_9B__WEBPACK_IMPORTED_MODULE_3___default()(component)
-
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/UserPage/UserPaymentForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/UserPage/UserPaymentForm.vue?vue&type=custom&index=0&blockType=input&name=cardName&class=form-control&v-model=name&placeholder=%E3%82%AB%E3%83%BC%E3%83%89%E5%90%8D%E7%BE%A9%E3%82%92%E5%85%A5%E5%8A%9B":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/UserPage/UserPaymentForm.vue?vue&type=custom&index=0&blockType=input&name=cardName&class=form-control&v-model=name&placeholder=%E3%82%AB%E3%83%BC%E3%83%89%E5%90%8D%E7%BE%A9%E3%82%92%E5%85%A5%E5%8A%9B ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
@@ -105839,8 +105936,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/pickapp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/pickapp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel-vue3/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel-vue3/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

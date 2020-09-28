@@ -20,7 +20,11 @@ class StoreItemsController extends Controller
     }
 
     public function StoreItemGet($id){
+        // dd($id);
+
         $storeItem = StoreItem::where('store_id', $id)->get();
+
+
 
         // dd($storeItem);
 
@@ -53,6 +57,7 @@ class StoreItemsController extends Controller
             $storeitem->item_name   = $request->item_name;
             $storeitem->price       = $request->price;
             $storeitem->item_status = $request->item_status;
+            $storeitem->store_id = $request->store_id;
             $storeitem->save();
  
             return ['success' => '登録しました!'];

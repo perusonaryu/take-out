@@ -19,7 +19,7 @@ export default {
         shopDataGet(){
             axios.get('/shopDataGet/' + this.$route.params.id)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch( error => console.log(error));
         }
