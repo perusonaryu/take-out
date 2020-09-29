@@ -2588,11 +2588,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 // import { mapState }   from 'vuex';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // computed: mapState(['items']),
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cartItems']),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cartItems', 'cartTotalPrice']),
   created: function created() {}
 });
 
@@ -8500,7 +8501,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.cart[data-v-366d0674]{\n    width:50%;\n    border:2px solid gray;\n    padding:40px 0;\n    margin:0 auto;\n}\nul[data-v-366d0674]{\n    margin:0 ;\n    /* padding: 0; */\n}\n\n", ""]);
+exports.push([module.i, "\n.cart[data-v-366d0674]{\n    width:50%;\n    border:2px solid gray;\n    padding:40px 0;\n    margin:0 auto;\n    text-align: center;\n}\nul[data-v-366d0674]{\n    margin:0 ;\n    /* padding: 0; */\n}\n\n", ""]);
 
 // exports
 
@@ -41443,22 +41444,26 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "cart" },
-    _vm._l(_vm.cartItems, function(item) {
-      return _c("ul", { key: item.id }, [
-        _c("li", [
-          _vm._v(
-            "\n            " +
-              _vm._s(item.itemName) +
-              " / " +
-              _vm._s(item.price) +
-              "円 / " +
-              _vm._s(item.quantity) +
-              "個\n        "
-          )
+    [
+      _vm._l(_vm.cartItems, function(item) {
+        return _c("ul", { key: item.id }, [
+          _c("li", [
+            _vm._v(
+              "\n            " +
+                _vm._s(item.itemName) +
+                " / " +
+                _vm._s(item.price) +
+                "円 / " +
+                _vm._s(item.quantity) +
+                "個\n        "
+            )
+          ])
         ])
-      ])
-    }),
-    0
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("合計金額： " + _vm._s(_vm.cartTotalPrice) + "(税込み)")])
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -107766,6 +107771,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   getters: {
     cartItems: function cartItems(state) {
       return state.cartItems;
+    },
+    cartTotalPrice: function cartTotalPrice(state, getters) {
+      var totalPrice = getters.cartItems.reduce(function (total, item) {
+        return total + item.price * item.quantity;
+      }, 0);
+      return Math.ceil(totalPrice * 1.08);
     }
   },
   modules: {}

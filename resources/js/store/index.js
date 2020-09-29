@@ -37,6 +37,14 @@ export default new Vuex.Store({
   getters:{
     cartItems: function (state){
       return state.cartItems
+    },
+    cartTotalPrice: function(state,getters){
+      const totalPrice = getters.cartItems.reduce((total,item)=>{
+        return total + item.price * item.quantity
+      },0);
+
+      return Math.ceil(totalPrice * 1.08);
+
     }
   },
   modules: {
