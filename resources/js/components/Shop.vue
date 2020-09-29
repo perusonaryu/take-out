@@ -18,9 +18,9 @@
     </v-img>
 
     <v-row justify="center" align="center">
-        <v-col md="3" v-for="item in shopData" :key="item.id" data-toggle="modal" :data-target="`#itemModal${item.id}`">
+        <v-col md="3" v-for="item in shopData" :key="item.id" class="d-flex justify-center">
 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem;" data-toggle="modal" :data-target="`#itemModal${item.id}`">
                 <img
                 :src="`${item.item_image}`"
                 width="100%"
@@ -51,7 +51,7 @@
                             </p>
                         </div>
                         <div class="quantity ">
-                            <v-btn color="success" text>
+                            <v-btn color="success" text @click="addItemCart(item)">
                                 カートに追加する
                             </v-btn>
                         </div>
@@ -61,9 +61,7 @@
         </v-col>
     </v-row>
 
-    <p>
-        {{ $store.state.message }}
-    </p>
+    <shop-cart />
 
   </div>
 </template>
@@ -75,7 +73,7 @@ export default {
         store:'',
     }),
 
-    mounted(){
+    created(){
         this.shopDataGet();
         this.storeDataGet();
     },
@@ -97,8 +95,14 @@ export default {
                 this.store = response.data; 
             })
             .catch(error => console.log(error));
+        },
+        addItemCart(item){
+            this.$store.dispatch('addItemCart',item);
         }
-    }
+        
+
+    },
+    // computed: mapGetters(['cartItems']),
 }
 </script>
 
