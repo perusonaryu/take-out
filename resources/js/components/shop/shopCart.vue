@@ -5,6 +5,7 @@
             {{item.itemName}} / {{item.price}}円 / {{item.quantity}}個
         </li>
     </ul>
+    <p>合計金額： {{cartTotalPrice}}(税込み)</p>
 </div>
 </template>
 
@@ -14,7 +15,9 @@ import { mapGetters } from 'vuex'
 
 export default {
     // computed: mapState(['items']),
-    computed: mapGetters(['cartItems']),
+    computed:mapGetters(['cartItems','cartTotalPrice']),
+
+    
 
     created(){
 
@@ -28,6 +31,7 @@ export default {
     border:2px solid gray;
     padding:40px 0;
     margin:0 auto;
+    text-align: center;
 }
 
 ul{
