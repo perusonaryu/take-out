@@ -34,6 +34,10 @@
                     </div>
 
                     <div class="item-status" >
+                        {{ storeitem.item_discription}}
+                    </div>
+
+                    <div class="item-status" >
                         {{ storeitem.item_status}}
                     </div>
                 </div>
@@ -124,6 +128,7 @@
     }),
     mounted(){
       this.getStoreUser();
+      // this.getStoreItem();
     },
     created(){
       //商品
@@ -174,7 +179,7 @@
       axios.get('/shopDataGet/'+ storeId)
       .then(response => {
         this.storeitems = response.data;
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch( error => console.log(error));
     },

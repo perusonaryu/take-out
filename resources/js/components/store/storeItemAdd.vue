@@ -6,7 +6,7 @@
       <form>
             <h1 class="d-flex justify-center">商品追加</h1>
              <label>商品画像
-                <input type="file" @change="itemImageSelect">
+                <input type="file" @change="itemImageSelect" v-if="view">
             </label>
             <p v-if="selectedImage" style="width:100px;height:200px;">
                 <img class="img" :src="selectedImage" style="width:100%;"/>
@@ -27,22 +27,30 @@
             @input="$v.Price.$touch()"
             @blur="$v.Price.$touch()"
             ></v-text-field>
-            <v-text-field
+            <v-textarea
+            auto-grow
             v-model="Discription"
             label="商品説明"
             :error-messages="itemDiscriptionErrors"
             required
             @input="$v.Discription.$touch()"
             @blur="$v.Discription.$touch()"
-            ></v-text-field>
-            <v-text-field
+            ></v-textarea>
+            <v-select
+            v-model="ItemStatus"
+            label="商品状況"
+            :items="StatusItems"
+            name="StatusItems"
+            required
+          ></v-select>
+            <!-- <v-text-field
             v-model="ItemStatus"
             label="商品状況"
             :error-messages="itemStatusErrors"
             required
             @input="$v.ItemStatus.$touch()"
             @blur="$v.ItemStatus.$touch()"
-            ></v-text-field>
+            ></v-text-field> -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
         <button type="button" class="btn btn-primary" @click="addStoreItem" >商品追加</button>
@@ -92,6 +100,7 @@ export default {
             view: true,
             selectedImage:"",
             // storeId:"",
+            StatusItems:["売り切れ","販売中"],
     }),
     mounted(){
       const vm = this;
@@ -101,7 +110,7 @@ export default {
       // this.storeId=this.val;
       // console.log(this.storeId);
     },
-    props:['id'],
+    // props:['id'],
 
     computed: {
       itemNameErrors () {
@@ -161,7 +170,10 @@ export default {
                     this.file = "";
                     this.Price = "";
                     this.ItemStatus = "";
+                    this.Discription ="";
+                    this.selectedImage ="";
                     
+                    //確認ログを出す+このバリデーションを消す
                     ファイルを選択のクリア
                     this.view = false;
                     this.$nextTick(function() {

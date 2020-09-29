@@ -2974,10 +2974,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_1__);
-var _name$props$mixins$va;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3045,7 +3049,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //vuelidate
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_name$props$mixins$va = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Modal',
   props: ['val'],
   mixins: [vuelidate__WEBPACK_IMPORTED_MODULE_0__["validationMixin"]],
@@ -3072,8 +3076,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Discription: "",
       ItemStatus: "",
       view: true,
-      selectedImage: "" // storeId:"",
-
+      selectedImage: "",
+      // storeId:"",
+      StatusItems: ["売り切れ", "販売中"]
     };
   },
   mounted: function mounted() {
@@ -3082,97 +3087,103 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(vm.val);
     }); // this.storeId=this.val;
     // console.log(this.storeId);
-  }
-}, _defineProperty(_name$props$mixins$va, "props", ['id']), _defineProperty(_name$props$mixins$va, "computed", {
-  itemNameErrors: function itemNameErrors() {
-    var errors = [];
-    if (!this.$v.StoreItemName.$dirty) return errors;
-    !this.$v.StoreItemName.required && errors.push('商品名を入力して下さい');
-    return errors;
   },
-  //   fileErrors () {
-  //     const errors = []
-  //     if (!this.$v.file.$dirty) return errors
-  //     !this.$v.file.required && errors.push('address is required')
-  //     return errors
-  //   },
-  itemPriceErrors: function itemPriceErrors() {
-    var errors = [];
-    if (!this.$v.Price.$dirty) return errors;
-    !this.$v.Price.required && errors.push('値段を入力して下さい');
-    return errors;
-  },
-  itemDiscriptionErrors: function itemDiscriptionErrors() {
-    var errors = [];
-    if (!this.$v.Discription.$dirty) return errors;
-    !this.$v.Discription.required && errors.push('商品説明を入力して下さい');
-    return errors;
-  },
-  itemStatusErrors: function itemStatusErrors() {
-    var errors = [];
-    if (!this.$v.ItemStatus.$dirty) return errors;
-    !this.$v.ItemStatus.required && errors.push('商品状況を入力して下さい');
-    return errors;
-  }
-}), _defineProperty(_name$props$mixins$va, "methods", {
-  addStoreItem: function addStoreItem() {
-    var _this = this;
-
-    //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
-    var data = new FormData();
-    data.append("item_name", this.StoreItemName);
-    data.append("file", this.file);
-    data.append("price", this.Price);
-    data.append("item_status", this.ItemStatus);
-    data.append("item_discription", this.Discription);
-    data.append("store_id", this.val);
-    var config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    };
-    axios.post("/api/StoreItems/", data, config).then(function (response) {
-      // this.getStoreItem();
-      _this.$emit('add');
-
-      _this.StoreItemName = "";
-      _this.file = "";
-      _this.Price = "";
-      _this.ItemStatus = "";
-      ファイルを選択のクリア;
-      _this.view = false;
-
-      _this.$nextTick(function () {
-        this.view = true;
-      });
-    })["catch"](function (err) {
-      _this.message = err;
-    });
-  },
-  itemImageSelect: function itemImageSelect(e) {
-    this.message = "";
-    this.file = e.target.files[0];
-
-    if (!this.file.type.match("image.*")) {
-      this.message = "画像ファイルを選択して下さい";
-      this.selectedImage = "";
-      return;
+  // props:['id'],
+  computed: {
+    itemNameErrors: function itemNameErrors() {
+      var errors = [];
+      if (!this.$v.StoreItemName.$dirty) return errors;
+      !this.$v.StoreItemName.required && errors.push('商品名を入力して下さい');
+      return errors;
+    },
+    //   fileErrors () {
+    //     const errors = []
+    //     if (!this.$v.file.$dirty) return errors
+    //     !this.$v.file.required && errors.push('address is required')
+    //     return errors
+    //   },
+    itemPriceErrors: function itemPriceErrors() {
+      var errors = [];
+      if (!this.$v.Price.$dirty) return errors;
+      !this.$v.Price.required && errors.push('値段を入力して下さい');
+      return errors;
+    },
+    itemDiscriptionErrors: function itemDiscriptionErrors() {
+      var errors = [];
+      if (!this.$v.Discription.$dirty) return errors;
+      !this.$v.Discription.required && errors.push('商品説明を入力して下さい');
+      return errors;
+    },
+    itemStatusErrors: function itemStatusErrors() {
+      var errors = [];
+      if (!this.$v.ItemStatus.$dirty) return errors;
+      !this.$v.ItemStatus.required && errors.push('商品状況を入力して下さい');
+      return errors;
     }
-
-    this.createItemImage(this.file);
   },
-  createItemImage: function createItemImage(file) {
-    var _this2 = this;
+  methods: {
+    addStoreItem: function addStoreItem() {
+      var _this = this;
 
-    //FileReaderのインスタンスを作成しfileを読み込む
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
+      //Laravel側のapiへPOSTするデータとしてFormData オブジェクトを利用
+      var data = new FormData();
+      data.append("item_name", this.StoreItemName);
+      data.append("file", this.file);
+      data.append("price", this.Price);
+      data.append("item_status", this.ItemStatus);
+      data.append("item_discription", this.Discription);
+      data.append("store_id", this.val);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      axios.post("/api/StoreItems/", data, config).then(function (response) {
+        // this.getStoreItem();
+        _this.$emit('add');
 
-    reader.onload = function (e) {
-      _this2.selectedImage = e.target.result;
-    };
+        _this.StoreItemName = "";
+        _this.file = "";
+        _this.Price = "";
+        _this.ItemStatus = "";
+        _this.Discription = "";
+        _this.selectedImage = ""; //確認ログを出す+このバリデーションを消す
+
+        ファイルを選択のクリア;
+        _this.view = false;
+
+        _this.$nextTick(function () {
+          this.view = true;
+        });
+      })["catch"](function (err) {
+        _this.message = err;
+      });
+    },
+    itemImageSelect: function itemImageSelect(e) {
+      this.message = "";
+      this.file = e.target.files[0];
+
+      if (!this.file.type.match("image.*")) {
+        this.message = "画像ファイルを選択して下さい";
+        this.selectedImage = "";
+        return;
+      }
+
+      this.createItemImage(this.file);
+    },
+    createItemImage: function createItemImage(file) {
+      var _this2 = this;
+
+      //FileReaderのインスタンスを作成しfileを読み込む
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function (e) {
+        _this2.selectedImage = e.target.result;
+      };
+    }
   }
-}), _name$props$mixins$va);
+});
 
 /***/ }),
 
@@ -3246,6 +3257,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Modal',
   props: ['val'],
@@ -3257,6 +3273,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       updatePrice: "",
       updateItemStatus: "",
       updateStoreId: "",
+      updateDiscription: "",
       file: "" // updateForm:false,
 
     };
@@ -3272,6 +3289,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.updatePrice = this.val.price;
     this.file = this.val.item_image;
     this.updateItemStatus = this.val.item_status;
+    this.updateDiscription = this.val.item_discription;
   },
   methods: {
     updateStoreItem: function updateStoreItem(updateId) {
@@ -3284,6 +3302,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       editedData.append("file", this.file);
       editedData.append("price", this.updatePrice);
       editedData.append("item_status", this.updateItemStatus);
+      editedData.append("item_discription", this.updateDiscription);
 
       (_console = console).log.apply(_console, _toConsumableArray(editedData.entries()));
 
@@ -3490,6 +3509,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 // import { validationMixin } from 'vuelidate'
 // import { required, maxLength, email } from 'vuelidate/lib/validators'
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3518,7 +3541,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getStoreUser();
+    this.getStoreUser(); // this.getStoreItem();
   },
   created: function created() {
     //商品
@@ -3572,7 +3595,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var storeId = this.storeUser.id;
       axios.get('/shopDataGet/' + storeId).then(function (response) {
-        _this4.storeitems = response.data; // console.log(response.data);
+        _this4.storeitems = response.data;
+        console.log(response.data);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -41843,10 +41867,12 @@ var render = function() {
               _vm._v(" "),
               _c("label", [
                 _vm._v("商品画像\n                "),
-                _c("input", {
-                  attrs: { type: "file" },
-                  on: { change: _vm.itemImageSelect }
-                })
+                _vm.view
+                  ? _c("input", {
+                      attrs: { type: "file" },
+                      on: { change: _vm.itemImageSelect }
+                    })
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _vm.selectedImage
@@ -41909,8 +41935,9 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-text-field", {
+              _c("v-textarea", {
                 attrs: {
+                  "auto-grow": "",
                   label: "商品説明",
                   "error-messages": _vm.itemDiscriptionErrors,
                   required: ""
@@ -41932,19 +41959,12 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-text-field", {
+              _c("v-select", {
                 attrs: {
                   label: "商品状況",
-                  "error-messages": _vm.itemStatusErrors,
+                  items: _vm.StatusItems,
+                  name: "StatusItems",
                   required: ""
-                },
-                on: {
-                  input: function($event) {
-                    return _vm.$v.ItemStatus.$touch()
-                  },
-                  blur: function($event) {
-                    return _vm.$v.ItemStatus.$touch()
-                  }
                 },
                 model: {
                   value: _vm.ItemStatus,
@@ -42069,6 +42089,17 @@ var render = function() {
                     _vm.updatePrice = $$v
                   },
                   expression: "updatePrice"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-textarea", {
+                attrs: { "auto-grow": "" },
+                model: {
+                  value: _vm.updateDiscription,
+                  callback: function($$v) {
+                    _vm.updateDiscription = $$v
+                  },
+                  expression: "updateDiscription"
                 }
               }),
               _vm._v(" "),
@@ -42283,6 +42314,14 @@ var render = function() {
                           _vm._v(
                             "\n                      " +
                               _vm._s(storeitem.price) +
+                              "\n                  "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "item-status" }, [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(storeitem.item_discription) +
                               "\n                  "
                           )
                         ]),

@@ -110,6 +110,7 @@ class StoreItemsController extends Controller
                     'price'      => $request->price,
                     // 'store_id'   => $request->store_id,
                     'item_status'=> $request->item_status,
+                    'item_discription'=> $request->item_discription,
                     'item_image' => 'storage/store_item_images/' . $file_name,
                 ];
                 StoreItem::where('id', $id)->update($update);
@@ -120,6 +121,7 @@ class StoreItemsController extends Controller
                     // 'store_id'   => $request->store_id,
                     'item_status'=> $request->item_status,
                     'item_image' => $request->file,
+                    'item_discription' => $request->item_discription,
                 ];
                 StoreItem::where('id', $id)->update($update);
             }

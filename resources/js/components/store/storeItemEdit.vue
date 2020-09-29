@@ -21,6 +21,11 @@
             label="値段"
             
             ></v-text-field>
+            <v-textarea
+            auto-grow
+            v-model="updateDiscription"
+            
+            ></v-textarea>
             <v-text-field
             v-model="updateItemStatus"
             label="商品状況"
@@ -59,7 +64,7 @@
             updatePrice: "",
             updateItemStatus: "",
             updateStoreId: "",
-
+            updateDiscription:"",
             file:"",
             
             // updateForm:false,
@@ -76,6 +81,7 @@
         this.updatePrice = this.val.price
         this.file = this.val.item_image
         this.updateItemStatus = this.val.item_status
+        this.updateDiscription = this.val.item_discription
         
     },
     methods:{
@@ -87,6 +93,7 @@
             editedData.append("file", this.file);
             editedData.append("price", this.updatePrice);
             editedData.append("item_status", this.updateItemStatus);
+            editedData.append("item_discription", this.updateDiscription);
             console.log(...editedData.entries());
 
             axios
