@@ -78,6 +78,8 @@ Route::post('logout', 'LoginController@logout');
 Route::get('/newStoreGet','StoreUserController@newStoreGet');
 Route::get('/storeGet/{id}','StoreUserController@storeGet');
 
+//店リスト
+Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
 //お店商品情報取得
 Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
 

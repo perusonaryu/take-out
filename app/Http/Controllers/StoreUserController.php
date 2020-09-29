@@ -55,6 +55,23 @@ class StoreUserController extends Controller
         return $storeInfo;
     
     }
+
+    public function shopListGet($id){
+        // dd($id);
+        if($id==="0"){
+            $shoplist = StoreUser::where('category', '和食')->get();        
+            return $shoplist;
+        }else if($id==="1"){
+            $shoplist = StoreUser::where('category', '洋食')->get();
+            return $shoplist;
+        }else if($id==="2"){
+                $shoplist = StoreUser::where('category', '中華')->get();
+                return $shoplist;
+        }else{
+                return ["erorr"=>"失敗しました"];
+            }
+    }
+
     public function storeGet($id){
         $stores = StoreUser::find($id);
 

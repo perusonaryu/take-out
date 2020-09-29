@@ -25,6 +25,13 @@
             <v-btn  >検索</v-btn>
             </template>
         </v-text-field>
+        <router-link 
+        v-for="(category,index) in ShopCategory" :key="category.index"
+           :to="{ name: 'ShopList',
+            params: { id:  index}
+            }"
+            ><v-btn type="button" >{{category.name}}</v-btn>
+        </router-link>
       </v-col>
     </v-row>
 
@@ -35,9 +42,11 @@
 <script>
 export default {
   data: () => ({
-    message:''
+    message:'',
+    ShopCategory:[{'name':'和食'},{'name':'洋食'},{'name':'中華'}]
   })
 }
+
 </script>
 
 <style scoped>

@@ -48,7 +48,7 @@
 
           </v-row>
       </v-container> -->
-    <v-img
+    <!-- <v-img
         :src= "` ${store.image} `"
         width="100%"
         height="300"
@@ -63,7 +63,7 @@
             <h1 class="display-1 font-weight-thin mb-4"> {{ store.name }} </h1>
         </v-col>
         </v-row>
-    </v-img>
+    </v-img> -->
 
     <v-row justify="center" align="center">
         <v-col md="3" v-for="item in shopData" :key="item.id" data-toggle="modal" :data-target="`#itemModal${item.id}`">
@@ -130,8 +130,8 @@ export default {
     // },
     mounted(){
         this.shopDataGet();
-        // this.getStoreUser();
-        this.storeDataGet();
+        this.getStoreUser();
+        // this.storeDataGet();
     },
     // created(){
     //   this.shopDataGet();
@@ -148,15 +148,15 @@ export default {
             })
             .catch( error => console.log(error));
         },
-        //   getStoreUser(){
-        //         axios.get('/storeImage/'+this.$route.params.id)
-        //         .then(response=>{
-        //         this.storeUser = response.data[0];
-        //         this.storeName = response.data.name;
-        //         console.log(this.storeUser);
-        //         })
-        //         .catch(error => console.log(error));
-        //  },
+          getStoreUser(){
+                axios.get('/storeImage/'+this.$route.params.id)
+                .then(response=>{
+                this.storeUser = response.data[0];
+                this.storeName = response.data.name;
+                console.log(this.storeUser);
+                })
+                .catch(error => console.log(error));
+         },
          
         //  selectItem(shopitem){
         //      let items = {"i":"1"};
@@ -170,14 +170,14 @@ export default {
         //     .catch( error => console.log(error));
         // },
 
-        storeDataGet(){
-            axios.get('/storeGet/' + this.$route.params.id)
-            .then(response => {
-                console.log(response.data);
-                this.store = response.data; 
-            })
-            .catch(error => console.log(error));
-        }
+        // storeDataGet(){
+        //     axios.get('/storeGet/' + this.$route.params.id)
+        //     .then(response => {
+        //         console.log(response.data);
+        //         this.store = response.data; 
+        //     })
+        //     .catch(error => console.log(error));
+        // }
     }
 }
 </script>
