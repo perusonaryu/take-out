@@ -20,15 +20,21 @@ class StoreItemsController extends Controller
     }
 
     public function StoreItemGet($id){
+        $item = StoreItem::where('store_id', $id)->get();
+        
+        return $item;
         // dd($id);
 
-        $storeItem = StoreItem::where('store_id', $id)->get();
+        // $storeItem = StoreItem::where('store_id', $id)->get();
 
 
 
         // dd($storeItem);
 
-        return $storeItem;
+        // $query = StoreItem::query();
+        // $item = $query->where('store_id',$id)->get();
+        
+        // return $item;
     }
 
     
@@ -46,9 +52,9 @@ class StoreItemsController extends Controller
 
         if (request()->file) {
             //アップロードされた画像の拡張子をとる
-            // $ext=$file->getClientOriginalExtension();
-            // $file_name = $request->item_name.'.'.$ext;
-            $file_name = $request->item_name.'.jpg';
+            $ext=request()->file->getClientOriginalExtension();
+            $file_name = $request->item_name.'.'.$ext;
+            
             //storage/app/public/store_item_imagesに保存
             $request->file->storeAs('public/store_item_images', $file_name);
  
@@ -57,6 +63,7 @@ class StoreItemsController extends Controller
             $storeitem->item_name   = $request->item_name;
             $storeitem->price       = $request->price;
             $storeitem->item_status = $request->item_status;
+            $storeitem->item_discription = $request->item_discription;
             $storeitem->store_id = $request->store_id;
             $storeitem->save();
  
@@ -103,6 +110,7 @@ class StoreItemsController extends Controller
                     'price'      => $request->price,
                     // 'store_id'   => $request->store_id,
                     'item_status'=> $request->item_status,
+                    'item_discription'=> $request->item_discription,
                     'item_image' => 'storage/store_item_images/' . $file_name,
                 ];
                 StoreItem::where('id', $id)->update($update);
@@ -113,6 +121,7 @@ class StoreItemsController extends Controller
                     // 'store_id'   => $request->store_id,
                     'item_status'=> $request->item_status,
                     'item_image' => $request->file,
+                    'item_discription' => $request->item_discription,
                 ];
                 StoreItem::where('id', $id)->update($update);
             }

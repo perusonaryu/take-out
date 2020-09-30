@@ -18,6 +18,7 @@ import userpaymentform from './components/UserPage/UserPaymentForm.vue'
 import userpaymentinfo from './components/UserPage/UserPaymentInfo.vue'
 import userinfodetail from './components/UserPage/UserInfoDetail.vue'
 import shop from './components/shop.vue'
+import ShopList from './components/ShopList.vue'
 
 // import StoreItem from './components/StoreItemComponent'
 
@@ -136,6 +137,12 @@ export default new VueRouter({
             path: '/shop:id',
             component: shop,
             name: 'shop'
+        },
+        {
+            path: '/ShopList/:id',
+            component: ShopList,
+            name: 'ShopList',
+            props:true,
         },
 
     

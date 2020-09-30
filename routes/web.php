@@ -53,7 +53,8 @@ Route::delete('/storeDelete/{id}','StoreController@destroy');
 //お店編集
 Route::put('/storeUserUpdate/{id}','StoreUserController@update');
 
-Route::post('/storeImage/{id}','StoreUserController@storeImage');
+// Route::post('/storeImage','StoreUserController@storeImage');
+Route::get('/storeImage/{id}','StoreUserController@storeImage');
 
 
 
@@ -77,6 +78,8 @@ Route::post('logout', 'LoginController@logout');
 Route::get('/newStoreGet','StoreUserController@newStoreGet');
 Route::get('/storeGet/{id}','StoreUserController@storeGet');
 
+//店リスト
+Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
 //お店商品情報取得
 Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
 
