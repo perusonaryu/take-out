@@ -23,32 +23,32 @@
             width="100%"
             :src="storeitem.item_image">
           </v-img>
-           <div class="item-detail-section" style="text-align:center;">
+          <div class="item-detail-section" style="text-align:center;">
 
-                    <div class="item-name" >
-                        {{ storeitem.item_name }}
-                    </div>
+            <div class="item-name" >
+                {{ storeitem.item_name }}
+            </div>
 
-                    <div class="item-price" >
-                        {{ storeitem.price}}
-                    </div>
+            <div class="item-price" >
+                {{ storeitem.price}}
+            </div>
 
-                    <div class="item-status" >
-                        {{ storeitem.item_discription}}
-                    </div>
+            <div class="item-status" >
+                {{ storeitem.item_discription}}
+            </div>
 
-                    <div class="item-status" >
-                        {{ storeitem.item_status}}
-                    </div>
-                </div>
-                <div class="button-section" style="display:flex; justify-content:space-around;">
-                   <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
-                    編集
-                  </v-btn>
-                  <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
-                    削除
-                  </v-btn>
-                </div>
+            <div class="item-status" >
+                {{ storeitem.item_status}}
+            </div>
+          </div>
+            <div class="button-section" style="display:flex; justify-content:space-around;">
+                <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
+                編集
+              </v-btn>
+              <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
+                削除
+              </v-btn>
+            </div>
           <!-- <div class="item-detail-section" style="text-align:center;">
 
               <div class="item-name" >

@@ -3,12 +3,10 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    message: 'Hello Vuex',
     cartItems:[],
   },
   plugins: [createPersistedState()],
@@ -25,6 +23,16 @@ export default new Vuex.Store({
     incrementItemQuantity(state,{id}){
       const cart = state.cartItems.find(cartItem => cartItem.id === id);
       cart.quantity++;
+    },
+    deleteItemCart(state,item){
+      // const cart = state.cartItems.find(cartItem => cartItem.id === id);
+
+      state.cartItems = state.cartItems.filter(cartItem => cartItem !== item )
+
+      // state.cartItems.filter(function(item){
+      //   return item === cart;
+        
+      // });
     }
   },
   actions: {
@@ -35,6 +43,9 @@ export default new Vuex.Store({
       }else{
         commit('incrementItemQuantity',cart);
       }
+    },
+    deleteItem({state,commit},item){
+      commit('deleteItemCart',item);
     }
   },
   getters:{
@@ -51,5 +62,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-  }
+  },
+  plugins: [createPersistedState()],
 })

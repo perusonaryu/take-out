@@ -3016,8 +3016,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/shopDataGet/' + this.$route.params.id).then(function (response) {
-        _this.shopData = response.data;
-        console.log(_this.shopData);
+        _this.shopData = response.data; // console.log(this.shopData);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -3027,8 +3026,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/storeImage/' + this.$route.params.id).then(function (response) {
         _this2.storeUser = response.data[0];
-        _this2.storeName = response.data.name;
-        console.log(_this2.storeUser);
+        _this2.storeName = response.data.name; // console.log(this.storeUser);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -3056,7 +3054,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get('/storeGet/' + this.$route.params.id).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this3.store = response.data;
       })["catch"](function (error) {
         return console.log(error);
@@ -3093,12 +3091,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 // import { mapState }   from 'vuex';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   // computed: mapState(['items']),
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['cartItems', 'cartTotalPrice']),
-  created: function created() {}
+  created: function created() {
+    console.log(this.cartItems);
+    console.log(this.cartTotalPrice);
+  },
+  methods: {
+    deleteItemCart: function deleteItemCart(item) {
+      this.$store.commit('deleteItemCart', item);
+    }
+  }
 });
 
 /***/ }),
@@ -4495,7 +4504,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      message: '',
+      serchMessage: '',
       ShopCategory: [{
         'name': '和食'
       }, {
@@ -4504,6 +4513,15 @@ __webpack_require__.r(__webpack_exports__);
         'name': '中華'
       }]
     };
+  },
+  methods: {
+    serch: function serch() {
+      axios.get('/' + this.serchMessage).then(function (response) {
+        console.log('ok');
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
   }
 });
 
@@ -9105,7 +9123,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-e99efa7e]{\n    padding:0;\n    position: relative;\n}\n.close[data-v-e99efa7e]{\n    position:absolute;\n    right:20px;\n    top:20px;\n    width:50px;\n    height:50px;\n    background: white;\n    border-radius: 50%;\n}\n.close span[data-v-e99efa7e]{\n    padding:0px 0px 3px;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-e99efa7e]{\n    padding:0;\n    position: relative;\n}\n.close[data-v-e99efa7e]{\n    position:absolute;\n    right:20px;\n    top:20px;\n    width:50px;\n    height:50px;\n    background: white;\n    border-radius: 50%;\n}\n.close span[data-v-e99efa7e]{\n    padding:0px 0px 3px;\n}\n.card[data-v-e99efa7e]{\n    cursor:pointer;\n}\n\n\n", ""]);
 
 // exports
 
@@ -42307,12 +42325,16 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "div",
-                            { staticClass: "quantity " },
+                            { staticClass: "quantity" },
                             [
                               _c(
                                 "v-btn",
                                 {
-                                  attrs: { color: "success", text: "" },
+                                  attrs: {
+                                    color: "success",
+                                    text: "",
+                                    "data-dismiss": "modal"
+                                  },
                                   on: {
                                     click: function($event) {
                                       return _vm.addItemCart(item)
@@ -42383,7 +42405,25 @@ var render = function() {
                 _vm._s(item.price) +
                 "円 / " +
                 _vm._s(item.quantity) +
-                "個\n        "
+                "個\n            "
+            ),
+            _c(
+              "span",
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "error", text: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteItemCart(item)
+                      }
+                    }
+                  },
+                  [_vm._v("削除")]
+                )
+              ],
+              1
             )
           ])
         ])
@@ -43095,33 +43135,33 @@ var render = function() {
                       [
                         _c("div", { staticClass: "item-name" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n              " +
                               _vm._s(storeitem.item_name) +
-                              "\n                  "
+                              "\n          "
                           )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item-price" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n              " +
                               _vm._s(storeitem.price) +
-                              "\n                  "
+                              "\n          "
                           )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item-status" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n              " +
                               _vm._s(storeitem.item_discription) +
-                              "\n                  "
+                              "\n          "
                           )
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "item-status" }, [
                           _vm._v(
-                            "\n                      " +
+                            "\n              " +
                               _vm._s(storeitem.item_status) +
-                              "\n                  "
+                              "\n          "
                           )
                         ])
                       ]
@@ -43152,7 +43192,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                  編集\n                ")]
+                          [_vm._v("\n              編集\n            ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -43165,7 +43205,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("\n                  削除\n                ")]
+                          [_vm._v("\n              削除\n            ")]
                         )
                       ],
                       1
@@ -44034,17 +44074,21 @@ var render = function() {
                       {
                         key: "append",
                         fn: function() {
-                          return [_c("v-btn", [_vm._v("検索")])]
+                          return [
+                            _c("v-btn", { on: { click: _vm.serch } }, [
+                              _vm._v("検索")
+                            ])
+                          ]
                         },
                         proxy: true
                       }
                     ]),
                     model: {
-                      value: _vm.message,
+                      value: _vm.serchMessage,
                       callback: function($$v) {
-                        _vm.message = $$v
+                        _vm.serchMessage = $$v
                       },
-                      expression: "message"
+                      expression: "serchMessage"
                     }
                   }),
                   _vm._v(" "),
@@ -109083,13 +109127,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store(_defineProperty({
   state: {
-    message: 'Hello Vuex',
     cartItems: []
   },
   plugins: [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_2__["default"])()],
@@ -109108,6 +109153,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         return cartItem.id === id;
       });
       cart.quantity++;
+    },
+    deleteItemCart: function deleteItemCart(state, item) {
+      // const cart = state.cartItems.find(cartItem => cartItem.id === id);
+      state.cartItems = state.cartItems.filter(function (cartItem) {
+        return cartItem !== item;
+      }); // state.cartItems.filter(function(item){
+      //   return item === cart;
+      // });
     }
   },
   actions: {
@@ -109123,6 +109176,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       } else {
         commit('incrementItemQuantity', cart);
       }
+    },
+    deleteItem: function deleteItem(_ref3, item) {
+      var state = _ref3.state,
+          commit = _ref3.commit;
+      commit('deleteItemCart', item);
     }
   },
   getters: {
@@ -109137,7 +109195,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   modules: {}
-}));
+}, "plugins", [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_2__["default"])()])));
 
 /***/ }),
 
@@ -109159,8 +109217,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/pickapp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/pickapp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel-vue3/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel-vue3/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

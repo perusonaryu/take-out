@@ -98,8 +98,8 @@
                                 トスカーナ産オリーブオイル・バーニャカウダ・モルタデッラハム・フォカッチャが付きます。
                             </p>
                         </div>
-                        <div class="quantity ">
-                            <v-btn color="success" text @click="addItemCart(item)">
+                        <div class="quantity">
+                            <v-btn color="success" text @click="addItemCart(item)" data-dismiss="modal">
                                 カートに追加する
                             </v-btn>
                         </div>
@@ -145,7 +145,7 @@ export default {
             axios.get('/shopDataGet/' + this.$route.params.id)
             .then(response => {
                 this.shopData=response.data;
-                console.log(this.shopData);
+                // console.log(this.shopData);
             })
             .catch( error => console.log(error));
         },
@@ -154,7 +154,7 @@ export default {
                 .then(response=>{
                 this.storeUser = response.data[0];
                 this.storeName = response.data.name;
-                console.log(this.storeUser);
+                // console.log(this.storeUser);
                 })
                 .catch(error => console.log(error));
          },
@@ -183,7 +183,7 @@ export default {
         storeDataGet(){
             axios.get('/storeGet/' + this.$route.params.id)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.store = response.data; 
             })
             .catch(error => console.log(error));
@@ -220,6 +220,10 @@ export default {
 
 .close span{
     padding:0px 0px 3px;
+}
+
+.card{
+    cursor:pointer;
 }
 
 
