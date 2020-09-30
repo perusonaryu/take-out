@@ -103,7 +103,9 @@ Route::group(['prefix' => 'storeusers'], function () {
     Route::post('logout', 'StoreUsersAuth\LoginController@logout');
 });
 
-
+//ショッピング関係
+Route::get('/storebuy', 'StoreBuyController@index')->name('storebuy');
+Route::post('/storebuy', 'StoreBuyController@store')->name('storebuy.store');
 
 //決済関係
 Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');

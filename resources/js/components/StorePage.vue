@@ -13,7 +13,7 @@
       <store-edit  @update = "getStoreUser" />
       <!-- 商品追加モーダル -->
       <store-item-add @add = "getStoreItem" :val="addItem"></store-item-add>
-      <store-item-edit :val="editItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
+      
       <!-- <store-item-add @add = "getStoreItem" :id="storeUser.id" />
       <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit> -->
       <v-row>
@@ -71,7 +71,7 @@
               </v-btn>
             </div> -->
           <!-- </div> -->
-               
+           <store-item-edit :val="editItem" v-if="showContent===storeitem.id" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>    
         </v-col>
         <!-- <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
           
@@ -81,11 +81,11 @@
                 -->
   
   
-                
-    <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" @click="displayAdd(storeUser.id)">
-      商品追加
-    </v-btn>
-          
+      <!-- <v-col lg="3" md="4" cols="12"> -->
+        <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" @click="displayAdd(storeUser.id)">
+          商品追加
+        </v-btn>
+      <!-- </v-col>  -->
       </v-row>
       
     </v-container>
@@ -188,11 +188,16 @@
       
         //商品編集モーダル
         displayUpdate(storeitem){
-          this.showContent = true
-          this.editItem = storeitem
+          // this.showContent = storeitem.id;
+          // if(this.showContent===storeitem.id){
+            this.showContent = storeitem.id;
+            this.editItem = storeitem
+          // }
+          
         },
         closeStoreEditModal(){
           this.showContent = false
+          this.showContent='';
         },
 
 //商品追加モーダルの開閉

@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     cartItems:[],
   },
+  plugins: [createPersistedState()],
   mutations: {
     pushItemCart(state,item){
       state.cartItems.push({

@@ -129,6 +129,8 @@ class Payment extends Model
                     'id' => $card->id,
                 ];
             }
+            //    else{ // return ["erorr"=>"カード登録がまだです！"];
+            // }
         // }
         return $default_card;
     }

@@ -17,14 +17,14 @@ class UserPaymentController extends Controller
         return view('user.index', compact('user', 'defaultCard'));
     }
 
-    public function itemPaid(Request $request){
-
+    public function itemPaid(Request $request ){
+        // dd($request->price);
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
-
+        
         try {
             $user = User::find(Auth::id());
             $chargeOject = [
-                'amount'      => 500,
+                'amount'      => $request->price,
                 'currency'    => 'jpy',
                 'description' => 'ユーザー：'.$user->name."、商品購入",
                 'customer'      => $user->stripe_id,
