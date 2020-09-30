@@ -70,6 +70,14 @@
             // updateForm:false,
         };
     },
+    created(){
+        this.updateId = this.val.id
+        this.updateItemName = this.val.item_name
+        this.updatePrice = this.val.price
+        this.file = this.val.item_image
+        this.updateItemStatus = this.val.item_status
+        this.updateDiscription = this.val.item_discription
+    },
     mounted(){
         const vm = this;
             Vue.nextTick(function () {
@@ -109,6 +117,14 @@
                     // this.updateForm = false;
                     console.log(response.data);
                     this.$emit('itemUpdate');
+                    this.editedImage="",
+                    this.updateId= "",
+                    this.updateItemName= "",
+                    this.updatePrice= "",
+                    this.updateItemStatus= "",
+                    this.updateStoreId= "",
+                    this.updateDiscription="",
+                    this.file="";
                 })
                 .catch(err => {
                     console.log(err);

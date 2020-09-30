@@ -6,6 +6,7 @@
         </li>
     </ul>
     <p>合計金額： {{cartTotalPrice}}(税込み)</p>
+    
 </div>
 </template>
 
