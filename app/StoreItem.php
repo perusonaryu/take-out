@@ -13,5 +13,6 @@ class StoreItem extends Model
         'store_id',
         'item_status',//店側で売り切れにする機能が要る
         'item_image',
+        'item_discription',
     ];
 }

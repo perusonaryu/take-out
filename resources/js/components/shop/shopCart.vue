@@ -3,6 +3,9 @@
     <ul v-for="item in cartItems" :key="item.id">
         <li>
             {{item.itemName}} / {{item.price}}円 / {{item.quantity}}個
+            <span>
+                <v-btn color="error" text @click="deleteItemCart(item)">削除</v-btn>
+            </span>
         </li>
     </ul>
     <p>合計金額： {{cartTotalPrice}}(税込み)</p>
@@ -17,10 +20,14 @@ export default {
     // computed: mapState(['items']),
     computed:mapGetters(['cartItems','cartTotalPrice']),
 
-    
-
     created(){
-
+        console.log(this.cartItems);
+        console.log(this.cartTotalPrice);
+    },
+    methods:{
+        deleteItemCart(item){
+            this.$store.commit('deleteItemCart',item);
+        }
     }
 }
 </script>

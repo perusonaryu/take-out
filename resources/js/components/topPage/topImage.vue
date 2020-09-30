@@ -15,16 +15,23 @@
             スマートに受け取り
         </h1>
         <v-text-field
-            v-model="message"
+            v-model="serchMessage"
             label="地域名を入力似て店舗を探す"
             type="text"
             color="white white-2"
             light
         >
             <template v-slot:append>
-            <v-btn  >検索</v-btn>
+            <v-btn @click="serch">検索</v-btn>
             </template>
         </v-text-field>
+        <router-link 
+        v-for="(category,index) in ShopCategory" :key="category.index"
+           :to="{ name: 'ShopList',
+            params: { id:  index}
+            }"
+            ><v-btn type="button" >{{category.name}}</v-btn>
+        </router-link>
       </v-col>
     </v-row>
 
@@ -35,9 +42,20 @@
 <script>
 export default {
   data: () => ({
-    message:''
-  })
+    serchMessage:'',
+    ShopCategory:[{'name':'和食'},{'name':'洋食'},{'name':'中華'}],
+  }),
+  methods:{
+    serch(){
+      axios.get('/' + this.serchMessage)
+      .then(response => {
+        console.log('ok');
+      })
+      .catch(error => console.log(error))
+    }
+  }
 }
+
 </script>
 
 <style scoped>

@@ -12,8 +12,10 @@
       <!-- 店編集モーダル -->
       <store-edit  @update = "getStoreUser" />
       <!-- 商品追加モーダル -->
-      <store-item-add @add = "getStoreItem" :id="storeUser.id" />
-      <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
+      <store-item-add @add = "getStoreItem" :val="addItem"></store-item-add>
+      <store-item-edit :val="editItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit>
+      <!-- <store-item-add @add = "getStoreItem" :id="storeUser.id" />
+      <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit> -->
       <v-row>
         <v-col lg="3" md="4" cols="12" class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id">
           <v-img 
@@ -22,6 +24,32 @@
             :src="storeitem.item_image">
           </v-img>
           <div class="item-detail-section" style="text-align:center;">
+
+            <div class="item-name" >
+                {{ storeitem.item_name }}
+            </div>
+
+            <div class="item-price" >
+                {{ storeitem.price}}
+            </div>
+
+            <div class="item-status" >
+                {{ storeitem.item_discription}}
+            </div>
+
+            <div class="item-status" >
+                {{ storeitem.item_status}}
+            </div>
+          </div>
+            <div class="button-section" style="display:flex; justify-content:space-around;">
+                <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
+                編集
+              </v-btn>
+              <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
+                削除
+              </v-btn>
+            </div>
+          <!-- <div class="item-detail-section" style="text-align:center;">
 
               <div class="item-name" >
                   {{ storeitem.item_name }}
@@ -33,16 +61,16 @@
 
               <div class="item-status" >
                   {{ storeitem.item_status}}
-              </div>
-            <div class="button-section" style="display:flex; justify-content:space-around;">
+              </div> -->
+            <!-- <div class="button-section" style="display:flex; justify-content:space-around;">
               <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
                 編集
               </v-btn>
               <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
                 削除
               </v-btn>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
                
         </v-col>
         <!-- <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
@@ -54,7 +82,7 @@
   
   
                 
-    <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" >
+    <v-btn text color="primary" data-toggle="modal" data-target="#itemaddmodal" @click="displayAdd(storeUser.id)">
       商品追加
     </v-btn>
           
@@ -93,12 +121,14 @@
       // 商品追加 storeitem
       storeitems: {},
       addmodal: false,
+      addItem:"",
       //商品編集モーダル
       showContent: false,
-      storeItem: "",
+      editItem: "",
     }),
     mounted(){
       this.getStoreUser();
+      // this.getStoreItem();
     },
     created(){
       //商品
@@ -149,7 +179,7 @@
       axios.get('/shopDataGet/'+ storeId)
       .then(response => {
         this.storeitems = response.data;
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch( error => console.log(error));
     },
@@ -159,7 +189,7 @@
         //商品編集モーダル
         displayUpdate(storeitem){
           this.showContent = true
-          this.storeItem = storeitem
+          this.editItem = storeitem
         },
         closeStoreEditModal(){
           this.showContent = false
@@ -171,6 +201,11 @@
         },
         closeStoreAddModal() {
           this.addmodal = false
+        },
+
+        displayAdd(id){
+          this.addItem=id;
+          console.log(this.addItem);
         },
     
  deleteStoreItem(id) {
