@@ -2553,7 +2553,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/storeGet/' + this.$route.params.id).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this2.store = response.data;
       })["catch"](function (error) {
         return console.log(error);
@@ -8482,7 +8482,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-e99efa7e]{\n    padding:0;\n    position: relative;\n}\n.close[data-v-e99efa7e]{\n    position:absolute;\n    right:20px;\n    top:20px;\n    width:50px;\n    height:50px;\n    background: white;\n    border-radius: 50%;\n}\n.close span[data-v-e99efa7e]{\n    padding:0px 0px 3px;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-e99efa7e]{\n    padding:0;\n    position: relative;\n}\n.close[data-v-e99efa7e]{\n    position:absolute;\n    right:20px;\n    top:20px;\n    width:50px;\n    height:50px;\n    background: white;\n    border-radius: 50%;\n}\n.close span[data-v-e99efa7e]{\n    padding:0px 0px 3px;\n}\n.card[data-v-e99efa7e]{\n    cursor:pointer;\n}\n\n\n", ""]);
 
 // exports
 
@@ -41382,12 +41382,16 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "quantity " },
+                          { staticClass: "quantity" },
                           [
                             _c(
                               "v-btn",
                               {
-                                attrs: { color: "success", text: "" },
+                                attrs: {
+                                  color: "success",
+                                  text: "",
+                                  "data-dismiss": "modal"
+                                },
                                 on: {
                                   click: function($event) {
                                     return _vm.addItemCart(item)
