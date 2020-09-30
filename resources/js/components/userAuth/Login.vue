@@ -13,6 +13,9 @@
         <div class="p-2 w-full mt-4">
             <button @click.prevent="loginUser" type="submit" class="flex border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Login</button>
         </div>
+        <div class="p-2 w-full mt-4">
+            <router-link to="/register">登録画面へ</router-link>
+        </div>
     </div> 
 </div>
 </template>
@@ -36,7 +39,7 @@ export default {
             axios.post('/login', this.form)
             .then(() =>{
              response => console.log(response.data);
-            this.$router.push({ name: "userpaymentform"}); 
+            this.$router.push({ name: "Confirm"}); 
                 // axios.get('/api/user')
                 // .then(response=>{
                 //     this.user = response.data;

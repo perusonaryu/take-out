@@ -13,7 +13,7 @@ class PaymentController extends Controller
     public function getCurrentPayment(){
         $user = Auth::user(); //要するにUser情報を取得したい
         $defaultCard = Payment::getDefaultcard($user);
-
+        // dd($defaultCard);
         return compact('defaultCard');
         // return view('user.payment.index', compact('user', 'defaultCard'));
 

@@ -19,6 +19,9 @@ import userpaymentinfo from './components/UserPage/UserPaymentInfo.vue'
 import userinfodetail from './components/UserPage/UserInfoDetail.vue'
 import shop from './components/shop.vue'
 import ShopList from './components/ShopList.vue'
+import ShopConfirm from './components/ShopConfirm.vue'
+import ShopSettle from './components/ShopSettle.vue'
+import ShopComplete from './components/ShopComplete.vue'
 
 // import StoreItem from './components/StoreItemComponent'
 
@@ -144,7 +147,48 @@ export default new VueRouter({
             name: 'ShopList',
             props:true,
         },
-
+        {
+            path: '/Confirm',
+            component: ShopConfirm,
+            name: 'Confirm',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        {
+            path: '/Settle',
+            component: ShopSettle,
+            name: 'Settle',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        {
+            path: '/SettleComplete',
+            component: ShopComplete,
+            name: 'SettleComplete',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
     
     ]
 });

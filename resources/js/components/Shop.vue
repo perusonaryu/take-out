@@ -107,6 +107,7 @@
                 </div>
             </div>
         </v-col>
+        <router-link to="/Confirm">次へ</router-link>
     </v-row>
 
     <shop-cart />
