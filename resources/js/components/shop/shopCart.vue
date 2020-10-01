@@ -34,6 +34,14 @@
 
         <p>合計金額： {{cartTotalPrice}}(税込み)</p>
     </v-card>
+
+    <router-link to="/Confirm" class="paid-btn">
+        <v-btn>
+            注文する
+        </v-btn>
+    </router-link>
+
+    
     
 </div>
 </template>
@@ -59,17 +67,25 @@ export default {
 </script>
 
 <style scoped>
+a{
+    text-decoration: none;
+}
+
 .cart{
     width:100%;
     text-align: center;
     position: -webkit-sticky;
-    top:80px;
+    top:20%;
     position:sticky;
+
+    /* height:100vh; */
 }
 
 .cart-title{
     font-size:25px;
 }
+
+
 
 ul{
     margin:0 ;

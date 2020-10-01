@@ -7,11 +7,14 @@
   
     <v-row
       align="center"
-      justify="center"
       class="h-100 mp-0"
     >
-      <v-col class="text-left" md="6" style="background-color:white;">
-        <h1 class="display-1 font-weight-thin mb-4" style="color:black"> {{ store.name }} </h1>
+      <v-col class="text-left  image-text d-flex align-center" md="4" >
+        <div>
+          <h3 style="color:black"> {{ store.name }} </h3>
+
+        </div>
+        
       </v-col>
     </v-row>
   </v-img>
@@ -41,7 +44,21 @@ img{
   background-size: cover;
 }
 
+.image-text{
+  background-color: #fff;
+  border-radius: 5px;
+  height:150px;
+  padding:10px;
+}
 
+/* .image-text h3{
+  margin: 0;
+} */
+
+.mp-0{
+  margin: 0;
+  padding: 0;
+}
 
 </style>
 
@@ -52,8 +69,5 @@ img{
   object-fit:cover;
 }
 
-.mp-0{
-  margin: 0;
-  padding: 0;
-}
+
 </style>
