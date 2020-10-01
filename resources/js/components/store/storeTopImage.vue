@@ -8,7 +8,7 @@
     <v-row
       align="center"
       justify="center"
-      class="h-100"
+      class="h-100 mp-0"
     >
       <v-col class="text-left" md="6" style="background-color:white;">
         <h1 class="display-1 font-weight-thin mb-4" style="color:black"> {{ store.name }} </h1>
@@ -50,5 +50,10 @@ img{
   height:500px;
   width:100%;
   object-fit:cover;
+}
+
+.mp-0{
+  margin: 0;
+  padding: 0;
 }
 </style>

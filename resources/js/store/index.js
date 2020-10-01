@@ -33,6 +33,9 @@ export default new Vuex.Store({
       //   return item === cart;
         
       // });
+    },
+    emptyItemCart(state){
+      state.cartItems = []
     }
   },
   actions: {
@@ -44,9 +47,7 @@ export default new Vuex.Store({
         commit('incrementItemQuantity',cart);
       }
     },
-    deleteItem({state,commit},item){
-      commit('deleteItemCart',item);
-    }
+    
   },
   getters:{
     cartItems: function (state){
@@ -63,5 +64,4 @@ export default new Vuex.Store({
   },
   modules: {
   },
-  plugins: [createPersistedState()],
 })

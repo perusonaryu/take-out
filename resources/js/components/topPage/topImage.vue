@@ -1,30 +1,23 @@
 <template>
-  <v-parallax
-    dark
-    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-    height="500"
+  <div
+  class="top-image"
   >
   <v-container>
     <v-row
       align="center"
-
     >
-      <v-col class="text-left" md="5">
+      <v-col class="text-left text-white" md="5">
         <h1 class="display-1 font-weight-thin mb-4">
             おいしいテイクアウト料理を <br>
             スマートに受け取り
         </h1>
         <v-text-field
-            v-model="serchMessage"
-            label="地域名を入力似て店舗を探す"
-            type="text"
-            color="white white-2"
-            light
-        >
-            <template v-slot:append>
-            <v-btn @click="serch">検索</v-btn>
-            </template>
-        </v-text-field>
+          solo
+          label="地域名を入力にて店舗を探す"
+          append-icon="mdi-map-marker"
+          color="#ffd700"
+          height="60"
+        ></v-text-field>
         <router-link 
         v-for="(category,index) in ShopCategory" :key="category.index"
            :to="{ name: 'ShopList',
@@ -36,7 +29,7 @@
     </v-row>
 
   </v-container>
-  </v-parallax>
+  </div>
 </template>
 
 <script>
@@ -59,15 +52,23 @@ export default {
 </script>
 
 <style scoped>
-.theme--light.v-text-field>.v-input__control>.v-input__slot:before {
-    border-color: white;
+
+
+.top-image{
+  background-image: url("../../../../public/storage/top_image2.jpg");
+  height:100vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+</style>
+
+<style>
+/* .theme--light.v-label{
+  color:white;
 }
 
-.v-text-field>.v-input__control>.v-input__slot:after {
-    border-color: white;
-}
-
-.theme--light.v-input, .theme--light.v-input input, .theme--light.v-input textarea {
-    color: white;
-}
+.theme--light.v-text-field>.v-input__control>.v-input__slot:before{
+  border-color:white;
+} */
 </style>

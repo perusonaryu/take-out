@@ -1,14 +1,39 @@
 <template>
 <div class="cart">
-    <ul v-for="item in cartItems" :key="item.id">
-        <li>
-            {{item.itemName}} / {{item.price}}円 / {{item.quantity}}個
-            <span>
-                <v-btn color="error" text @click="deleteItemCart(item)">削除</v-btn>
-            </span>
-        </li>
-    </ul>
-    <p>合計金額： {{cartTotalPrice}}(税込み)</p>
+    <v-card
+    width="100%"
+    tile
+    >
+        <v-list dense>
+            <v-subheader class="cart-title">カート情報</v-subheader>
+            <v-list-item-group
+                color="primary"
+            >
+                <v-list-item
+                v-for="item in cartItems" 
+                :key="item.id"
+                >
+                    <v-list-item-content>
+                        <v-list-item-title >
+                            {{item.itemName}} / {{item.price}}円 / {{item.quantity}}個
+                            <span>
+                                
+                                <v-btn
+                                icon
+                                color="error"
+                                @click="deleteItemCart(item)"
+                                >
+                                    <v-icon>mdi-delete</v-icon>
+                                </v-btn>
+                            </span>
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-item-group>
+        </v-list>
+
+        <p>合計金額： {{cartTotalPrice}}(税込み)</p>
+    </v-card>
     
 </div>
 </template>
@@ -35,11 +60,15 @@ export default {
 
 <style scoped>
 .cart{
-    width:50%;
-    border:2px solid gray;
-    padding:40px 0;
-    margin:0 auto;
+    width:100%;
     text-align: center;
+    position: -webkit-sticky;
+    top:80px;
+    position:sticky;
+}
+
+.cart-title{
+    font-size:25px;
 }
 
 ul{
