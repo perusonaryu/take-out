@@ -54,28 +54,28 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-data(){
-    return{
-        cardData:"",
-        PickUpTime:"",
-    }
-},
-computed:{
-    ...mapGetters(['cartItems','cartTotalPrice'])
+    data(){
+        return{
+            cardData:"",
+            PickUpTime:"",
+        }
+    },
+    computed:{
+        ...mapGetters(['cartItems','cartTotalPrice'])
+            
+        },
+    mounted(){
+        this.getCardData();
+        
+        
+
+    },
+    created(){
+        
         
     },
-mounted(){
-    this.getCardData();
-    
-    
-
-},
-created(){
-    
-    
-},
-methods:{
-    getCardData(){
+    methods:{
+        getCardData(){
             axios.get('/user/payment')
             .then(response => {
                 console.log(response.data);
@@ -86,8 +86,8 @@ methods:{
                 this.$router.push({ name: "userpaymentform"})          
             });
         },
-    postConfirmData(){
-        // console.log(this.cartItems[0].itemName);
+        postConfirmData(){
+            // console.log(this.cartItems[0].itemName);
             // console.log(this.cartTotalPrice);
             // console.log(this.PickUpTime);
             let ItemInfo = [this.cartItems[0].itemName,this.cartItems[0].price,this.cartItems[0].quantity]
@@ -98,15 +98,17 @@ methods:{
             
             // console.log(data.item_info);
             axios.post("/storebuy", data)
-                .then(response => {
-                    console.log("サクセス");
-                    this.$router.push({ name: "Settle"});
-                })
-                .catch(err => {
-                    this.message = err;
-                });
-                
-    },
+            .then(response => {
+                console.log("サクセス");
+                this.$router.push({ name: "Settle"});
+            })
+            .catch(err => {
+                this.message = err;
+            });     
+        },
+
+        
+
     
     },
 }

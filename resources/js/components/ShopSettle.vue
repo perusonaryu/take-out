@@ -55,20 +55,20 @@
 import { mapGetters } from 'vuex'
 export default {
     data(){
-    return{
-        cardData:"",
-        PickUpTime:"",
-    }
-},
-computed:{
+        return{
+            cardData:"",
+            PickUpTime:"",
+        }
+    },
+    computed:{
     ...mapGetters(['cartItems','cartTotalPrice'])
         
     },
-mounted(){
+    mounted(){
     this.getCardData();
     },
-methods:{
-    getCardData(){
+    methods:{
+        getCardData(){
             axios.get('/user/payment')
             .then(response => {
                 console.log(response.data);
@@ -79,17 +79,23 @@ methods:{
                 this.$router.push({ name: "userpaymentform"})          
             });
         },
-    shopSettle(){
+        shopSettle(){
             let data = new FormData();
             data.append("price", this.cartTotalPrice);
             
             axios.post('/user/paid',data)
             .then(response => {
+                this.emptyItemCart();
                 this.$router.push({ name: "SettleComplete"})
             })
             .catch(error => console.log(error));
         },
-    }
+
+        emptyItemCart(){
+            this.$store.commit('emptyItemCart');
+        }
+    },
+
 }
 </script>
 

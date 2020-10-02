@@ -1,19 +1,19 @@
 <template>
     <v-app-bar
-      color="white"
+      color="#ffd700"
       elevate-on-scroll
       scroll-target="#scrolling-techniques-7"
       fixed
     >
 
 
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-toolbar-title>Pick Up</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <router-link to="/userinfotop">picksについて</router-link>
-      <router-link to="/dashboard">飲食店登録</router-link>
-      <router-link to="/dashboard">picksについて</router-link>
+      <!-- <router-link to="/userinfotop">picksについて</router-link> -->
+      <router-link to="/register">アカウントを作成</router-link>
+      <router-link to="/login">ログイン</router-link>
       
     </v-app-bar>
 </template>
@@ -30,7 +30,7 @@ export default {
 <style scoped>
 a{
   text-decoration:none;
-  color:black!important;
+  color:white!important;
 }
 
 .v-toolbar__content a + a{

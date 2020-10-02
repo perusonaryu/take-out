@@ -1,10 +1,9 @@
 <template>
-    <div class="top-image" >
+    <div class="top-page" >
         <Header />
         <top-image />
         <v-container>
             <top-newstores />
-            <top-howuse />
         </v-container>
         <Footer />
     </div>
@@ -17,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.top-image{
+.top-page{
     margin-top: 64px;
 }
 
