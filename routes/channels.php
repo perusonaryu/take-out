@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use App\StoreUser;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+Broadcast::channel('my-channel.{id}', function ($storeUser , $id){
+    return $storeUser->id === StoreUser::find($id)->id;
+},
+['guards' => ['storeuser']]
+);

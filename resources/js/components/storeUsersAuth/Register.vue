@@ -1,59 +1,172 @@
 <template>
-  <div class="d-flex justify-center">
-        <div class="">
-            <div class="p-2 text-2xl text-gray-800 font-semibold"><h1>Register an StoreAccount</h1></div>
-            <div class="p-2 w-full">
-                <label class="w-full" for="name">Name</label>
-                <span class="w-full text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name" >
-            </div>
-            <div class="p-2 w-full">
-                <label for="email">Your e-mail</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
-            </div>
-            <div class="p-2 w-full">
-                <label for="password">Password</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
-            </div>
-            <div class="p-2 w-full">
-                <label for="confirm_password">Confirm Password</label>
-                <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
-            </div>
-            <div class="p-2 w-full mt-4">
-                <button @click.prevent="saveForm" type="submit" class="flex py-2 px-8  hover:bg-indigo-600 rounded text-lg">Register</button>
-            </div>
-        </div> 
-    </div>
+  <v-container>
+    <v-row justify="center" align="center" class="login-form">
+      <v-col md="7" cols="12" class="login-text">
+        <v-card class="card" outlined>
+          <v-list-item-title class="register-title"> アカウント作成 </v-list-item-title>
+          <v-text-field
+            v-model="storeRegister.name"
+            :error-messages="nameErrors"
+            label="店名"
+            required
+            outlined
+            color="#ffd700"
+            append-icon="mdi-storefront"
+            @input="$v.storeRegister.name.$touch()"
+            @blur="$v.storeRegister.name.$touch()"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="storeRegister.email"
+            :error-messages="emailErrors"
+            label="メールアドレス"
+            required
+            outlined
+            color="#ffd700"
+            append-icon="mdi-email"
+            @input="$v.storeRegister.email.$touch()"
+            @blur="$v.storeRegister.email.$touch()"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="storeRegister.password"
+            :error-messages="passwordErrors"
+            label="パスワード"
+            type="password"
+            outlined
+            required
+            color="#ffd700"
+            append-icon="mdi-lock"
+            @input="$v.storeRegister.password.$touch()"
+            @blur="$v.storeRegister.password.$touch()"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="storeRegister.password_confirmation"
+            :error-messages="password_confirmationErrors"
+            label="パスワード"
+            type="password"
+            outlined
+            required
+            color="#ffd700"
+            append-icon="mdi-lock"
+            @input="$v.storeRegister.password_confirmation.$touch()"
+            @blur="$v.storeRegister.password_confirmation.$touch()"
+          ></v-text-field>
+
+          <div class="d-flex justify-space-between">
+            <v-btn class="btn-font" @click.prevent="registerStore" color="#ffd700" text x-large>
+              サインアップ
+            </v-btn>
+
+            <router-link to="/storelogin">
+              <v-btn class="btn-font" color="primary" text x-large> ログイン画面へ </v-btn>
+            </router-link>
+          </div>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate';
+import { required, maxLength, minLength, email } from 'vuelidate/lib/validators';
+
 export default {
-    data(){
-        return{
-            form:{
-                name: '',
-                email: '',
-                password:'',
-                password_confirmation:''
-            },
-            errors:[]
-        }
+  mixins: [validationMixin],
+
+  validations: {
+    storeRegister: {
+      name: { required },
+      email: { required, email },
+      password: { required, minLength: minLength(8) },
+      password_confirmation: { required, minLength: minLength(8) },
     },
-    methods:{
-        saveForm(){
-            axios.post('/storeusers/register', this.form)
-            .then(() =>{
-                console.log('saved');
-                this.$router.push({ name: "storePage"}); 
-            })
-            .catch((error) =>{
-                this.errors = error.response.data.errors;
-            })
-        }
-    }
-}
+  },
+  data() {
+    return {
+      storeRegister: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      },
+      errors: [],
+    };
+  },
+  computed: {
+    nameErrors() {
+      const errors = [];
+      // console.log(this.$v);
+      if (!this.$v.storeRegister.name.$dirty) return errors;
+      !this.$v.storeRegister.name.required && errors.push('店名を入力してください');
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.storeRegister.email.$dirty) return errors;
+      !this.$v.storeRegister.email.email && errors.push('メールアドレスの形式が違います');
+      !this.$v.storeRegister.email.required && errors.push('メールアドレスを入力してください');
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      // console.log(this.$v);
+      if (!this.$v.storeRegister.password.$dirty) return errors;
+      !this.$v.storeRegister.password.minLength && errors.push('パスワードは8文字以上です');
+      !this.$v.storeRegister.password.required && errors.push('パスワードを入力してください');
+      return errors;
+    },
+    password_confirmationErrors() {
+      const errors = [];
+      // console.log(this.$v);
+      if (!this.$v.storeRegister.password_confirmation.$dirty) return errors;
+      !this.$v.storeRegister.password_confirmation.minLength &&
+        errors.push('パスワードは8文字以上です');
+      !this.$v.storeRegister.password_confirmation.required &&
+        errors.push('確認用のパスワードを入力してください');
+      return errors;
+    },
+  },
+  methods: {
+    registerStore() {
+      axios
+        .post('/storeusers/register', this.storeRegister)
+        .then(() => {
+          console.log('saved');
+          this.$router.push({ name: 'storePage' });
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
+a {
+  text-decoration: none;
+}
 
+.login-form {
+  height: 100vh;
+}
+
+.card {
+  padding: 50px;
+}
+
+.register-title {
+  font-size: 25px;
+  border-bottom: 1px solid #ffd700;
+  font-weight: bold;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.btn-font {
+    font-size:20px;
+}
 </style>
