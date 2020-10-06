@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cartItems:[],
+    storeId:'',
   },
   plugins: [createPersistedState()],
   mutations: {
@@ -20,22 +21,20 @@ export default new Vuex.Store({
       }
       )
     },
+
     incrementItemQuantity(state,{id}){
       const cart = state.cartItems.find(cartItem => cartItem.id === id);
       cart.quantity++;
     },
+
     deleteItemCart(state,item){
-      // const cart = state.cartItems.find(cartItem => cartItem.id === id);
-
       state.cartItems = state.cartItems.filter(cartItem => cartItem !== item )
-
-      // state.cartItems.filter(function(item){
-      //   return item === cart;
-        
-      // });
     },
     emptyItemCart(state){
       state.cartItems = []
+    },
+    pushStoreId(state,id){
+      state.storeId = id;
     }
   },
   actions: {
@@ -47,6 +46,16 @@ export default new Vuex.Store({
         commit('incrementItemQuantity',cart);
       }
     },
+    addStoreId({state,commit},id){
+      if(!state.storeId.length){
+        commit('pushStoreId',id);
+      }else if(state.storeId != id){
+        commit('emptyItemCart');
+        commit('pushStoreId',store);
+      }else{
+        console.log('ダメだった');
+      }
+    }
     
   },
   getters:{

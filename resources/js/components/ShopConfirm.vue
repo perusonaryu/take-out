@@ -48,6 +48,8 @@
         <button type="button" @click="postConfirmData">決済へ</button>
     </div>
 
+    <button @click="logout">logout</button>
+
 </v-container>
 </template>
 
@@ -78,7 +80,7 @@ export default {
         getCardData(){
             axios.get('/user/payment')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 // this.userData = response.data.user;
                 this.cardData = response.data.defaultCard;
             })
@@ -95,17 +97,30 @@ export default {
             data.append("item_info", ItemInfo);
             data.append("item_total_price", this.cartTotalPrice);
             data.append("pickup_date_time", this.PickUpTime);
-            
-            // console.log(data.item_info);
+            data.append("store_id",this.$store.state.storeId);
             axios.post("/storebuy", data)
             .then(response => {
-                console.log("サクセス");
-                this.$router.push({ name: "Settle"});
+                this.notification(this.$store.state.storeId);
+                
             })
             .catch(err => {
                 this.message = err;
             });     
         },
+
+        notification(id){
+            axios.get('/sent/' + id)
+            .then(response => {
+                console.log("サクセス");
+                this.$router.push({ name: "Settle"});
+            })
+            .catch(error => console.log(error))
+        },
+        logout(){
+            axios.post('/logout').then(()=>{
+                this.$router.push({ name: "login"})
+            })
+        }
 
         
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\StoreBuy;
+use Auth;
 
 class StoreBuyController extends Controller
 {
@@ -15,6 +16,8 @@ class StoreBuyController extends Controller
 
     public function store(Request $request)
     {   
+        $user = Auth::user();
+        // dd($user->id);
         $iteminfo = serialize($request->item_info);
         // dd($iteminfo,$request->item_info,$request->pickup_date_time);
         // dd($request->item_total_price);
@@ -22,6 +25,8 @@ class StoreBuyController extends Controller
             'item_info'=>$iteminfo,
             'pickup_date_time'=>$request->pickup_date_time,
             'item_total_price'=>$request->item_total_price,
+            'store_id' => $request->store_id,
+            'user_id'  => $user->id,
         ];
         StoreBuy::create($store);
     }

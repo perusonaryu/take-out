@@ -116,6 +116,16 @@ Route::get('/user/info', 'UserPaymentController@getUserInfo')->name('user.info')
 Route::post('/user/paid', 'UserPaymentController@itemPaid')->name('user.paid');
 Route::post('/user/cancel', 'UserPaymentController@cancelPaidMember')->name('user.cancel');
 
+//通知関係
+
+Route::get('/sent/{id}', function($id){
+    // インスタンス生成するだけで、自動的にpusher送信してくれる
+    $order = [
+        'store_id' => $id,
+        'message'=>'注文が入りました！',
+    ];
+    event(new App\Events\OrderNotification($order));
+});
 
 
 

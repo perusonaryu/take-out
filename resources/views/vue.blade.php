@@ -19,7 +19,8 @@
   </div>
   
   <script src="https://js.stripe.com/v3/"></script>
-<!-- <script src="public/js/payment.js"></script> -->
+  <!-- <script src="https://js.pusher.com/7.0/pusher.min.js"></script> -->
   <script src="{{mix('js/app.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 </body>
 </html>

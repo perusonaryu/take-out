@@ -15,7 +15,7 @@ import router from './router';
 import store from './store';
 import Vuelidate from 'vuelidate';
 
-import  mapGetters  from 'vuex'
+// import  mapGetters  from 'vuex'
 
 
 
@@ -63,8 +63,16 @@ const app = new Vue({
     router,
     Vuelidate,
     store,
-    mapGetters,
     
 });
+
+// $(document).ready(function() {
+//     //受信するチャネル名・イベント名を指定＆処理を記述
+//     window.Echo.channel('order')
+//         // イベント名の前にドットをつけるのを忘れずに！！
+//         .listen('.my-event', (e) => {
+//             console.log(e);
+//         });
+// });
 
 
