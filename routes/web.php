@@ -85,7 +85,7 @@ Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
 Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
 
 //検索
-
+Route::post('/shopAdressSerch','StoreUserController@StoreAdressSerch');
 
 
 
