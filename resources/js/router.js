@@ -15,9 +15,9 @@ import storeLogin from './components/storeUsersAuth/Login.vue'
 import storeRegister from './components/storeUsersAuth/Register'
 import userinfotop from './components/UserPage/UserInfoTop.vue'
 import userpaymentform from './components/UserPage/UserPaymentForm.vue'
-import userpaymentinfo from './components/UserPage/UserPaymentInfo.vue'
 import userinfodetail from './components/UserPage/UserInfoDetail.vue'
 import shop from './components/shop.vue'
+import shopAdressSerch from './components/shop/shopAdressSerch'
 import ShopList from './components/ShopList.vue'
 import ShopConfirm from './components/ShopConfirm.vue'
 import ShopSettle from './components/ShopSettle.vue'
@@ -140,6 +140,11 @@ export default new VueRouter({
             path: '/shop:id',
             component: shop,
             name: 'shop'
+        },
+        {
+            path: '/serch:address',
+            component: shopAdressSerch,
+            name: 'shopAdressSerch'
         },
         {
             path: '/ShopList/:id',
