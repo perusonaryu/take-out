@@ -11,7 +11,7 @@
             required
             outlined
             color="#ffd700"
-            append-icon="mdi-storefront"
+            append-icon="mdi-account"
             @input="$v.register.name.$touch()"
             @blur="$v.register.name.$touch()"
           ></v-text-field>
@@ -133,11 +133,21 @@ export default {
 
   methods: {
     registerUser() {
+      const self = this;
+      const storeId = self.$store.state.storeId;
+
       axios
         .post('/register', this.register)
         .then(() => {
           console.log('saved');
-          this.$router.push({ name: 'userpaymentform' });
+          // this.$router.push({ name: 'userpaymentform' });
+          if (self.$store.state.cartItems.length > 0) {
+            self.$router.push({ name: 'Confirm' });
+          } else if (storeId) {
+            self.$router.push({ name: 'shop', params: { id: storeId } });
+          } else {
+            self.$router.push({ path: '/' });
+          }
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
@@ -169,6 +179,6 @@ a {
 }
 
 .btn-font {
-    font-size:20px;
+  font-size: 20px;
 }
 </style>

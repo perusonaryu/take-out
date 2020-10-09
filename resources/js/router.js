@@ -37,6 +37,12 @@ export default new VueRouter({
         {
             path: '/',
             component: topPage,
+            // name:topPage,
+        },
+        {
+            path: '/top',
+            component: topPage,
+            name:topPage,
         },
         {
             // routeのパス設定
@@ -72,7 +78,8 @@ export default new VueRouter({
         },
         {
             path: '/register',
-            component: register
+            component: register,
+            name:'register'
         },
         {
             path: '/login',

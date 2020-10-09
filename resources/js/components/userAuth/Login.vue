@@ -67,6 +67,8 @@ export default {
     };
   },
 
+  // computed: mapGetters(['cartItems']),
+
   computed: {
     passwordErrors() {
       const errors = [];
@@ -86,12 +88,21 @@ export default {
 
   methods: {
     loginUser() {
+      const self = this;
+      const storeId = self.$store.state.storeId;
+      console.log(storeId);
       axios
         .post('/login', this.login)
-        .then(() => {
-          (response) => console.log(response.data);
-
-          this.$router.push({ name: 'Confirm' });
+        .then((response) => {
+          // console.log(response.data);
+          if(self.$store.state.cartItems.length > 0){
+            self.$router.push({ name: 'Confirm' });
+          }else if(storeId){
+            self.$router.push({ name:'shop', params: {id:storeId} })
+          }
+          else{
+            self.$router.push({ path: '/' });
+          }
         })
         .catch((error) => {
           console.log(error);
