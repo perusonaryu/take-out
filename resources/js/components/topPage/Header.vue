@@ -17,9 +17,9 @@
     <!-- <router-link to="/userinfotop">picksについて</router-link> -->
 
     <!-- <router-link to="/register">アカウントを作成</router-link> -->
-    <router-link to="/login">
+    <!-- <router-link to="/login">
       <v-btn class="btn-font" color="white" outlined  > ログイン </v-btn>
-    </router-link>
+    </router-link> -->
     <slot></slot>
   </v-app-bar>
 </template>

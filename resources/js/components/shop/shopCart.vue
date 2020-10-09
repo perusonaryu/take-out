@@ -2,7 +2,7 @@
   <div class="cart">
     <v-card width="100%" tile>
       <v-list dense>
-        <v-subheader class="cart-title">カート情報</v-subheader>
+        <v-subheader class="cart-title">ご注文情報</v-subheader>
         <v-list-item-group color="primary">
           <v-list-item v-for="item in cartItems" :key="item.id">
             <v-list-item-content>
@@ -22,27 +22,42 @@
       <p>合計金額： {{ cartTotalPrice }}(税込み)</p>
     </v-card>
 
-    <router-link to="/Confirm" class="paid-btn">
-      <v-btn> 注文する </v-btn>
-    </router-link>
+      <v-btn v-bind:disabled="cartEmpty" @click="cofirmPaidMove">
+        注文する
+      </v-btn>
   </div>
 </template>
 
 <script>
 // import { mapState }   from 'vuex';
+
 import { mapGetters } from 'vuex';
 
 export default {
+  data: () => ({
+    
+  }),
+  props:['cartEmpty'],
   // computed: mapState(['items']),
   computed: mapGetters(['cartItems', 'cartTotalPrice']),
 
   created() {
     // console.log(this.cartItems);
-    // console.log(this.cartTotalPrice);
   },
   methods: {
     deleteItemCart(item) {
       this.$store.commit('deleteItemCart', item);
+      this.$emit('cart-empty-check');
+    },
+
+    cartEmptyCheck() {
+      if(this.cartItems.length > 0){
+        this.cartEmpty = false
+      }
+    },
+
+    cofirmPaidMove(){
+      this.$router.push({ name: "Confirm"})
     },
   },
 };
@@ -82,7 +97,7 @@ ul {
     background: white;
     text-align: center;
     width: 100%;
-    height:100vh;
+    height: 100vh;
     margin-top: 64px;
   }
 }

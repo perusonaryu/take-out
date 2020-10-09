@@ -68,12 +68,12 @@
       </v-col>
 
       <v-col md="3" cols="12" class="cart-item">
-        <shop-cart />
+        <shop-cart @cart-empty-check="cartEmptyCheck" :cartEmpty="cartEmpty" />
       </v-col>
 
       <transition>
-        <v-col md="3" cols="12" v-show="cartItems">
-          <shop-cart />
+        <v-col md="3" cols="12" v-show="cartItem">
+          <shop-cart @cart-empty-check="cartEmptyCheck" :cartEmpty="cartEmpty" />
         </v-col>
       </transition>
     </v-row>
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     shopitems: '',
@@ -92,12 +93,16 @@ export default {
     SelectedItems: {},
     shopData: '',
     store: '',
-    cartItems: false,
+    cartItem: false,
+    cartEmpty: true,
   }),
+
+  computed: mapGetters(['cartItems']),
 
   created() {
     this.shopDataGet();
     this.getStoreUser();
+    this.cartEmptyCheck();
     // this.storeDataGet();
     // console.log(this.$store.state.storeId);
   },
@@ -135,12 +140,21 @@ export default {
     },
     addItemCart(item) {
       this.$store.dispatch('addItemCart', item);
+      this.cartEmptyCheck();
     },
     addStoreId(id) {
       this.$store.dispatch('addStoreId', id);
     },
     cartBtn() {
-      this.cartItems = !this.cartItems;
+      this.cartItem = !this.cartItem;
+    },
+    cartEmptyCheck() {
+      if (this.cartItems.length > 0) {
+        this.cartEmpty = false;
+      }else{
+        this.cartEmpty = true;
+      }
+      // console.log('ok');
     },
   },
 

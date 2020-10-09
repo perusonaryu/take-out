@@ -45,7 +45,7 @@ export default {
     ShopCategory: [{ name: '和食' }, { name: '洋食' }, { name: '中華' }],
   }),
   methods: {
-    
+
   },
 };
 </script>

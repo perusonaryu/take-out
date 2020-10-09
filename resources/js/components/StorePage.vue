@@ -224,6 +224,7 @@ export default {
           console.log(err);
         });
     },
+    
     orderNotification() {
       const id = this.storeUser.id;
       // console.log(id);
