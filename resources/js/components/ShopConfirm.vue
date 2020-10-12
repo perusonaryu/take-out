@@ -47,12 +47,13 @@
         </ul>
 
         <div class="d-flex">
-            <h5>受け取り時間</h5>
-            <input type="text" v-model="PickUpTime" />
-
+          <h5>受け取り時間</h5>
+          <input type="text" v-model="PickUpTime" />
         </div>
-            <button type="button" @click="postConfirmData">決済へ</button>
 
+        <div class="d-flex justify-end">
+          <v-btn color="#ffd700" @click="postConfirmData">注文</v-btn>
+        </div>
       </v-col>
     </v-row>
 
@@ -70,13 +71,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['cartItems', 'cartTotalPrice', 'selectedStore',]),
+    ...mapGetters(['cartItems', 'cartTotalPrice', 'selectedStore']),
   },
   mounted() {
     this.getCardData();
     this.getStore(this.$store.state.storeId);
   },
-  created() {},
   methods: {
     getCardData() {
       axios
@@ -90,9 +90,11 @@ export default {
           this.$router.push({ name: 'userpaymentform' });
         });
     },
+
     getStore(storeId) {
       this.$store.dispatch('addSelectedStore', storeId);
     },
+
     postConfirmData() {
       // console.log(this.cartItems[0].itemName);
       // console.log(this.cartTotalPrice);
@@ -111,10 +113,24 @@ export default {
         .post('/storebuy', data)
         .then((response) => {
           this.notification(this.$store.state.storeId);
+          this.shopSettle();
         })
         .catch((err) => {
           this.message = err;
         });
+    },
+
+    shopSettle() {
+      let data = new FormData();
+      data.append('price', this.cartTotalPrice);
+
+      axios
+        .post('/user/paid', data)
+        .then((response) => {
+          this.emptyItemCart();
+          this.$router.push({ name: 'SettleComplete' });
+        })
+        .catch((error) => console.log(error));
     },
 
     notification(id) {
@@ -122,9 +138,12 @@ export default {
         .get('/sent/' + id)
         .then((response) => {
           console.log('サクセス');
-          this.$router.push({ name: 'Settle' });
+        //   this.$router.push({ name: 'Settle' });
         })
         .catch((error) => console.log(error));
+    },
+    emptyItemCart() {
+      this.$store.commit('emptyItemCart');
     },
     logout() {
       axios.post('/logout').then(() => {
@@ -136,8 +155,8 @@ export default {
 </script>
 
 <style scoped>
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
 ul {
