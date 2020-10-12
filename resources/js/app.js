@@ -18,7 +18,7 @@ import Vuelidate from 'vuelidate';
 // import  mapGetters  from 'vuex'
 
 
-
+axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
 
 
 
