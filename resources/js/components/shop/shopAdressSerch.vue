@@ -4,9 +4,9 @@
     <v-container>
       <div class="Stores">
         <div class="title">
-          <h3>{{storeSerch}}  の検索結果</h3>
+          <h3>{{ storeSerch }} の検索結果</h3>
           <p v-show="result">
-              該当するお店はありません
+            該当するお店はありません
           </p>
         </div>
         <v-row justify="space-between" v-if="storeList">
@@ -38,7 +38,7 @@ export default {
   data: () => ({
     storeList: '',
     storeSerch: '',
-    result:false,
+    result: false,
   }),
   mounted() {
     this.storeSerch = this.$route.params.address;
@@ -50,15 +50,15 @@ export default {
         .post('/shopAdressSerch', {
           address: this.$route.params.address,
         })
-        .then((response) => {
-            if(response.data.length > 0){
-                console.log(response.data);
-                this.storeList = response.data;
-            }else{
-                this.result = true;
-            }
+        .then(response => {
+          if (response.data.length > 0) {
+            console.log(response.data);
+            this.storeList = response.data;
+          } else {
+            this.result = true;
+          }
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
   },
 };
