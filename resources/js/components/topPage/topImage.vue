@@ -61,7 +61,7 @@ a{
 
 .top-image {
   /* background-image: url('../../../../public/storage/top_image2.jpg'); */
-  background-image: url('/pickup/images/top_image2.jpg');
+  background-image: url('http://perusonaryu.sakura.ne.jp/pickup/images/top_image2.jpg');
   height: 100vh;
   background-size: cover;
   display: flex;
