@@ -21,7 +21,8 @@ import Vuelidate from 'vuelidate';
 axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
 
 
-console.log(process.env.MIX_SENTRY_DSN_PUBLIC);
+
+console.log(axios.defaults.baseURL);
 
 
 
