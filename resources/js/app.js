@@ -24,6 +24,8 @@ axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
 
 
 
+
+
 Vue.use(Vuetify);
 Vue.use(Vuelidate);
 /**
