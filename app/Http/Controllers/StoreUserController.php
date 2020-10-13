@@ -12,6 +12,7 @@ class StoreUserController extends Controller
     {
         // dd(request()->store_name);
 
+        // dd(config('app.env'));
 
         
         // dd($file_name);
@@ -33,8 +34,11 @@ class StoreUserController extends Controller
         if (request()->file) {
             $file_name = request()->file->getClientOriginalName();
             request()->file->storeAs('public/Store/', $file_name);
-
-            $store->image        = '/storage/Store/'.$file_name;
+            if(config('app.env') === 'local'){
+                $store->image        = '/storage/Store/'.$file_name;
+            }else if(config('app.env') === 'production'){
+                $store->image        = 'pickup/storage/Store/'.$file_name;
+            }
         }
         $store->save();
 
