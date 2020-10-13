@@ -29,7 +29,7 @@ if(process.env.MIX_APP_ENV === 'production'){
     window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
 }
 
-console.log(window.axios.defaults.baseURL);
+console.log(process.env.MIX_APP_ENV);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
