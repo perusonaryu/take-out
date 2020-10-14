@@ -105,7 +105,7 @@
             console.log(...editedData.entries());
 
             axios
-                .post("/api/StoreItems/" + this.updateId,editedData,
+                .post("/StoreItems/" + this.updateId,editedData,
                 {
           headers: {
             'X-HTTP-Method-Override': 'PUT'
