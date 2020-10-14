@@ -89,6 +89,8 @@ Route::post('/shopAdressSerch','StoreUserController@StoreAdressSerch');
 
 
 
+
+
 //お店ユーザー認証
 Route::group(['prefix' => 'storeusers'], function () {
     // Route::middleware('auth:storeuser')->post('register', 'StoreUsersAuth\RegisterController@register');

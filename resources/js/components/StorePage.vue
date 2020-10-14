@@ -51,28 +51,6 @@
             </v-btn>
             <v-btn @click="deleteStoreItem(storeitem.id)" type="button"> 削除 </v-btn>
           </div>
-          <!-- <div class="item-detail-section" style="text-align:center;">
-
-              <div class="item-name" >
-                  {{ storeitem.item_name }}
-              </div>
-
-              <div class="item-price" >
-                  {{ storeitem.price}}
-              </div>
-
-              <div class="item-status" >
-                  {{ storeitem.item_status}}
-              </div> -->
-          <!-- <div class="button-section" style="display:flex; justify-content:space-around;">
-              <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
-                編集
-              </v-btn>
-              <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
-                削除
-              </v-btn>
-            </div> -->
-          <!-- </div> -->
           <store-item-edit
             :val="editItem"
             v-if="showContent === storeitem.id"
@@ -80,14 +58,6 @@
             @itemUpdate="getStoreItem"
           ></store-item-edit>
         </v-col>
-        <!-- <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
-          
-                <div class="img-wrapper">
-                    <img :src="`${storeitem.item_image}`" alt="商品の画像です" style="width:100%; height:150px">
-                </div>
-                -->
-
-        <!-- <v-col lg="3" md="4" cols="12"> -->
         <v-btn
           text
           color="primary"
@@ -123,7 +93,6 @@ export default {
 
   data: () => ({
     storeUser: {},
-    // storeId:'',
     storeName: '',
     address: '',
     introduction: '',
