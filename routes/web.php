@@ -83,9 +83,12 @@ Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
 
 //お店商品情報取得
 Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
+Route::apiResource('/StoreItems','StoreItemsController');
+
 
 //検索
 Route::post('/shopAdressSerch','StoreUserController@StoreAdressSerch');
+
 
 
 

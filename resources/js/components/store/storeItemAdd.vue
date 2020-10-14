@@ -162,7 +162,7 @@ export default {
                     }
                 };
             axios
-                .post("/api/StoreItems/", data)
+                .post("/StoreItems/", data)
                 .then(response => {
                     // this.getStoreItem();
                     this.$emit('add');

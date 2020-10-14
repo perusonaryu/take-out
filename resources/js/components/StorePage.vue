@@ -185,7 +185,7 @@ export default {
 
     deleteStoreItem(id) {
       axios
-        .delete('/api/StoreItems/' + id)
+        .delete('/StoreItems/' + id)
         .then((response) => {
           this.getStoreItem();
         })
