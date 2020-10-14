@@ -40,7 +40,6 @@ export default {
         .then((response) => {
           // console.log(response.data);
           this.newStores = response.data;
-          console.log(this.newStores[0].image);
         })
         .catch((error) => console.log(error));
     },

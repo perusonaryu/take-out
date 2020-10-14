@@ -34,7 +34,7 @@ if(process.env.MIX_APP_ENV === 'production'){
     endPoint = '/broadcasting/auth';
 }
 
-console.log(endPoint);
+// console.log(endPoint);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

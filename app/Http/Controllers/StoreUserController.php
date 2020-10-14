@@ -32,8 +32,14 @@ class StoreUserController extends Controller
         $store->introduction = request()->introduction;
         $store->category     = request()->category;
         if (request()->file) {
+            //アップロードされた画像の拡張子をとる
+            $ext=request()->file->getClientOriginalExtension();
+            $image_name = request()->file->getClientOriginalName();
+            
+            $file_name = request()->id.'-'.$image_name;
+            // dd($file_name);
             // $file_name = request()->file->getClientOriginalName();
-            $file_name = request()->store_name.request()->file->getClientOriginalExtension();
+            // $file_name = request()->store_name.request()->file->getClientOriginalExtension();
             request()->file->storeAs('public/Store/', $file_name);
             if(config('app.env') === 'local'){
                 $store->image        = '/storage/Store/'.$file_name;
