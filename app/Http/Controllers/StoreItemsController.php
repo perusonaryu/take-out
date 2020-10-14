@@ -59,12 +59,18 @@ class StoreItemsController extends Controller
             $request->file->storeAs('public/store_item_images', $file_name);
  
             $storeitem = new StoreItem();//店毎でフォルダを作った方が良いか？
-            $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
             $storeitem->item_name   = $request->item_name;
             $storeitem->price       = $request->price;
             $storeitem->item_status = $request->item_status;
             $storeitem->item_discription = $request->item_discription;
             $storeitem->store_id = $request->store_id;
+
+            if(config('app.env') === 'production'){
+                $storeitem->item_image  = 'pickup/storage/store_item_images/' . $file_name;
+            }else{
+                $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
+            }
+
             $storeitem->save();
  
             return ['success' => '登録しました!'];
@@ -105,13 +111,20 @@ class StoreItemsController extends Controller
             
                 $file_name =request()->item_name.request()->file->getClientOriginalExtension();
                 request()->file->storeAs('public/store_item_images',$file_name);
+
+                if(config('app.env') === 'production'){
+                    $item_image  = 'pickup/storage/store_item_images/' . $file_name;
+                }else{
+                    $item_image  = 'storage/store_item_images/' . $file_name;
+                }
+
                 $update = [
                     'item_name'  => $request->item_name,
                     'price'      => $request->price,
                     // 'store_id'   => $request->store_id,
                     'item_status'=> $request->item_status,
                     'item_discription'=> $request->item_discription,
-                    'item_image' => 'storage/store_item_images/' . $file_name,
+                    'item_image' => $item_image,
                 ];
                 StoreItem::where('id', $id)->update($update);
             }else{
