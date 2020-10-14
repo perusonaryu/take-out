@@ -32,7 +32,8 @@ class StoreUserController extends Controller
         $store->introduction = request()->introduction;
         $store->category     = request()->category;
         if (request()->file) {
-            $file_name = request()->file->getClientOriginalName();
+            // $file_name = request()->file->getClientOriginalName();
+            $file_name = request()->store_name.request()->file->getClientOriginalExtension();
             request()->file->storeAs('public/Store/', $file_name);
             if(config('app.env') === 'local'){
                 $store->image        = '/storage/Store/'.$file_name;
