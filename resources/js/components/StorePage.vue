@@ -1,107 +1,78 @@
 <template>
-  <div>
-    <store-image v-bind:store="storeUser" />
-    <v-btn text color="primary" data-toggle="modal" data-target="#editModal"> 編集 </v-btn>
-    <v-btn text color="primary" @click.prevent="logout"> ログアウト </v-btn>
-    <!-- Modal -->
-    <v-container>
-      <!-- 店編集モーダル -->
-      <store-edit @update="getStoreUser" />
-      <!-- 商品追加モーダル -->
-      <store-item-add @add="getStoreItem" :val="addItem"></store-item-add>
+  <div class="store">
+    <v-row class="mp-0">
+      <store-navi/>
+      
+      <v-col md="9" class="shop-item">
+        <store-image v-bind:store="storeUser" />
+        <v-btn text color="primary" data-toggle="modal" data-target="#editModal"> 編集 </v-btn>
+        <v-btn text color="primary" @click.prevent="logout"> ログアウト </v-btn>
+        <!-- Modal -->
+        <v-container>
+          <!-- 店編集モーダル -->
+          <store-edit @update="getStoreUser" />
+          <!-- 商品追加モーダル -->
+          <store-item-add @add="getStoreItem" :val="addItem"></store-item-add>
 
-      <!-- <store-item-add @add = "getStoreItem" :id="storeUser.id" />
-      <store-item-edit :val="storeItem" v-if="showContent" @close="closeStoreEditModal" @itemUpdate = "getStoreItem"></store-item-edit> -->
-      <v-row>
-        <v-col
-          lg="3"
-          md="4"
-          cols="12"
-          class="store-item-list"
-          v-for="storeitem in storeitems"
-          :key="storeitem.id"
-        >
-          <v-img height="100%" width="100%" :src="storeitem.item_image"> </v-img>
-          <div class="item-detail-section" style="text-align: center">
-            <div class="item-name">
-              {{ storeitem.item_name }}
-            </div>
-
-            <div class="item-price">
-              {{ storeitem.price }}
-            </div>
-
-            <div class="item-status">
-              {{ storeitem.item_discription }}
-            </div>
-
-            <div class="item-status">
-              {{ storeitem.item_status }}
-            </div>
-          </div>
-          <div class="button-section" style="display: flex; justify-content: space-around">
-            <v-btn
-              text
-              color="primary"
-              data-toggle="modal"
-              data-target="#itemeditmodal"
-              @click="displayUpdate(storeitem)"
+          <v-row justify="space-between" align="center" class="mp-0">
+            <v-col
+              lg="3"
+              md="4"
+              cols="12"
+              class="store-item-list d-flex justify-center"
+              v-for="storeitem in storeitems"
+              :key="storeitem.id"
             >
-              編集
-            </v-btn>
-            <v-btn @click="deleteStoreItem(storeitem.id)" type="button"> 削除 </v-btn>
-          </div>
-          <!-- <div class="item-detail-section" style="text-align:center;">
-
-              <div class="item-name" >
-                  {{ storeitem.item_name }}
-              </div>
-
-              <div class="item-price" >
-                  {{ storeitem.price}}
-              </div>
-
-              <div class="item-status" >
-                  {{ storeitem.item_status}}
-              </div> -->
-          <!-- <div class="button-section" style="display:flex; justify-content:space-around;">
-              <v-btn text color="primary" data-toggle="modal" data-target="#itemeditmodal" @click="displayUpdate(storeitem)">
-                編集
-              </v-btn>
-              <v-btn  @click="deleteStoreItem(storeitem.id)" type="button">
-                削除
-              </v-btn>
-            </div> -->
-          <!-- </div> -->
-          <store-item-edit
-            :val="editItem"
-            v-if="showContent === storeitem.id"
-            @close="closeStoreEditModal"
-            @itemUpdate="getStoreItem"
-          ></store-item-edit>
-        </v-col>
-        <!-- <div class="store-item-list" v-for="storeitem in storeitems" :key="storeitem.id" style="width:100px; height:330px">
-          
-                <div class="img-wrapper">
-                    <img :src="`${storeitem.item_image}`" alt="商品の画像です" style="width:100%; height:150px">
+              <div class="card" style="width: 300px">
+                <div class="card-img">
+                  <img width="100%" :src="storeitem.item_image"  />
                 </div>
-                -->
+                <div class="item-detail-section" style="text-align: center">
+                  <div class="item-name">
+                    {{ storeitem.item_name }}
+                  </div>
 
-        <!-- <v-col lg="3" md="4" cols="12"> -->
-        <v-btn
-          text
-          color="primary"
-          data-toggle="modal"
-          data-target="#itemaddmodal"
-          @click="displayAdd(storeUser.id)"
-        >
-          商品追加
-        </v-btn>
-        <!-- </v-col>  -->
-      </v-row>
-    </v-container>
-    <!-- デバック -->
-    <!-- <p v-if="message">{{ message }}</p> -->
+                  <div class="item-price">
+                    {{ storeitem.price }}
+                  </div>
+                </div>
+                <div class="button-section" style="display: flex; justify-content: space-around">
+                  <v-btn
+                    text
+                    color="primary"
+                    data-toggle="modal"
+                    data-target="#itemeditmodal"
+                    @click="displayUpdate(storeitem)"
+                  >
+                    編集
+                  </v-btn>
+                  <v-btn @click="deleteStoreItem(storeitem.id)" type="button"> 削除 </v-btn>
+                </div>
+              </div>
+              <!-- 商品編集モーダル -->
+              <store-item-edit
+                :val="editItem"
+                v-if="showContent === storeitem.id"
+                @close="closeStoreEditModal"
+                @itemUpdate="getStoreItem"
+              ></store-item-edit>
+            </v-col>
+            <!-- 商品追加ボタン -->
+            <v-col lg="3" md="4" cols="12" class="d-flex justify-center">
+              <v-btn
+                text
+                color="primary"
+                data-toggle="modal"
+                data-target="#itemaddmodal"
+                @click="displayAdd(storeUser.id)"
+              >
+                商品追加
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -228,13 +199,11 @@ export default {
       const id = this.storeUser.id;
       // console.log(id);
       Echo.private('my-channel.' + id)
-      // Echo.channel('my-channel')
-      .listen('.my-event', function (data) {
-        // console.log(data);
-        $.notify(data.order.message, 'info');
-      });
-
-     
+        // Echo.channel('my-channel')
+        .listen('.my-event', function (data) {
+          // console.log(data);
+          $.notify(data.order.message, 'info');
+        });
     },
   },
 };
@@ -247,5 +216,16 @@ a {
 
 input {
   color: black !important;
+}
+
+.card .card-img {
+  height: 200px;
+  width: 100%;
+}
+
+.card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

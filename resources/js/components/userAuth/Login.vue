@@ -90,8 +90,10 @@ export default {
         .post('/login', this.login)
         .then(() => {
           (response) => console.log(response.data);
+        //ここでstoreに何か入っていれば、確認ページ なければユーザートップページ
 
-          this.$router.push({ name: 'Confirm' });
+          this.$router.push({ name: 'UserInfoTop' });
+          // this.$router.push({ name: 'Confirm' });
         })
         .catch((error) => {
           console.log(error);

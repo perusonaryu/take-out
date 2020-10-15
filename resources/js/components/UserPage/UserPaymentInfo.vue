@@ -1,67 +1,87 @@
 <template>
-  <table class="table" >
-  <thead > 
-    <tr >
-      <!-- scope="col" -->
-      <th >登録されているカード</th>
-    </tr>
-  </thead>
-  <tbody >
-    <tr >
-      <!-- scope="row" -->
-      <th >カード番号</th>
-      <td>{{ cardinfo.number }}</td>
-    </tr>
-    <th >カードブランド</th>
-      <td>{{ cardinfo.brand }}</td>
-    <tr>
-      <th >名義</th>
-      <td>{{ cardinfo.name }}</td>
-    </tr>
-    <th >有効期限</th>
-      <td>{{ cardinfo.exp_month }}/{{ cardinfo.exp_year }}</td>
-  </tbody>
-</table>
+    <v-container>
+        <v-row justify="center">
+            <h1>現在登録しているクレジットカード</h1>
+            <v-col md="8">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span>カード番号： </span>
+                        {{cardData.number}}
+                    </li>
+                    <li class="list-group-item">
+                        <span>カード有効期限(月/年)：</span>
+                        {{cardData.exp_month}}/{{cardData.exp_year}}
+                    </li>
+                    <li class="list-group-item">
+                        <span>カード名義：</span>
+                        {{cardData.name}}
+                    </li>
+                    <li class="list-group-item">
+                        <span>カードブランド：</span>
+                        {{cardData.brand}}
+                    </li>
+                </ul>
+            </v-col>
+        </v-row>
+        <v-row justify="space-around">
+            <router-link to="/userpaymentform">
+                <v-btn text >
+                    カード登録画面へ
+                </v-btn>
+            </router-link>
+
+            <v-btn color="success" @click="itemPaid">
+                購入
+            </v-btn>
+
+            <v-btn color="primary" @click="logout">
+                ログアウト
+            </v-btn>
+            
+            
+
+        </v-row>
+    </v-container>
 </template>
+
 <script>
 export default {
-    data(){
-        return{
-            cardinfo: "",
-            // number:"",
-            // brand:"",
-            // name:"",
-            // month:"",
-            // year:"",
+    data: () => ({
+        userData:'',
+        cardData:''
+    }),
+    mounted(){
+        this.getUserData();
+    },
+
+    methods:{
+        getUserData(){
+            axios.get('/user/payment')
+            .then(response => {
+                console.log(response.data);
+                this.userData = response.data.user;
+                this.cardData = response.data.defaultCard;
+            })
+            .catch(error => console.log(error));
+        },
+        itemPaid(){
+            axios.post('/user/paid')
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => console.log(error));
+        },
+        logout(){
+            axios.post('/logout').then(()=>{
+                this.$router.push({ name: "login"})
+            })
         }
     },
-    
-    mounted: function() {
-        this.getCardInfo();
-        
-    },
-    methods: {
-        getCardInfo() {
-            axios
-                .get("/user/payment")
-                .then(response => {
-                    this.cardinfo = response.data.defaultCard;
-                    // this.number = this.cardinfo.number;
-                    // this.brand = this.cardinfo.brand;
-                    // this.name = this.cardinfo.name;
-                    // this.month = this.cardinfo.exp_month
-                    // this.year = this.cardinfo.exp_year;
-                    // console.log(response.data);
-                    console.log(response.data);
-                    console.log(response.data.defaultCard);
-                })
-                .catch(err => {
-                    // this.message = err;
-                    console.log(err);
-                });
-        },
-    }
 }
-
-
 </script>
+
+
+
+<style>
+
+</style>

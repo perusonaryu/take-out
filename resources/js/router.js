@@ -16,12 +16,14 @@ import storeRegister from './components/storeUsersAuth/Register'
 import userinfotop from './components/UserPage/UserInfoTop.vue'
 import userpaymentform from './components/UserPage/UserPaymentForm.vue'
 import userpaymentinfo from './components/UserPage/UserPaymentInfo.vue'
-import userinfodetail from './components/UserPage/UserInfoDetail.vue'
+import userorderhistory from './components/UserPage/UserOrderHistory.vue'
 import shop from './components/shop.vue'
 import ShopList from './components/ShopList.vue'
 import ShopConfirm from './components/ShopConfirm.vue'
 import ShopSettle from './components/ShopSettle.vue'
 import ShopComplete from './components/ShopComplete.vue'
+import OrderHistory from './components/store/OrderHistory.vue'
+import OrderComplete from './components/store/OrderComplete.vue'
 
 // import StoreItem from './components/StoreItemComponent'
 
@@ -71,6 +73,34 @@ export default new VueRouter({
             }
         },
         {
+            path: '/OrderHistory',
+            component:OrderHistory,
+            name: 'OrderHistory',
+            // beforeEnter: (to, from, next) => {
+            //     axios.get('/athenticated')
+            //     .then(()=>{
+            //         next()
+            //     })
+            //     .catch(()=>{
+            //         return next({name:'login'})
+            //     })
+            // }
+        },
+        {
+            path: '/OrderComplete',
+            component:OrderComplete,
+            name: 'OrderComplete',
+            // beforeEnter: (to, from, next) => {
+            //     axios.get('/athenticated')
+            //     .then(()=>{
+            //         next()
+            //     })
+            //     .catch(()=>{
+            //         return next({name:'login'})
+            //     })
+            // }
+        },
+        {
             path: '/register',
             component: register
         },
@@ -106,12 +136,21 @@ export default new VueRouter({
         {
             path: '/userinfotop',
             component: userinfotop,
-            name: 'userinfotop'
+            name: 'userinfotop',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
-            path: '/userinfodetail',
-            component: userinfodetail,
-            name: 'userinfodetail',
+            path: '/userpaymentinfo',
+            component: userpaymentinfo,
+            name: 'userpaymentinfo',
             beforeEnter: (to, from, next) => {
                 axios.get('/athenticated')
                 .then(()=>{
@@ -136,6 +175,21 @@ export default new VueRouter({
                 })
             }
         },
+        {
+            path: '/userorderhistory',
+            component: userorderhistory,
+            name: 'userorderhistory',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        
         {
             path: '/shop:id',
             component: shop,

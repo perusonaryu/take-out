@@ -77,6 +77,8 @@ Route::post('logout', 'LoginController@logout');
 //お店情報取得
 Route::get('/newStoreGet','StoreUserController@newStoreGet');
 Route::get('/storeGet/{id}','StoreUserController@storeGet');
+//ユーザー情報取得
+Route::get('/user/{id}','UserController@show');
 
 //店リスト
 Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
@@ -105,7 +107,10 @@ Route::group(['prefix' => 'storeusers'], function () {
 
 //ショッピング関係
 Route::get('/storebuy', 'StoreBuyController@index')->name('storebuy');
+Route::get('/storebuy/{id}', 'StoreBuyController@show')->name('storebuy.show');
+Route::get('/deleveried/{id}', 'StoreBuyController@deleveried')->name('storebuy.deleveried');
 Route::post('/storebuy', 'StoreBuyController@store')->name('storebuy.store');
+Route::post('/storebuy/{id}', 'StoreBuyController@update')->name('storebuy.update');
 
 //決済関係
 Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');
