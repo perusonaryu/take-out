@@ -46,9 +46,14 @@
           </div>
         </ul>
 
-        <div class="d-flex">
-          <h5>受け取り時間</h5>
-          <input type="text" v-model="PickUpTime" />
+        <div class="d-flex align-center">
+          <!-- <h5>受け取り時間</h5> -->
+          <!-- <input type="text"  /> -->
+          <v-text-field
+            label="受け取り時間"
+            v-model="PickUpTime" 
+            hint="例 14:00"
+          ></v-text-field>
         </div>
 
         <div class="d-flex justify-end">
@@ -57,7 +62,7 @@
       </v-col>
     </v-row>
 
-    <button @click="logout">logout</button>
+    <!-- <button @click="logout">logout</button> -->
   </div>
 </template>
 
@@ -81,12 +86,16 @@ export default {
     getCardData() {
       axios
         .get('/user/payment')
-        .then((response) => {
-          // console.log(response.data);
+        .then(response => {
+          // console.log(response.data.defaultCard);
           // this.userData = response.data.user;
+          if (response.data.defaultCard == null) {
+            alert('カードを登録してください！');
+            this.$router.push({ name: 'userpaymentform' });
+          }
           this.cardData = response.data.defaultCard;
         })
-        .catch((error) => {
+        .catch(error => {
           this.$router.push({ name: 'userpaymentform' });
         });
     },
@@ -111,11 +120,11 @@ export default {
       data.append('store_id', this.$store.state.storeId);
       axios
         .post('/storebuy', data)
-        .then((response) => {
+        .then(response => {
           this.notification(this.$store.state.storeId);
           this.shopSettle();
         })
-        .catch((err) => {
+        .catch(err => {
           this.message = err;
         });
     },
@@ -126,21 +135,21 @@ export default {
 
       axios
         .post('/user/paid', data)
-        .then((response) => {
+        .then(response => {
           this.emptyItemCart();
           this.$router.push({ name: 'SettleComplete' });
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     notification(id) {
       axios
         .get('/sent/' + id)
-        .then((response) => {
+        .then(response => {
           console.log('サクセス');
-        //   this.$router.push({ name: 'Settle' });
+          //   this.$router.push({ name: 'Settle' });
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     emptyItemCart() {
       this.$store.commit('emptyItemCart');

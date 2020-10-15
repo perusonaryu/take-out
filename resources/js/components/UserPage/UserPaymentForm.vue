@@ -32,7 +32,10 @@
         カードを登録する
       </button>
     </div>
-    <router-link to="/userinfodetail">クレジットカード情報ページに戻る</router-link>
+    <router-link to="/userinfodetail">クレジットカード情報を確認する</router-link>
+    <router-link to="/Confirm" v-show="purchaseBtn">
+      <v-btn >購入画面へ</v-btn>
+    </router-link>
   </v-container>
 </template>
 
@@ -49,6 +52,7 @@ export default {
     name: '',
     cardNumber: null,
     stripeToken: '',
+    purchaseBtn:false,
   }),
   mounted() {
     const elements = this.stripe.elements();
@@ -69,20 +73,6 @@ export default {
   },
   methods: {
     submit() {
-      // const self = this;
-      // self.show_result = false;
-      // this.stripe.createToken(this.card).then(result => {
-      //     console.log("result: " + JSON.stringify(result));
-      //     // エラーの場合
-      //     if (result.error) {
-      //     self.show_result = true;
-      //     self.result_message = result.error.message;
-      //     // 成功の場合
-      //     } else {
-      //     self.show_result = true;
-      //     self.result_message = "token_id: " + result.token.id;
-      //     }
-      // });
       const self = this;
       /* Stripe.jsを使って、フォームに入力されたコードをStripe側に送信。今回ご紹介している方法の場合、「カード名義」だけはStripe Elementsの仕組みを使っていないため、このままだとカード名義の情報が足りずにカード情報の暗号化ができなくなってしまうので、{name:document.querySelector('#cardName').value}を足すことで、フォームに入力されたカード名義情報も、他の情報と同時にStripeに送ることができるようになる。 */
       this.stripe.createToken(this.cardNumber, { name: this.name }).then(function (result) {
@@ -101,7 +91,9 @@ export default {
               stripeToken: self.stripeToken,
             })
             .then((response) => {
-              console.log(response);
+              // console.log(response);
+              alert('登録しました！');
+              self.$router.push({ name: 'userinfodetail' });
             })
             .catch((error) => console.log(error));
         }
