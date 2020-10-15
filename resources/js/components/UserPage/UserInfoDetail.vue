@@ -1,95 +1,56 @@
 <template>
-    <v-container>
-        <v-row justify="center" v-if ="cardJudg == true">
-            <h1>現在登録しているクレジットカード</h1>
-            <v-col md="8">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span>カード番号： </span>
-                        {{cardData.number}}
-                    </li>
-                    <li class="list-group-item">
-                        <span>カード有効期限(月/年)：</span>
-                        {{cardData.exp_month}}/{{cardData.exp_year}}
-                    </li>
-                    <li class="list-group-item">
-                        <span>カード名義：</span>
-                        {{cardData.name}}
-                    </li>
-                    <li class="list-group-item">
-                        <span>カードブランド：</span>
-                        {{cardData.brand}}
-                    </li>
-                </ul>
-            </v-col>
-        </v-row>
-        <v-row justify="center" v-else-if="cardJudg === false">
-            <h1>現在登録しているクレジットカードはありません</h1>
-        </v-row>
-        <v-row justify="space-around">
-            <router-link to="/userpaymentform">
-                <v-btn text >
-                    カードの変更
-                </v-btn>
-            </router-link>
-
-            <router-link to="/Confirm">
-                <v-btn color="success" @click="itemPaid">
-                    購入画面へ
-                </v-btn>
-            </router-link>
-        </v-row>
-            <v-btn color="primary" @click="logout">
-                ログアウト
-            </v-btn>
-    </v-container>
+  <div class="user-info-detail">
+    <Header />
+    <div class="uid-wrapper" >
+      <h1 style="text-align:center;">お客様情報</h1>
+      <div class="userinfo-card">
+        <div>{{ userData.name }}</div>
+        <div>{{ userData.email }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data: () => ({
-        userData:'',
-        cardData:'',
-        cardJudg:'',
+  data: () => ({
+    userData: '',
+  }),
+  mounted() {
+    this.getUserData();
+  },
 
-    }),
-    mounted(){
-        this.getUserData();
+  methods: {
+    getUserData() {
+      axios
+        .get('/user')
+        .then(res => {
+          this.userData = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
-
-    methods:{
-        getUserData(){
-            axios.get('/user/payment')
-            .then(response => {
-                console.log(response.data);
-                this.userData = response.data.user;
-                if(response.data.defaultCard == null){
-                    this.cardJudg = false;
-                }else{
-                    this.cardData = response.data.defaultCard;
-                    this.cardJudg = true;
-                }
-            })
-            .catch(error => console.log(error));
-        },
-        itemPaid(){
-            axios.post('/user/paid')
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => console.log(error));
-        },
-        logout(){
-            axios.post('/logout').then(()=>{
-                this.$router.push({ name: "login"})
-            })
-        }
-    },
-}
+  },
+};
 </script>
 
-
-
 <style>
+.user-info-detail {
+  margin-top: 64px;
+  height: 100%;
+}
 
+.uid-wrapper {
+  height: 100%;
+  margin-top: 150px;
+}
+
+.userinfo-card {
+  width: 300px;
+  margin: 30px auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
 </style>

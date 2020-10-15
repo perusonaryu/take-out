@@ -1,6 +1,8 @@
 <template>
-    <v-container>
-        <v-row justify="center">
+<div class="payment-info">
+    <Header/>
+    <div class="wrapper" style="height:100%;">
+        <v-row justify="center" align="center">
             <h1>現在登録しているクレジットカード</h1>
             <v-col md="8">
                 <ul class="list-group">
@@ -41,7 +43,8 @@
             
 
         </v-row>
-    </v-container>
+    </div>
+</div>
 </template>
 
 <script>
@@ -83,5 +86,10 @@ export default {
 
 
 <style>
-
+.payment-info{
+  margin-top: 64px;
+}
+.wrapper{
+  margin-top: 150px;
+}
 </style>

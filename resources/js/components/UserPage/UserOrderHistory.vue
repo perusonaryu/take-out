@@ -1,5 +1,6 @@
 <template>
-  <div class="wrapper">
+  <div class="user-order-wrapper">
+    <Header/>
     <h1 style="text-align:center;margin-top:50px;">注文履歴</h1>
     <p style="text-align:center">
       アイテムをクリックすると、詳細が見れます<br />
@@ -86,5 +87,8 @@ export default {
   width: 500px;
   border-radius: 20px;
   margin: 50px auto;
+}
+.user-order-wrapper{
+  margin-top: 64px;
 }
 </style>

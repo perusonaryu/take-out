@@ -1,5 +1,8 @@
 <template>
-  <v-container>
+<div class="payment-form">
+  <Header/>
+  <div class="wrapper">
+    <v-container>
     <div class="form-group">
       <label for="name">カード番号</label>
       <div id="cardNumber"></div>
@@ -32,11 +35,13 @@
         カードを登録する
       </button>
     </div>
-    <router-link to="/userinfodetail">クレジットカード情報を確認する</router-link>
+    <router-link to="/userpaymentinfo">クレジットカード情報を確認する</router-link>
     <router-link to="/Confirm" v-show="purchaseBtn">
       <v-btn >購入画面へ</v-btn>
     </router-link>
-  </v-container>
+    </v-container>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -106,4 +111,10 @@ export default {
 
 
 <style>
+.payment-form{
+  margin-top: 64px;
+}
+.wrapper{
+  margin-top: 150px;
+}
 </style>
