@@ -61,36 +61,36 @@ export default new VueRouter({
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },
 
-        {
-            path: '/storeadd',
-            component:storeadd,
-            name: 'storeadd',
-            beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
-                .then(()=>{
-                    next()
-                })
-                .catch(()=>{
-                    return next({name:'login'})
-                })
-            }
-        },
+        // {
+        //     path: '/storeadd',
+        //     component:storeadd,
+        //     name: 'storeadd',
+        //     beforeEnter: (to, from, next) => {
+        //         axios.get('/athenticated')
+        //         .then(()=>{
+        //             next()
+        //         })
+        //         .catch(()=>{
+        //             return next({name:'login'})
+        //         })
+        //     }
+        // },
         {
             path: '/OrderHistory',
             component:OrderHistory,
             name: 'OrderHistory',
             beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
+                axios.get('/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },
@@ -99,12 +99,12 @@ export default new VueRouter({
             component:OrderComplete,
             name: 'OrderComplete',
             beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
+                axios.get('/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },

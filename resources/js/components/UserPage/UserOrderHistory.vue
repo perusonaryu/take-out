@@ -26,7 +26,7 @@
       >
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="text-align: center">
-            <h1 class="d-flex justify-center">商品一覧</h1>
+            <h1 class="d-flex justify-center">注文情報</h1>
             <div>{{ item.item_info }}</div>
             <div>{{ item.item_total_price }}</div>
             <div>{{ item.pickup_date_time }}</div>

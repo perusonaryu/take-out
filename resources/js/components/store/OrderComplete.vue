@@ -13,11 +13,12 @@
             <div class="time">{{ item.pickup_date_time }}</div>
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn"
               data-dismiss="modal"
               @click="complete(item)"
               data-toggle="modal"
               data-target="#CompleteModal"
+              style="background-color:#ffd700;"
             >
               詳細
             </button>
