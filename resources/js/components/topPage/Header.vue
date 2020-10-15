@@ -17,16 +17,47 @@
     <!-- <router-link to="/userinfotop">picksについて</router-link> -->
 
     <!-- <router-link to="/register">アカウントを作成</router-link> -->
-    <!-- <router-link to="/login">
-      <v-btn class="btn-font" color="white" outlined  > ログイン </v-btn>
-    </router-link> -->
+    <div v-if="authJudg" class="d-flex align-center">
+      <h5 class="mr-5 text-white mb-0">{{ userName }}さん</h5>
+      <v-btn  class="btn-font" color="white" outlined @click="logout">
+        ログアウト
+      </v-btn>
+    </div>
+
     <slot></slot>
   </v-app-bar>
 </template>
 
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    userName: '',
+    authJudg: false,
+  }),
+  created() {
+    this.auth();
+  },
+  methods: {
+    auth() {
+      axios
+        .get('/athenticated')
+        .then(response => {
+          axios.get('/user').then(response => {
+            // console.log(response.data);
+            this.userName = response.data.name;
+            this.authJudg = !this.authJudg;
+          });
+        })
+        .catch(error => {
+          this.authJudg = false;
+        });
+    },
+    logout() {
+      axios.post('/logout').then(() => {
+        this.$router.push({ name: 'topPage' });
+      });
+    },
+  },
 };
 </script>
 
@@ -53,6 +84,6 @@ a {
 
 <style>
 button:focus {
-	outline:0;
+  outline: 0;
 }
 </style>

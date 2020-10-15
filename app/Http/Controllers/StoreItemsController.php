@@ -73,8 +73,8 @@ class StoreItemsController extends Controller
 
             $storeitem->save();
  
-            return ['success' => '登録しました!'];
             StoreItem::create($request->all());
+            return ['success' => '登録しました!'];
         }
         //このコード要るのか？
         

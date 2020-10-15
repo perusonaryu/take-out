@@ -1,5 +1,5 @@
 <template>
-  <div>登録完了しました！</div>
+  <div>注文が完了しました！</div>
 </template>
 
 <script>
