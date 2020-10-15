@@ -12,13 +12,14 @@ class StoreUserController extends Controller
     {
         // dd(request()->store_name);
 
+        // dd(config('app.env'));
 
         
         // dd($file_name);
 
         $store = StoreUser::find($id);
 
-        if(!empty($store->image)){
+        if (!empty($store->image)) {
             $image = $store->image;
             $pathdel = public_path().$image;
             // dd($pathdel);
@@ -30,11 +31,22 @@ class StoreUserController extends Controller
         $store->address      = request()->address;
         $store->introduction = request()->introduction;
         $store->category     = request()->category;
-        if(request()->file){
-            $file_name = request()->file->getClientOriginalName();
-            request()->file->storeAs('public/Store/',$file_name);
-
-            $store->image        = '/storage/Store/'.$file_name; 
+        if (request()->file) {
+            //アップロードされた画像の拡張子をとる
+            $ext=request()->file->getClientOriginalExtension();
+            $image_name = request()->file->getClientOriginalName();
+            
+            $file_name = request()->id.'-'.$image_name;
+            // dd($file_name);
+            // $file_name = request()->file->getClientOriginalName();
+            // $file_name = request()->store_name.request()->file->getClientOriginalExtension();
+            request()->file->storeAs('public/Store/', $file_name);
+            
+            if(config('app.env') === 'production'){
+                $store->image        = 'pickup/storage/Store/'.$file_name;
+            }else{
+                $store->image        = '/storage/Store/'.$file_name;
+            }
         }
         $store->save();
 
@@ -43,36 +55,46 @@ class StoreUserController extends Controller
         // }
     }
 
-    public function newStoreGet(){
-        $stores = StoreUser::orderBy('id','DESC')->take(3)->get();
+    public function newStoreGet()
+    {
+        $stores = StoreUser::orderBy('id', 'DESC')->take(3)->get();
 
         return $stores;
     }
 
-    public function storeImage($id){
+    public function storeImage($id)
+    {
         $storeInfo = StoreUser::where('id', $id)->get();
         // dd($storeInfo);
         return $storeInfo;
-    
     }
 
-    public function shopListGet($id){
+    public function shopListGet($id)
+    {
         // dd($id);
-        if($id==="0"){
-            $shoplist = StoreUser::where('category', '和食')->get();        
+        if ($id==="0") {
+            $shoplist = StoreUser::where('category', '和食')->get();
             return $shoplist;
-        }else if($id==="1"){
+        } elseif ($id==="1") {
             $shoplist = StoreUser::where('category', '洋食')->get();
             return $shoplist;
-        }else if($id==="2"){
-                $shoplist = StoreUser::where('category', '中華')->get();
-                return $shoplist;
-        }else{
-                return ["erorr"=>"失敗しました"];
-            }
+        } elseif ($id==="2") {
+            $shoplist = StoreUser::where('category', '中華')->get();
+            return $shoplist;
+        } else {
+            return ["erorr"=>"失敗しました"];
+        }
     }
 
-    public function storeGet($id){
+    public function StoreAdressSerch(Request $request){
+        // dd($request->all());
+        $shop = StoreUser::where('address','like','%'.$request->address.'%')->orderBy('id','desc')->get();
+
+        return $shop;
+    }
+
+    public function storeGet($id)
+    {
         $stores = StoreUser::find($id);
 
         return $stores;

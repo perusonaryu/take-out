@@ -17,7 +17,9 @@ import userinfotop from './components/UserPage/UserInfoTop.vue'
 import userpaymentform from './components/UserPage/UserPaymentForm.vue'
 import userpaymentinfo from './components/UserPage/UserPaymentInfo.vue'
 import userorderhistory from './components/UserPage/UserOrderHistory.vue'
+import userinfodetail from './components/UserPage/UserInfoDetail.vue'
 import shop from './components/shop.vue'
+import shopAdressSerch from './components/shop/shopAdressSerch'
 import ShopList from './components/ShopList.vue'
 import ShopConfirm from './components/ShopConfirm.vue'
 import ShopSettle from './components/ShopSettle.vue'
@@ -39,6 +41,12 @@ export default new VueRouter({
         {
             path: '/',
             component: topPage,
+            // name:topPage,
+        },
+        {
+            path: '/top',
+            component: topPage,
+            name:topPage,
         },
         {
             // routeのパス設定
@@ -76,33 +84,34 @@ export default new VueRouter({
             path: '/OrderHistory',
             component:OrderHistory,
             name: 'OrderHistory',
-            // beforeEnter: (to, from, next) => {
-            //     axios.get('/athenticated')
-            //     .then(()=>{
-            //         next()
-            //     })
-            //     .catch(()=>{
-            //         return next({name:'login'})
-            //     })
-            // }
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
             path: '/OrderComplete',
             component:OrderComplete,
             name: 'OrderComplete',
-            // beforeEnter: (to, from, next) => {
-            //     axios.get('/athenticated')
-            //     .then(()=>{
-            //         next()
-            //     })
-            //     .catch(()=>{
-            //         return next({name:'login'})
-            //     })
-            // }
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
             path: '/register',
-            component: register
+            component: register,
+            name:'register'
         },
         {
             path: '/login',
@@ -194,6 +203,11 @@ export default new VueRouter({
             path: '/shop:id',
             component: shop,
             name: 'shop'
+        },
+        {
+            path: '/serch:address',
+            component: shopAdressSerch,
+            name: 'shopAdressSerch'
         },
         {
             path: '/ShopList/:id',

@@ -30,7 +30,9 @@
           ></v-text-field>
 
           <div class="d-flex justify-space-between">
-            <v-btn class="btn-font" @click="loginUser" color="#ffd700" text x-large> ログイン </v-btn>
+            <v-btn class="btn-font" @click="loginUser" color="#ffd700" text x-large>
+              ログイン
+            </v-btn>
 
             <router-link to="/register">
               <v-btn class="btn-font" color="primary" text x-large> 登録画面へ </v-btn>
@@ -67,6 +69,8 @@ export default {
     };
   },
 
+  // computed: mapGetters(['cartItems']),
+
   computed: {
     passwordErrors() {
       const errors = [];
@@ -86,16 +90,22 @@ export default {
 
   methods: {
     loginUser() {
+      const self = this;
+      const storeId = self.$store.state.storeId;
+      console.log(storeId);
       axios
         .post('/login', this.login)
-        .then(() => {
-          (response) => console.log(response.data);
-        //ここでstoreに何か入っていれば、確認ページ なければユーザートップページ
-
-          this.$router.push({ name: 'UserInfoTop' });
-          // this.$router.push({ name: 'Confirm' });
+        .then(response => {
+          // console.log(response.data);
+          if (self.$store.state.cartItems.length > 0) {
+            self.$router.push({ name: 'Confirm' });
+          } else if (storeId) {
+            self.$router.push({ name: 'shop', params: { id: storeId } });
+          } else {
+            self.$router.push({ path: '/userinfodetail' });
+          }
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
           this.errors = error.response.data.errors;
         });
@@ -126,6 +136,6 @@ a {
 }
 
 .btn-font {
-    font-size:20px;
+  font-size: 20px;
 }
 </style>

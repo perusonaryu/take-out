@@ -32,8 +32,15 @@ class StoreBuyController extends Controller
         // $storeuser = StoreBuy::where('store_id', $id)->get();
         return $storeuser;
     }
-    
-
+    public function  userboughtitem($id)
+    {   
+        $query = StoreBuy::query();
+        $query->where('user_id',$id); 
+        $boughtitem = $query->get();
+        // $storeuser = StoreBuy::where('store_id', $id)->get();
+        return $boughtitem;
+    }
+   
     public function store(Request $request)
     {   
         $user = Auth::user();

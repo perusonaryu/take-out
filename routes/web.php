@@ -85,8 +85,13 @@ Route::get('/shopListGet/{id}','StoreUserController@shopListGet');
 
 //お店商品情報取得
 Route::get('/shopDataGet/{id}','StoreItemsController@StoreItemGet');
+Route::apiResource('/StoreItems','StoreItemsController');
+
 
 //検索
+Route::post('/shopAdressSerch','StoreUserController@StoreAdressSerch');
+
+
 
 
 
@@ -109,6 +114,7 @@ Route::group(['prefix' => 'storeusers'], function () {
 Route::get('/storebuy', 'StoreBuyController@index')->name('storebuy');
 Route::get('/storebuy/{id}', 'StoreBuyController@show')->name('storebuy.show');
 Route::get('/deleveried/{id}', 'StoreBuyController@deleveried')->name('storebuy.deleveried');
+Route::get('/userboughtitem/{id}', 'StoreBuyController@userboughtitem')->name('storebuy.userboughtitem');
 Route::post('/storebuy', 'StoreBuyController@store')->name('storebuy.store');
 Route::post('/storebuy/{id}', 'StoreBuyController@update')->name('storebuy.update');
 

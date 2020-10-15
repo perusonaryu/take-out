@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
@@ -9,6 +10,7 @@ export default new Vuex.Store({
   state: {
     cartItems:[],
     storeId:'',
+    selectedStore:[],
   },
   plugins: [createPersistedState()],
   mutations: {
@@ -21,6 +23,16 @@ export default new Vuex.Store({
       }
       )
     },
+    changeSelectedStore(state,store){
+      state.selectedStore = {
+        storeName:store.name,
+        storeAddress:store.address,
+        storeIntroduction:store.introduction,
+        storeImage:store.image,
+      };
+      
+    },
+
 
     incrementItemQuantity(state,{id}){
       const cart = state.cartItems.find(cartItem => cartItem.id === id);
@@ -35,7 +47,8 @@ export default new Vuex.Store({
     },
     pushStoreId(state,id){
       state.storeId = id;
-    }
+    },
+
   },
   actions: {
     addItemCart({state,commit},item){
@@ -47,20 +60,31 @@ export default new Vuex.Store({
       }
     },
     addStoreId({state,commit},id){
-      if(!state.storeId.length){
+      if( state.storeId === id || !state.storeId.length){
         commit('pushStoreId',id);
       }else if(state.storeId != id){
         commit('emptyItemCart');
         commit('pushStoreId',store);
       }else{
-        console.log('ダメだった');
+        // console.log('ダメだった');
       }
-    }
+    },
+    addSelectedStore({commit},id){
+      axios.get('/storeGet/' + id)
+      .then(response => {
+        commit('changeSelectedStore', response.data);
+        // console.log(response.data);
+      })
+      .catch(error => console.log(error))
+    },
     
   },
   getters:{
     cartItems: function (state){
       return state.cartItems
+    },
+    selectedStore:function(state){
+      return state.selectedStore
     },
     cartTotalPrice: function(state,getters){
       const totalPrice = getters.cartItems.reduce((total,item)=>{
@@ -68,8 +92,11 @@ export default new Vuex.Store({
       },0);
 
       return Math.ceil(totalPrice * 1.08);
-
+    },
+    storeId:function(state){
+      return state.storeId;
     }
+
   },
   modules: {
   },

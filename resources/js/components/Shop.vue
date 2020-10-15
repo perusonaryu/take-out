@@ -1,6 +1,9 @@
 <template>
   <div class="shop">
     <Header>
+      <router-link to="/login">
+        <v-btn class="btn-font" color="white" outlined> ログイン </v-btn>
+      </router-link>
       <v-btn icon color="white" x-large class="cart-btn" @click="cartBtn">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
@@ -68,12 +71,12 @@
       </v-col>
 
       <v-col md="3" cols="12" class="cart-item">
-        <shop-cart />
+        <shop-cart @cart-empty-check="cartEmptyCheck" :cartEmpty="cartEmpty" />
       </v-col>
 
       <transition>
-        <v-col md="3" cols="12" v-show="cartItems">
-          <shop-cart />
+        <v-col md="3" cols="12" v-show="cartItem">
+          <shop-cart @cart-empty-check="cartEmptyCheck" :cartEmpty="cartEmpty" />
         </v-col>
       </transition>
     </v-row>
@@ -85,6 +88,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     shopitems: '',
@@ -92,55 +96,68 @@ export default {
     SelectedItems: {},
     shopData: '',
     store: '',
-    cartItems: false,
+    cartItem: false,
+    cartEmpty: true,
   }),
 
+  computed: mapGetters(['cartItems']),
+
+ 
   created() {
     this.shopDataGet();
     this.getStoreUser();
-    // this.storeDataGet();
-    // console.log(this.$store.state.storeId);
+    this.cartEmptyCheck();
+    this.addStoreId(this.$route.params.id);
   },
 
   methods: {
     shopDataGet() {
       axios
         .get('/shopDataGet/' + this.$route.params.id)
-        .then((response) => {
+        .then(response => {
           this.shopData = response.data;
           // console.log(this.shopData);
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     getStoreUser() {
       axios
         .get('/storeImage/' + this.$route.params.id)
-        .then((response) => {
+        .then(response => {
           this.storeUser = response.data[0];
           this.storeName = response.data.name;
           // console.log(this.storeUser);
-          this.addStoreId(this.storeUser.id);
+          
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     storeDataGet() {
       axios
         .get('/storeGet/' + this.$route.params.id)
-        .then((response) => {
+        .then(response => {
           // console.log(response.data);
           this.store = response.data;
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     addItemCart(item) {
       this.$store.dispatch('addItemCart', item);
+      this.cartEmptyCheck();
     },
     addStoreId(id) {
-      this.$store.dispatch('addStoreId', id);
+      this.$store.dispatch('addStoreId',id);
     },
     cartBtn() {
-      this.cartItems = !this.cartItems;
+      this.cartItem = !this.cartItem;
+    },
+    cartEmptyCheck() {
+      if (this.cartItems.length > 0) {
+        this.cartEmpty = false;
+      } else {
+        this.cartEmpty = true;
+      }
+      // console.log('ok');
     },
   },
 

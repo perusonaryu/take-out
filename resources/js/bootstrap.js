@@ -21,7 +21,20 @@ try {
 
 window.axios = require('axios');
 
+
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+let endPoint = '';
+
+if(process.env.MIX_APP_ENV === 'production'){
+    window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
+    endPoint = '/pickup/broadcasting/auth';
+}else if(process.env.MIX_APP_ENV === 'local'){
+    endPoint = '/broadcasting/auth';
+}
+
+// console.log(endPoint);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -38,8 +51,10 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true,
-    // authEndpoint: '/broadcasting/auth'
+    authEndpoint: endPoint,
 });
+
+
 
 
 
