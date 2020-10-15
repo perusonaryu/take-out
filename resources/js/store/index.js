@@ -60,13 +60,13 @@ export default new Vuex.Store({
       }
     },
     addStoreId({state,commit},id){
-      if(!state.storeId.length){
+      if( state.storeId === id || !state.storeId.length){
         commit('pushStoreId',id);
       }else if(state.storeId != id){
         commit('emptyItemCart');
         commit('pushStoreId',store);
       }else{
-        console.log('ダメだった');
+        // console.log('ダメだった');
       }
     },
     addSelectedStore({commit},id){
@@ -93,6 +93,9 @@ export default new Vuex.Store({
 
       return Math.ceil(totalPrice * 1.08);
     },
+    storeId:function(state){
+      return state.storeId;
+    }
 
   },
   modules: {

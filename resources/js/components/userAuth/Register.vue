@@ -144,7 +144,7 @@ export default {
           if (self.$store.state.cartItems.length > 0) {
             self.$router.push({ name: 'Confirm' });
           } else if (storeId) {
-            self.$router.push({ name: 'shop', params: { id: storeId } });
+            self.$router.push({ name: 'userinfodetail' });
           } else {
             self.$router.push({ path: '/' });
           }
