@@ -72,7 +72,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['cartItems', 'cartTotalPrice', 'selectedStore']),
+    ...mapGetters(['cartItems', 'cartTotalPrice', 'selectedStore','storeId']),
   },
   mounted() {
     this.getCardData();
@@ -116,11 +116,11 @@ export default {
       data.append('item_info', ItemInfo);
       data.append('item_total_price', this.cartTotalPrice);
       data.append('pickup_date_time', this.PickUpTime);
-      data.append('store_id', this.$store.state.storeId);
+      data.append('store_id', this.storeId);
       axios
         .post('/storebuy', data)
         .then((response) => {
-          this.notification(this.$store.state.storeId);
+          this.notification(this.storeId);
           this.shopSettle();
         })
         .catch((err) => {
