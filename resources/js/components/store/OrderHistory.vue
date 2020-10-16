@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <v-row class="mp-0">
-      <store-navi/>
+      <store-navi />
       <v-col md="9">
         <v-container>
           <h1>注文履歴</h1>
@@ -14,11 +14,12 @@
             <div class="time">{{ item.pickup_date_time }}</div>
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn"
               data-dismiss="modal"
               @click="complete(item)"
               data-toggle="modal"
               data-target="#CompleteModal"
+              style="background-color:#ffd700;"
             >
               詳細
             </button>
@@ -56,22 +57,22 @@ export default {
     getThisStore() {
       axios
         .get('/storeusers/user')
-        .then((response) => {
+        .then(response => {
           this.store = response.data;
           console.log(this.store.id);
           this.getBoughtItem(this.store.id);
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
     getBoughtItem(id) {
       axios
         .get('/storebuy/' + id)
-        .then((response) => {
+        .then(response => {
           this.Items = response.data;
           console.log(this.Items);
           //   this.getUser(this.Items.user_id);
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     complete(item) {
@@ -79,11 +80,10 @@ export default {
       this.Item = item;
       // }
     },
-     closeModal() {
+    closeModal() {
       this.showContent = false;
       this.showContent = '';
     },
-   
   },
 };
 </script>
@@ -93,7 +93,8 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: solid 5px #ffd700;
+  border: solid 3px #ffd700;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
   height: 50px;
   width: 500px;
   border-radius: 20px;

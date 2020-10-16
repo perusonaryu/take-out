@@ -1,15 +1,20 @@
 <template>
-  <div class="container " style="display:flex;align-items:center;">
-    <div class="link-box" style="">
-      <router-link to="/UserInfoDetail" class="button d-flex align-center justify-center">
-        <div class="link">お客様情報</div>
-      </router-link>
-      <router-link to="/userinfodetail" class="button d-flex align-center justify-center">
-        <div class="link">カード情報</div>
-      </router-link>
-      <router-link to="/userorderhistory" class="button d-flex align-center justify-center">
-        <div class="link">注文履歴</div>
-      </router-link>
+  <div class="user-info-top" style="height:100%;">
+    <Header>
+        <v-btn class="btn-font" color="white" outlined @click="logout"> ログアウト </v-btn>
+    </Header>
+    <div class="user-info-wrapper">
+      <div class="link-box" style="">
+        <router-link to="/userinfodetail" class="button d-flex align-center justify-center">
+          <div class="link">お客様情報</div>
+        </router-link>
+        <router-link to="/userpaymentinfo" class="button d-flex align-center justify-center">
+          <div class="link">カード情報</div>
+        </router-link>
+        <router-link to="/userorderhistory" class="button d-flex align-center justify-center">
+          <div class="link">注文履歴</div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -23,37 +28,45 @@ export default {
 
   // },
 
-  // methods:{
-  //     getUserData(){
-  //         axios.get('/user/payment')
-  //         .then(response => {
-  //             consol.log(response.data);
-  //         })
-  //         .catch(error => console.log(error));
-  //     }
-  // },
+  methods:{
+      logout() {
+      axios.post('/logout').then(() => {
+        this.$router.push({ name: 'login' });
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.user-info-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .link-box {
-  background-color: #ffd700;
   width: 300px;
   height: 300px;
   margin: auto;
   border-radius: 20px;
-  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .2);
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  border: solid 2px #ffd700;
 }
 .link {
   text-align: center;
   align-items: center;
-  
+  font-weight: bold;
   font-size: 18px;
-  color: black;
+  color: white;
   width: 120px;
-  background-color: white;
+  background-color: #ffd700;
   margin: 30px auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .2);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.user-info-top {
+  margin-top: 64px;
 }
 </style>

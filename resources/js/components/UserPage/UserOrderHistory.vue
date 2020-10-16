@@ -1,5 +1,6 @@
 <template>
-  <div class="wrapper">
+  <div class="user-order-wrapper">
+    <Header/>
     <h1 style="text-align:center;margin-top:50px;">注文履歴</h1>
     <p style="text-align:center">
       アイテムをクリックすると、詳細が見れます<br />
@@ -14,7 +15,7 @@
     >
       <div class="price">{{ item.item_total_price }}</div>
       <div class="time">{{ item.pickup_date_time }}</div>
-      <div class="time">{{ item.pickup_date_time }}</div>
+      
 
       <div
         class="modal fade"
@@ -26,7 +27,7 @@
       >
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="text-align: center">
-            <h1 class="d-flex justify-center">商品一覧</h1>
+            <h1 class="d-flex justify-center">注文情報</h1>
             <div>{{ item.item_info }}</div>
             <div>{{ item.item_total_price }}</div>
             <div>{{ item.pickup_date_time }}</div>
@@ -86,5 +87,8 @@ export default {
   width: 500px;
   border-radius: 20px;
   margin: 50px auto;
+}
+.user-order-wrapper{
+  margin-top: 64px;
 }
 </style>

@@ -61,25 +61,25 @@ export default new VueRouter({
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },
 
-        {
-            path: '/storeadd',
-            component:storeadd,
-            name: 'storeadd',
-            beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
-                .then(()=>{
-                    next()
-                })
-                .catch(()=>{
-                    return next({name:'login'})
-                })
-            }
-        },
+        // {
+        //     path: '/storeadd',
+        //     component:storeadd,
+        //     name: 'storeadd',
+        //     beforeEnter: (to, from, next) => {
+        //         axios.get('/athenticated')
+        //         .then(()=>{
+        //             next()
+        //         })
+        //         .catch(()=>{
+        //             return next({name:'login'})
+        //         })
+        //     }
+        // },
         {
             path: '/OrderHistory',
             component:OrderHistory,
@@ -90,7 +90,7 @@ export default new VueRouter({
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },
@@ -104,7 +104,7 @@ export default new VueRouter({
                     next()
                 })
                 .catch(()=>{
-                    return next({name:'login'})
+                    return next({name:'storeLogin'})
                 })
             }
         },
@@ -174,6 +174,20 @@ export default new VueRouter({
             path: '/userpaymentinfo',
             component: userpaymentinfo,
             name: 'userpaymentinfo',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        {
+            path: '/userinfodetail',
+            component: userinfodetail,
+            name: 'userinfodetail',
             beforeEnter: (to, from, next) => {
                 axios.get('/athenticated')
                 .then(()=>{

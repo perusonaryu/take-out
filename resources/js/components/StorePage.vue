@@ -1,12 +1,20 @@
 <template>
   <div class="store">
     <v-row class="mp-0">
-      <store-navi/>
-      
+      <store-navi />
+
       <v-col md="9" class="shop-item">
         <store-image v-bind:store="storeUser" />
-        <v-btn text color="primary" data-toggle="modal" data-target="#editModal"> 編集 </v-btn>
-        <v-btn text color="primary" @click.prevent="logout"> ログアウト </v-btn>
+        <v-btn
+          text
+          data-toggle="modal"
+          data-target="#editModal"
+          style="background-color:#ffd700;
+          box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.3);font-weight:bold;
+          border-radius: 15px;"
+        >
+          編集
+        </v-btn>
         <!-- Modal -->
         <v-container>
           <!-- 店編集モーダル -->
@@ -25,7 +33,7 @@
             >
               <div class="card" style="width: 300px">
                 <div class="card-img">
-                  <img width="100%" :src="storeitem.item_image"  />
+                  <img width="100%" :src="storeitem.item_image" />
                 </div>
                 <div class="item-detail-section" style="text-align: center">
                   <div class="item-name">
@@ -39,10 +47,11 @@
                 <div class="button-section" style="display: flex; justify-content: space-around">
                   <v-btn
                     text
-                    color="primary"
                     data-toggle="modal"
                     data-target="#itemeditmodal"
                     @click="displayUpdate(storeitem)"
+                    style="background-color:#ffd700;
+                    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);"
                   >
                     編集
                   </v-btn>
@@ -61,12 +70,17 @@
             <v-col lg="3" md="4" cols="12" class="d-flex justify-center">
               <v-btn
                 text
-                color="primary"
+                color="#ffd700"
                 data-toggle="modal"
                 data-target="#itemaddmodal"
                 @click="displayAdd(storeUser.id)"
               >
-                商品追加
+                <v-icon
+                  large
+                  style="color:#ffd700;  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+border-radius: 10px;"
+                  >mdi-plus</v-icon
+                >
               </v-btn>
             </v-col>
           </v-row>
@@ -122,38 +136,32 @@ export default {
     getStoreUser() {
       axios
         .get('/storeusers/user')
-        .then((response) => {
+        .then(response => {
           this.storeUser = response.data;
           this.storeName = response.data.name;
           this.getStoreItem();
           this.orderNotification();
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     Delete(id) {
       console.log(id);
       axios
         .delete('/storeDelete/' + id)
-        .then((response) => (this.stores = response.data))
-        .catch((error) => console.log(error));
-    },
-
-    logout() {
-      axios.post('/storeusers/logout').then(() => {
-        this.$router.push({ name: 'storeLogin' });
-      });
+        .then(response => (this.stores = response.data))
+        .catch(error => console.log(error));
     },
 
     getStoreItem() {
       const storeId = this.storeUser.id;
       axios
         .get('/shopDataGet/' + storeId)
-        .then((response) => {
+        .then(response => {
           this.storeitems = response.data;
           // console.log(response.data);
         })
-        .catch((error) => console.log(error));
+        .catch(error => console.log(error));
     },
 
     //商品リストの読み込み
@@ -187,20 +195,20 @@ export default {
     deleteStoreItem(id) {
       axios
         .delete('/api/StoreItems/' + id)
-        .then((response) => {
+        .then(response => {
           this.getStoreItem();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
-    
+
     orderNotification() {
       const id = this.storeUser.id;
       // console.log(id);
       Echo.private('my-channel.' + id)
         // Echo.channel('my-channel')
-        .listen('.my-event', function (data) {
+        .listen('.my-event', function(data) {
           // console.log(data);
           $.notify(data.order.message, 'info');
         });
@@ -218,6 +226,11 @@ input {
   color: black !important;
 }
 
+.card {
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
 .card .card-img {
   height: 200px;
   width: 100%;
@@ -227,5 +240,9 @@ input {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+.item-detail-section {
 }
 </style>
