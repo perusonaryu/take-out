@@ -108,7 +108,7 @@ class Payment extends Model
     protected static function getDefaultcard($user)
     {
         \Stripe\Stripe::setApiKey(\Config::get('payment.stripe_secret_key'));
-
+        // dd('aaaa');
         $default_card = null;
 
         if (!is_null($user->stripe_id)) {

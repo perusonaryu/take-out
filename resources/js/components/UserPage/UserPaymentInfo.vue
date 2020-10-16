@@ -63,7 +63,7 @@ export default {
           getUserData(){
             axios.get('/user/payment')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.userData = response.data.user;
                 if(response.data.defaultCard == null){
                     this.cardJudg = false;

@@ -157,6 +157,20 @@ export default new VueRouter({
             }
         },
         {
+            path: '/userinfodetail',
+            component: userinfodetail,
+            name: 'userinfodetail',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        {
             path: '/userpaymentinfo',
             component: userpaymentinfo,
             name: 'userpaymentinfo',

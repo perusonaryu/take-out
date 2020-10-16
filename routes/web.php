@@ -77,6 +77,7 @@ Route::post('logout', 'LoginController@logout');
 //お店情報取得
 Route::get('/newStoreGet','StoreUserController@newStoreGet');
 Route::get('/storeGet/{id}','StoreUserController@storeGet');
+
 //ユーザー情報取得
 Route::get('/userinfo/{id}','UserController@show');
 
