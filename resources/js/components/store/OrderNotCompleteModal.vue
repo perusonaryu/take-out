@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal"
-    id="CompleteModal"
+    id="NotCompleteModal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="exampleModalLabel"
@@ -9,9 +9,9 @@
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content" style="text-align: center">
-        <h1 class="d-flex justify-center">商品一覧</h1>
-        <div>{{ val.item_info }}</div>
+        <h1 class="d-flex justify-center">注文詳細</h1>
         <div>{{ UserName}}</div>
+        <div v-for="itemInfo in itemInfos" :key="itemInfo.item_name">{{ itemInfo}}</div>
         <div>{{ val.item_total_price }}</div>
         <div>{{ val.pickup_date_time }}</div>
 
@@ -38,10 +38,16 @@ export default {
    data: () => ({
     User: '',
     UserName: '',
+    itemInfos:'',
   }),
   mounted() {
-    console.log(this.val);
+    // console.log(this.val);
     this.getUser(this.val.user_id);
+    var str ='';
+    str =this.val.item_info;
+    console.log(str);
+    this.itemInfos = str.split('/');
+    
   },
   methods: {
     completeDelivery() {
@@ -51,7 +57,7 @@ export default {
       axios
         .post('/storebuy/' + this.val.id, data)
         .then((res) => {
-          console.log(response.data);
+          console.log(res.data);
           this.$emit('update');
         })
         .catch((err) => {
@@ -64,7 +70,7 @@ export default {
         .get('/userinfo/' + userId)
         .then((response) => {
           this.User = response.data;
-          console.log(response.data);
+          // console.log(response.data);
           this.UserName = this.User.name;
         })
         .catch((error) => console.log(error));

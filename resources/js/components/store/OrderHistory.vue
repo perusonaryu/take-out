@@ -18,7 +18,7 @@
               data-dismiss="modal"
               @click="complete(item)"
               data-toggle="modal"
-              data-target="#CompleteModal"
+              data-target="#NotCompleteModal"
               style="background-color:#ffd700;"
             >
               詳細
@@ -45,6 +45,7 @@ export default {
     //モーダル
     showContent: false,
     Item: '',
+    ItemInfo:'',
   }),
   mounted() {
     this.getThisStore();
@@ -69,7 +70,7 @@ export default {
         .get('/storebuy/' + id)
         .then(response => {
           this.Items = response.data;
-          console.log(this.Items);
+          console.log(this.Items);       
           //   this.getUser(this.Items.user_id);
         })
         .catch(error => console.log(error));
