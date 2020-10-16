@@ -8,7 +8,7 @@
   >
     <v-toolbar-title class="txt-color">
       <router-link to="/">
-        Pick Up
+        Take-Out
       </router-link>
     </v-toolbar-title>
 
