@@ -1,32 +1,46 @@
 <template>
   <v-col md="3" style="text-align: center" class="navi">
-    <v-btn text @click.prevent="logout" class="button2" style="background-color:#ffd700;"> ログアウト </v-btn>
-    <router-link to="/storepage" class="button d-flex align-center justify-center">
-      <div class="button2">ホーム</div>
-    </router-link>
-    <router-link to="/OrderHistory" class="button d-flex align-center justify-center">
-      <div class="button2">注文履歴</div>
-    </router-link>
-    <router-link to="/OrderComplete" class="button d-flex align-center justify-center">
-      <div class="button2">注文完了履歴</div>
-    </router-link>
+    <v-row justify="center" align="center">
+      <v-col md="4">
+        <v-btn text @click.prevent="logout" class="button2" style="background-color:#ffd700;">
+          ログアウト
+        </v-btn>
+        <div class="button2">
+          <router-link to="/storepage" class="button d-flex align-center justify-center">
+            ホーム
+          </router-link>
+        </div>
+        <div class="button2">
+          <router-link to="/OrderHistory" class="button d-flex align-center justify-center">
+            注文履歴
+          </router-link>
+        </div>
+        <div class="button2">
+          <router-link to="/OrderComplete" class="button d-flex align-center justify-center">
+            注文完了履歴
+          </router-link>
+        </div>
+      </v-col>
+    </v-row>
   </v-col>
 </template>
 
 <script>
 export default {
-
-  methods:{
-      logout() {
+  methods: {
+    logout() {
       axios.post('/storeusers/logout').then(() => {
         this.$router.push({ name: 'storeLogin' });
       });
     },
-  }
+  },
 };
 </script>
 
-<style>
+<style scoped>
+a{
+  color: black!important;
+}
 .button2 {
   text-align: center;
   align-items: center;

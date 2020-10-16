@@ -1,19 +1,19 @@
 <template>
   <div class="user-info-top" style="height:100%;">
-    <Header>
-        <v-btn class="btn-font" color="white" outlined @click="logout"> ログアウト </v-btn>
-    </Header>
+    <Header />
     <div class="user-info-wrapper">
-      <div class="link-box" style="">
-        <router-link to="/userinfodetail" class="button d-flex align-center justify-center">
-          <div class="link">お客様情報</div>
-        </router-link>
-        <router-link to="/userpaymentinfo" class="button d-flex align-center justify-center">
-          <div class="link">カード情報</div>
-        </router-link>
-        <router-link to="/userorderhistory" class="button d-flex align-center justify-center">
-          <div class="link">注文履歴</div>
-        </router-link>
+      <div class="link-box d-flex align-center justify-center">
+        <div >
+          <router-link to="/userinfodetail" class="button d-flex align-center justify-center link">
+            <div >お客様情報</div>
+          </router-link>
+          <router-link to="/userpaymentinfo" class="button d-flex align-center justify-center link">
+            <div >カード情報</div>
+          </router-link>
+          <router-link to="/userorderhistory" class="button d-flex align-center justify-center link">
+            <div >注文履歴</div>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style scoped>
+a{
+  text-decoration: none;
+}
 .user-info-wrapper {
   height: 100%;
   display: flex;
@@ -59,7 +62,8 @@ export default {
   font-weight: bold;
   font-size: 18px;
   color: white;
-  width: 120px;
+  width: 200px;
+  height:60px;
   background-color: #ffd700;
   margin: 30px auto;
   border-radius: 20px;

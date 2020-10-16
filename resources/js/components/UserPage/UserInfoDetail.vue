@@ -4,8 +4,8 @@
     <div class="uid-wrapper" >
       <h1 style="text-align:center;">お客様情報</h1>
       <div class="userinfo-card">
-        <div>{{ userData.name }}</div>
-        <div>{{ userData.email }}</div>
+        <div>お名前：{{ userData.name }}</div>
+        <div>メールアドレス：{{ userData.email }}</div>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default {
 }
 
 .userinfo-card {
-  width: 300px;
+  width: 400px;
   margin: 30px auto;
   text-align: center;
   font-weight: bold;

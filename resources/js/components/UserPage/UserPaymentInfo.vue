@@ -35,15 +35,7 @@
                 </v-btn>
             </router-link>
 
-            <router-link to="/Confirm">
-                <v-btn color="success" >
-                    購入画面へ
-                </v-btn>
-            </router-link>
         </v-row>
-            <v-btn color="primary" @click="logout">
-                ログアウト
-            </v-btn>
     </div>
 </div>
 </template>
