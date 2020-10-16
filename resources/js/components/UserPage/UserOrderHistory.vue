@@ -13,8 +13,14 @@
       data-toggle="modal"
       :data-target="`#itemModal${item.id}`"
     >
-      <div class="price">{{ item.item_total_price }}</div>
-      <div class="time">{{ item.pickup_date_time }}</div>
+      <div class="price">金額：{{ item.item_total_price }}</div>
+      <div class="time">受け取り時間：{{ item.pickup_date_time }}</div>
+      <p class="unreceived" v-if="item.pickup_status === null">
+        未受け取り
+      </p>
+      <p class="received" v-if="item.pickup_status == 1">
+        受け取り済み
+      </p>
       
 
       <div
@@ -29,8 +35,8 @@
           <div class="modal-content" style="text-align: center">
             <h1 class="d-flex justify-center">注文情報</h1>
             <div>{{ item.item_info }}</div>
-            <div>{{ item.item_total_price }}</div>
-            <div>{{ item.pickup_date_time }}</div>
+            <div>金額：{{ item.item_total_price }}</div>
+            <div>受け取り時間：{{ item.pickup_date_time }}</div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -87,8 +93,23 @@ export default {
   width: 500px;
   border-radius: 20px;
   margin: 50px auto;
+  cursor: pointer;
 }
+.item-box p{
+  margin:0;
+}
+
+p.unreceived{
+  color:red;
+}
+
+p.received{
+  color:#ffd700;
+}
+
 .user-order-wrapper{
   margin-top: 64px;
 }
+
+
 </style>

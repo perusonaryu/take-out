@@ -9,7 +9,7 @@
             該当するお店はありません
           </p>
         </div>
-        <v-row justify="space-between" v-if="storeList">
+        <v-row  v-if="storeList">
           <v-col md="4" cols="12" class="store-box" v-for="store in storeList" :key="store.id">
             <div class="box">
               <router-link

@@ -40,7 +40,7 @@ export default {
     UserName: '',
   }),
   mounted() {
-    console.log(this.val);
+    // console.log(this.val);
     this.getUser(this.val.user_id);
   },
   methods: {
@@ -51,7 +51,7 @@ export default {
       axios
         .post('/storebuy/' + this.val.id, data)
         .then((res) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.$emit('update');
         })
         .catch((err) => {
@@ -64,7 +64,7 @@ export default {
         .get('/userinfo/' + userId)
         .then((response) => {
           this.User = response.data;
-          console.log(response.data);
+          // console.log(response.data);
           this.UserName = this.User.name;
         })
         .catch((error) => console.log(error));
