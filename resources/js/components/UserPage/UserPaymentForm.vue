@@ -48,12 +48,12 @@
 export default {
   data: () => ({
     // card: null,
-    stripe: Stripe(
-      'pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF'
-    ),
+    // stripe: Stripe(
+    //   'pk_test_51HSFBBF9GRw3obPkIX51VQ8SeexFhz1bUOGMqwVAVhf12FIVEJsn3QEWFs96HEiWZzIB9Isb5I4iucRaYhcKhcKU008JCCHxIF'
+    // ),
     // show_result: false,
     // result_message: "",
-    // stripe: Stripe("pk_test_51HTcy3LNe3F5SGnQS3KhJx0L2sJsExG6RpslBaBSNSQALEV0Owxs8RI0ex5ZorikXXEeFP2do2ggJLDUuTwVPjEe00GeQ23J0r"),
+    stripe: Stripe("pk_test_51HTcy3LNe3F5SGnQS3KhJx0L2sJsExG6RpslBaBSNSQALEV0Owxs8RI0ex5ZorikXXEeFP2do2ggJLDUuTwVPjEe00GeQ23J0r"),
     name: '',
     cardNumber: null,
     stripeToken: '',
@@ -98,7 +98,7 @@ export default {
             .then((response) => {
               // console.log(response);
               alert('登録しました！');
-              self.$router.push({ name: 'userinfodetail' });
+              self.$router.push({ name: 'userinfotop' });
             })
             .catch((error) => console.log(error));
         }

@@ -15,7 +15,7 @@
     >
       <div class="price">{{ item.item_total_price }}</div>
       <div class="time">{{ item.pickup_date_time }}</div>
-      <div class="time">{{ item.pickup_date_time }}</div>
+      
 
       <div
         class="modal fade"
