@@ -145,6 +145,8 @@ export default {
       this.cartEmptyCheck();
     },
     addStoreId(id) {
+      console.log(id);
+      console.log(this.$store.state.storeId);
       this.$store.dispatch('addStoreId',id);
     },
     cartBtn() {
