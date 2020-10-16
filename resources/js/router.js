@@ -85,7 +85,7 @@ export default new VueRouter({
             component:OrderHistory,
             name: 'OrderHistory',
             beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
+                axios.get('/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
@@ -99,7 +99,7 @@ export default new VueRouter({
             component:OrderComplete,
             name: 'OrderComplete',
             beforeEnter: (to, from, next) => {
-                axios.get('/athenticated')
+                axios.get('/storeusers/athenticated')
                 .then(()=>{
                     next()
                 })
@@ -146,6 +146,20 @@ export default new VueRouter({
             path: '/userinfotop',
             component: userinfotop,
             name: 'userinfotop',
+            beforeEnter: (to, from, next) => {
+                axios.get('/athenticated')
+                .then(()=>{
+                    next()
+                })
+                .catch(()=>{
+                    return next({name:'login'})
+                })
+            }
+        },
+        {
+            path: '/userinfodetail',
+            component: userinfodetail,
+            name: 'userinfodetail',
             beforeEnter: (to, from, next) => {
                 axios.get('/athenticated')
                 .then(()=>{

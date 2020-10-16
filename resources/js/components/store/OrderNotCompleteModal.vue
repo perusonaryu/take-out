@@ -61,7 +61,7 @@ export default {
      getUser(id) {
       const userId = id;
       axios
-        .get('/user/' + userId)
+        .get('/userinfo/' + userId)
         .then((response) => {
           this.User = response.data;
           console.log(response.data);

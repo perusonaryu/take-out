@@ -4,7 +4,7 @@
       <router-link to="/UserInfoDetail" class="button d-flex align-center justify-center">
         <div class="link">お客様情報</div>
       </router-link>
-      <router-link to="/userpaymentinfo" class="button d-flex align-center justify-center">
+      <router-link to="/userinfodetail" class="button d-flex align-center justify-center">
         <div class="link">カード情報</div>
       </router-link>
       <router-link to="/userorderhistory" class="button d-flex align-center justify-center">
