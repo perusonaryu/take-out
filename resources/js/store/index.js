@@ -60,14 +60,14 @@ export default new Vuex.Store({
       }
     },
     addStoreId({state,commit},id){
-      if( state.storeId === id || !state.storeId.length){
-        commit('pushStoreId',id);
-      }else if(state.storeId != id){
+      if( state.storeId != id){
         commit('emptyItemCart');
         commit('pushStoreId',id);
       }else{
         // console.log('ダメだった');
+        commit('pushStoreId',id);
       }
+      // state.storeId === id || !state.storeId.length
     },
     addSelectedStore({commit},id){
       axios.get('/storeGet/' + id)

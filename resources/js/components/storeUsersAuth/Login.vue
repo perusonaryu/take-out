@@ -32,7 +32,7 @@
           <div class="d-flex justify-space-between">
             <v-btn class="btn-font" @click="loginStore" color="#ffd700" text x-large> ログイン </v-btn>
 
-            <router-link to="/register">
+            <router-link to="/storeregister">
               <v-btn class="btn-font" color="primary" text x-large> 登録画面へ </v-btn>
             </router-link>
           </div>
