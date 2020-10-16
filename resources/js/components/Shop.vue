@@ -1,9 +1,9 @@
 <template>
   <div class="shop">
     <Header>
-      <router-link to="/login">
+      <!-- <router-link to="/login">
         <v-btn class="btn-font" color="white" outlined> ログイン </v-btn>
-      </router-link>
+      </router-link> -->
       <v-btn icon color="white" x-large class="cart-btn" @click="cartBtn">
         <v-icon>mdi-cart</v-icon>
       </v-btn>
@@ -12,7 +12,7 @@
       <v-col md="9" class="shop-item">
         <store-image v-bind:store="storeUser" />
         <v-container>
-          <v-row justify="space-between" align="center" class="mp-0">
+          <v-row  align="center" class="mp-0">
             <v-col md="4" v-for="item in shopData" :key="item.id" class="d-flex justify-center">
               <div
                 class="card"
@@ -53,8 +53,7 @@
                     <div class="modal-body">
                       <h5 class="modal-title" id="exampleModalLabel">{{ item.item_name }}</h5>
                       <p>
-                        人気商品！！大きな螺旋状のショートパスタと、チキンを白ワインと香味野菜で煮込んだソースを合わせました。
-                        トスカーナ産オリーブオイル・バーニャカウダ・モルタデッラハム・フォカッチャが付きます。
+                        {{ item.item_discription }}
                       </p>
                     </div>
                     <div class="quantity">

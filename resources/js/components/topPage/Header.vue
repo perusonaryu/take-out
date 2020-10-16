@@ -20,8 +20,9 @@
     
     <v-menu  offset-y v-if="authJudg">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="white" text outlined v-bind="attrs" v-on="on">
+        <v-btn color="white"  text outlined v-bind="attrs" v-on="on">
           {{ userName }}さん
+          <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
       </template>
 
@@ -39,6 +40,7 @@
           <v-list-item-title class="d-flex justify-center">
             <v-btn class="btn-font" color="white" outlined @click="logout">
               ログアウト
+              
             </v-btn>
           </v-list-item-title>
         </v-list-item>

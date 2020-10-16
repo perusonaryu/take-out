@@ -136,7 +136,7 @@ export default {
         .post('/user/paid', data)
         .then((response) => {
           this.emptyItemCart();
-          this.$router.push({ name: 'SettleComplete' });
+          this.$router.push({ name: 'userinfotop' });
         })
         .catch((error) => console.log(error));
     },
@@ -160,6 +160,10 @@ export default {
     },
   },
 };
+
+
+
+
 </script>
 
 <style scoped>

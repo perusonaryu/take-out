@@ -26,7 +26,7 @@
             <order-not-complete-modal
               :val="Item"
               v-if="showContent === item.id"
-              @update="getBoughtItem"
+              @update="getBoughtItem(store.id)"
               @close="closeModal"
             ></order-not-complete-modal>
           </div>
@@ -60,7 +60,7 @@ export default {
         .get('/storeusers/user')
         .then(response => {
           this.store = response.data;
-          console.log(this.store.id);
+          // console.log(this.store.id);
           this.getBoughtItem(this.store.id);
         })
         .catch(error => console.log(error));
