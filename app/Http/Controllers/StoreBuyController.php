@@ -20,6 +20,7 @@ class StoreBuyController extends Controller
         $query->where('store_id',$id); 
         $query->where('pickup_status',null);
         $storeuser = $query->get();
+        // dd($storeuser);
         // $storeuser = StoreBuy::where('store_id', $id)->get();
         return $storeuser;
     }
@@ -44,10 +45,11 @@ class StoreBuyController extends Controller
     public function store(Request $request)
     {   
         $user = Auth::user();
-        // dd($user->id);
+        // $array = explode(",", $request->item_info);
+        // dd($array);
         // $iteminfo = serialize($request->item_info);
-        // dd($iteminfo,$request->item_info,$request->pickup_date_time);
-        // dd($request->item_total_price);
+        // dd($request->item_info);
+       
         $store =[
             'item_info'=>$request->item_info,
             'pickup_date_time'=>$request->pickup_date_time,

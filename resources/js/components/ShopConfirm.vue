@@ -49,11 +49,7 @@
         <div class="d-flex align-center">
           <!-- <h5>受け取り時間</h5> -->
           <!-- <input type="text"  /> -->
-          <v-text-field
-            label="受け取り時間"
-            v-model="PickUpTime" 
-            hint="例 14:00"
-          ></v-text-field>
+          <v-text-field label="受け取り時間" v-model="PickUpTime" hint="例 14:00"></v-text-field>
         </div>
 
         <div class="d-flex justify-end">
@@ -81,12 +77,13 @@ export default {
   mounted() {
     this.getCardData();
     this.getStore(this.$store.state.storeId);
+    console.log(this.$store.state);
   },
   methods: {
     getCardData() {
       axios
         .get('/user/payment')
-        .then(response => {
+        .then((response) => {
           // console.log(response.data.defaultCard);
           // this.userData = response.data.user;
           if (response.data.defaultCard == null) {
@@ -95,7 +92,7 @@ export default {
           }
           this.cardData = response.data.defaultCard;
         })
-        .catch(error => {
+        .catch((error) => {
           this.$router.push({ name: 'userpaymentform' });
         });
     },
@@ -105,14 +102,16 @@ export default {
     },
 
     postConfirmData() {
-      // console.log(this.cartItems[0].itemName);
-      // console.log(this.cartTotalPrice);
-      // console.log(this.PickUpTime);
-      let ItemInfo = [
-        this.cartItems[0].itemName,
-        this.cartItems[0].price,
-        this.cartItems[0].quantity,
-      ];
+      let ItemInfo = [];
+      let self = this;
+      for (let i = 0; i < this.cartItems.length; i++) {
+        ItemInfo.push([
+          self.cartItems[i].itemName,
+          self.cartItems[i].quantity+'個',
+          self.cartItems[i].price+'円',
+        ]+'/');
+      }
+      console.log(ItemInfo);
       let data = new FormData();
       data.append('item_info', ItemInfo);
       data.append('item_total_price', this.cartTotalPrice);
@@ -120,11 +119,11 @@ export default {
       data.append('store_id', this.$store.state.storeId);
       axios
         .post('/storebuy', data)
-        .then(response => {
+        .then((response) => {
           this.notification(this.$store.state.storeId);
           this.shopSettle();
         })
-        .catch(err => {
+        .catch((err) => {
           this.message = err;
         });
     },
@@ -135,21 +134,21 @@ export default {
 
       axios
         .post('/user/paid', data)
-        .then(response => {
+        .then((response) => {
           this.emptyItemCart();
           this.$router.push({ name: 'userinfotop' });
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
 
     notification(id) {
       axios
         .get('/sent/' + id)
-        .then(response => {
+        .then((response) => {
           console.log('サクセス');
           //   this.$router.push({ name: 'Settle' });
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     },
     emptyItemCart() {
       this.$store.commit('emptyItemCart');

@@ -14,12 +14,13 @@
             <button
               type="button"
               class="btn"
-              data-dismiss="modal"
+           
+            >
+               <!-- data-dismiss="modal"
               @click="complete(item)"
               data-toggle="modal"
               data-target="#CompleteModal"
-              style="background-color:#ffd700;"
-            >
+              style="background-color:#ffd700;" -->
               詳細
             </button>
             
