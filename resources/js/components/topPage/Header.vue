@@ -17,12 +17,33 @@
     <!-- <router-link to="/userinfotop">picksについて</router-link> -->
 
     <!-- <router-link to="/register">アカウントを作成</router-link> -->
-    <div v-if="authJudg" class="d-flex align-center">
-      <h5 class="mr-5 text-white mb-0">{{ userName }}さん</h5>
-      <v-btn  class="btn-font" color="white" outlined @click="logout">
-        ログアウト
-      </v-btn>
-    </div>
+    
+    <v-menu  offset-y v-if="authJudg">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="white" text outlined v-bind="attrs" v-on="on">
+          {{ userName }}さん
+        </v-btn>
+      </template>
+
+      <v-list color="#ffd700">
+        <v-list-item>
+          <v-list-item-title class="d-flex justify-center">
+            <router-link to="/userinfotop">
+              <v-btn class="btn-font" color="white" outlined>
+                マイページ
+              </v-btn>
+            </router-link>
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title class="d-flex justify-center">
+            <v-btn class="btn-font" color="white" outlined @click="logout">
+              ログアウト
+            </v-btn>
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
 
     <slot></slot>
   </v-app-bar>

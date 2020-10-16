@@ -1,4 +1,6 @@
 <template>
+<div>
+    <Header/>
     <v-container>
         <v-row justify="center" v-if ="cardJudg == true">
             <h1>現在登録しているクレジットカード</h1>
@@ -39,10 +41,8 @@
                 </v-btn>
             </router-link>
         </v-row>
-            <v-btn color="primary" @click="logout">
-                ログアウト
-            </v-btn>
     </v-container>
+</div>
 </template>
 
 <script>
@@ -61,7 +61,6 @@ export default {
         getUserData(){
             axios.get('/user/payment')
             .then(response => {
-                console.log(response.data);
                 this.userData = response.data.user;
                 if(response.data.defaultCard == null){
                     this.cardJudg = false;

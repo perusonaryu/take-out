@@ -26,11 +26,18 @@
             v-model="updateDiscription"
             
             ></v-textarea>
-            <v-text-field
+            <!-- <v-text-field
             v-model="updateItemStatus"
             label="商品状況"
             
-            ></v-text-field>
+            ></v-text-field> -->
+                 <v-select
+            v-model="updateItemStatus"
+            label="商品状況"
+            :items="StatusItems"
+            name="StatusItems"
+            required
+          ></v-select>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateStoreItem(updateId)" >編集する</button>
@@ -66,7 +73,7 @@
             updateStoreId: "",
             updateDiscription:"",
             file:"",
-            
+            StatusItems:["売り切れ","販売中"],
             // updateForm:false,
         };
     },

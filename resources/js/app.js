@@ -47,6 +47,9 @@ Vue.component('store-item', require('./components/store/storeItem.vue').default)
 Vue.component('store-edit', require('./components/store/storeEdit.vue').default);
 Vue.component('store-item-add', require('./components/store/storeItemAdd.vue').default);
 Vue.component('store-item-edit', require('./components/store/storeItemEdit.vue').default);
+Vue.component('order-not-complete-modal', require('./components/store/OrderNotCompleteModal.vue').default);
+Vue.component('order-complete-modal', require('./components/store/OrderCompleteModal.vue').default);
+Vue.component('store-navi', require('./components/store/StoreNavi.vue').default);
 Vue.component('Header', require('./components/topPage/Header.vue').default);
 Vue.component('top-image', require('./components/topPage/topImage.vue').default);
 Vue.component('top-newstores', require('./components/topPage/newStores.vue').default);
