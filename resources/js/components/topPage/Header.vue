@@ -17,10 +17,10 @@
     <!-- <router-link to="/userinfotop">picksについて</router-link> -->
 
     <!-- <router-link to="/register">アカウントを作成</router-link> -->
-    
-    <v-menu  offset-y v-if="authJudg">
+
+    <v-menu offset-y v-if="authJudg">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="white"  text outlined v-bind="attrs" v-on="on">
+        <v-btn color="white" text outlined v-bind="attrs" v-on="on">
           {{ userName }}さん
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>
@@ -40,12 +40,16 @@
           <v-list-item-title class="d-flex justify-center">
             <v-btn class="btn-font" color="white" outlined @click="logout">
               ログアウト
-              
             </v-btn>
           </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
+    <router-link to="/login">
+      <v-btn v-if="authJudg == false" class="btn-font" color="white" outlined >
+        ログイン
+      </v-btn>
+    </router-link>
 
     <slot></slot>
   </v-app-bar>
@@ -77,7 +81,8 @@ export default {
     },
     logout() {
       axios.post('/logout').then(() => {
-        this.$router.push({ name: 'topPage' });
+        this.$router.push({ path: '/' });
+        this.authJudg = false;
       });
     },
   },
