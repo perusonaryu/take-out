@@ -44,7 +44,7 @@ Vue.use(Vuelidate);
 // Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
 Vue.component('store-image', require('./components/store/storeTopImage.vue').default);
 Vue.component('store-item', require('./components/store/storeItem.vue').default);
-Vue.component('store-edit', require('./components/store/storeEdit.vue').default);
+Vue.component('store-edit', require('./components/store/StoreEdit.vue').default);
 Vue.component('store-item-add', require('./components/store/storeItemAdd.vue').default);
 Vue.component('store-item-edit', require('./components/store/storeItemEdit.vue').default);
 Vue.component('order-not-complete-modal', require('./components/store/OrderNotCompleteModal.vue').default);
