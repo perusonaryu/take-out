@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 
 import topPage from './components/topPage.vue'
-import storePage from './components/storePage.vue'
+import storePage from './components/StorePage.vue'
 import storeadd from './components/StoreAdd.vue'
 // import storeedit from './components/store/StoreEdit.vue'
 import dashboard from './components/Dashboard.vue'
