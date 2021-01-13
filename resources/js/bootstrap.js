@@ -27,13 +27,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let endPoint = '';
 
-if(process.env.MIX_APP_ENV === 'production'){
-    window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
-    endPoint = '/pickup/broadcasting/auth';
-}else if(process.env.MIX_APP_ENV === 'local'){
-    window.axios.defaults.baseURL = '';
-    endPoint = '/broadcasting/auth';
-}
+// if(process.env.MIX_APP_ENV === 'production'){
+//     window.axios.defaults.baseURL = process.env.MIX_SENTRY_DSN_PUBLIC;
+//     endPoint = '/pickup/broadcasting/auth';
+// }else if(process.env.MIX_APP_ENV === 'local'){
+//     window.axios.defaults.baseURL = '';
+//     endPoint = '/broadcasting/auth';
+// }
 
 // console.log(endPoint);
 
