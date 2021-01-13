@@ -65,11 +65,13 @@ class StoreItemsController extends Controller
             $storeitem->item_discription = $request->item_discription;
             $storeitem->store_id = $request->store_id;
 
-            if(config('app.env') === 'production'){
-                $storeitem->item_image  = 'pickup/storage/store_item_images/' . $file_name;
-            }else{
-                $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
-            }
+            // if(config('app.env') === 'production'){
+            //     $storeitem->item_image  = 'pickup/storage/store_item_images/' . $file_name;
+            // }else{
+            //     $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
+            // }
+
+            $storeitem->item_image  = 'storage/store_item_images/' . $file_name;
 
             $storeitem->save();
  
