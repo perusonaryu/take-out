@@ -9,14 +9,21 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.3-node-browsers
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
+      - image: circleci/postgres:11.6-alpine
+        environment: 
+          POSTGRES_DB: take-out
+          POSTGRES_USER: default
+          POSTGRES_PASSWORD: secret
+
+
+    environment:
+      APP_ENV: testing
+      DB_CONNECTION: pgsql
+      DB_HOST: localhost
+      DB_POST: 5432
+      DB_DATABASE: take-out
+      DB_USERNAME: default
+      DB_PASSWORD: secret
 
     steps:
       - checkout
@@ -42,6 +49,13 @@ jobs:
           paths: 
             -node_modules
       - run: npm run dev
+      - run: 
+          name: get ready for postgres
+          command: |
+            sudo apt-get update
+            sudo apt-get install libpq-dev
+            sudo docker-php-ext-install pdo_pgsql
+            dockerize -wait tcp://localhost:5432 -timeout  1m
       - run:
           name: php test
           command: vendor/bin/phpunit
